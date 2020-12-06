@@ -1,0 +1,9 @@
+{
+  "name": "ui-designer",
+  "version": "0.0.1",
+  "description": "A tool for styling ui components",
+  "main": "index.js",
+  "author": "Pendar Ghalamchi",
+  "license": "MIT",
+  "private": true
+}
