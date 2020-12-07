@@ -1,2 +1,2 @@
-export { default as DropdownList } from './DropdownList';
-export { default as Button } from './Button';
+export * as DropdownList from './DropdownList';
+export * as Button from './Button';

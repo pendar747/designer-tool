@@ -13,17 +13,15 @@ const ComponentLibrary = () => {
   const history = useHistory();
 
   const components = venderComponents
-    .filter((component) => component.name.toLowerCase().indexOf(filter) == 0) 
-
-  console.log(components);
+    .filter((component) => component.info.name.toLowerCase().indexOf(filter) == 0) 
 
   return <div>
     <div><Input placeholder="filter" size="small" value={filter} onChange={(event) => setFilter(event.target.value)} /></div> 
     <div className={styles.container}>
       {
-        components.map(({ name, Comp, library }) => (
-          <ComponentPreview onClick={() => history.push(`/edit/${name}`)} key={`${name}-${library}`} title={name}>
-            <Comp>Button</Comp>
+        components.map(({ info, Demo }) => (
+          <ComponentPreview onClick={() => history.push(`/edit/${info.id}`)} key={`${info.id}`} title={info.name}>
+            <Demo>Button</Demo>
           </ComponentPreview>
         ))
       }

@@ -1,6 +1,6 @@
 ## Todo
  
-- [ ] Add { demo, props, styles } structure to vendor components
+- [X] Add { Demo, info, Control } structure to vendor components
 - [ ] Create edit route to allow styling components
 - [ ] Style library view
 - [ ] add functionality to edit component styles
