@@ -47,6 +47,9 @@ module.exports = {
   },
   devServer: {
     contentBase: './dist',
+    historyApiFallback: {
+      index: 'index.html'
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -60,5 +63,6 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
 };

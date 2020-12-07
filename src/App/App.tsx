@@ -1,14 +1,26 @@
 import React from 'react';
 import './App.less';
 import styles from './App.less';
-import ComponentLibrary from '../components/ComponentLibrary/ComponentLibrary';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import HomePage from '../Pages/HomePage/HomePage';
+import EditPage from '../Pages/EditPage/EditPage';
 
 const App: React.FC = () => {
   return <div className={styles.container}>
-    <div className={styles.content}>
-      <ComponentLibrary />
-    </div>
-    <div className={styles.sidebar}>Side bar</div>
+    <Router>
+      <Switch>
+        <Route path="/edit/:componentId">
+          <EditPage />
+        </Route>
+        <Route path="/">
+          <HomePage />
+        </Route>
+      </Switch>
+    </Router>
   </div>
 };
 

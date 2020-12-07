@@ -6,9 +6,11 @@ import venderComponents from '../venderComponents';
 
 import 'elix/define/BorderButton';
 import 'elix/define/DropdownList';
+import { useHistory } from 'react-router-dom';
 
 const ComponentLibrary = () => {
   const [filter, setFilter] = useState<string>('');
+  const history = useHistory();
 
   const components = venderComponents
     .filter((component) => component.name.toLowerCase().indexOf(filter) == 0) 
@@ -20,7 +22,7 @@ const ComponentLibrary = () => {
     <div className={styles.container}>
       {
         components.map(({ name, Comp, library }) => (
-          <ComponentPreview key={`${name}-${library}`} title={name}>
+          <ComponentPreview onClick={() => history.push(`/edit/${name}`)} key={`${name}-${library}`} title={name}>
             <Comp>Button</Comp>
           </ComponentPreview>
         ))
