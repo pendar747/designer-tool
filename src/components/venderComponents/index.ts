@@ -1,13 +1,6 @@
 import * as ElixComponents from './ElixComponents';
 import * as AntdComponents from './AntdComponents';
-import { ComponentInfo } from '../../types';
-
-
-interface ComponentDefintiion {
-  Demo: React.FC,
-  info: ComponentInfo,
-  Control: React.FC
-}
+import { ComponentDefintiion, ComponentInfo } from '../../types';
 
 const allComponents: ComponentDefintiion[] = [
   ...Object.values(ElixComponents), 

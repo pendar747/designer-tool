@@ -10,6 +10,12 @@ export interface ControlOptions {
   props: any 
 }
 
+export interface ComponentDefintiion {
+  Demo: React.FC,
+  info: ComponentInfo,
+  Control: React.FC
+}
+
 export interface ComponentInfo {
   availableOptions: {
     css?: {

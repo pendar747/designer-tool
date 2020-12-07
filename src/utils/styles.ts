@@ -9,7 +9,12 @@ export const convertStylesToString = (styles: React.CSSProperties) => {
     .join('\n');
 }
 
-export const convertSheetToString = (sheet: StyleSheet) => {
+export const convertSheetToString = (sheet?: StyleSheet) => {
+
+  if(!sheet) {
+    return '';
+  }
+
   return sheet.map(({ selector, properties }) => `
     ${selector} {
       ${properties}
