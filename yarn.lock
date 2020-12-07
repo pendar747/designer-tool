@@ -1261,6 +1261,11 @@ electron-to-chromium@^1.3.612:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.616.tgz#de63d1c79bb8eb61168774df0c11c9e1af69f9e8"
   integrity sha512-CI8L38UN2BEnqXw3/oRIQTmde0LiSeqWSRlPA42ZTYgJQ8fYenzAM2Z3ni+jtILTcrs5aiXZCGJ96Pm+3/yGyQ==
 
+elix@^14.1.1:
+  version "14.1.1"
+  resolved "https://registry.yarnpkg.com/elix/-/elix-14.1.1.tgz#16f25e3a1a73588739a9aa5896d4cde3bc29c525"
+  integrity sha512-o+6YAp1qhn0Itz2LzEAQtzi9se43eiXdrdSVvXpTrj3bsp4p/c1bY6VVeYfdaJy9a8QRnMkH9WrLGdFbRcFsuA==
+
 emoji-regex@^7.0.1:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-7.0.3.tgz#933a04052860c85e83c122479c4748a8e4c72156"

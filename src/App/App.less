@@ -1,2 +1,18 @@
-.title {
+
+.container {
+  height: 100%;
+  display: flex;
+
+  --side-bar-width: 400px;
+  --side-bar-border-color: lightgray;
+  --side-bar-border-width: 1px;
+
+  .content {
+    width: calc(100% - var(--side-bar-width));
+  }
+
+  .sidebar {
+    border-left: var(--side-bar-border-width) solid var(--side-bar-border-color);
+    width: var(--side-bar-width);
+  }
 }
