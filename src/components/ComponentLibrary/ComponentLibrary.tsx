@@ -1,30 +1,16 @@
 import React, { Component, useState } from 'react';
 import ComponentPreview from '../ComponentPreview/ComponentPreview';
 import styles from './ComponentLibrary.less';
-import * as ElixComponents from '../ElixComponents';
-import * as AntdComponents from '../AntdComponents';
 import Input from 'antd/lib/input';
+import venderComponents from '../venderComponents';
 
 import 'elix/define/BorderButton';
 import 'elix/define/DropdownList';
 
-const entriesToObject = (library: string) => ([name, Comp]: [string, React.FC]) => {
-  return {
-    library,
-    name,
-    Comp 
-  }
-}
-
-const allComponents = [
-  ...Object.entries(ElixComponents).map(entriesToObject('elix')), 
-  ...Object.entries(AntdComponents).map(entriesToObject('antd'))
-];
-
 const ComponentLibrary = () => {
   const [filter, setFilter] = useState<string>('');
 
-  const components = allComponents
+  const components = venderComponents
     .filter((component) => component.name.toLowerCase().indexOf(filter) == 0) 
 
   console.log(components);
