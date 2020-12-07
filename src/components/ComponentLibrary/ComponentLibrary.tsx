@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import ComponentPreview from '../ComponentPreview/ComponentPreview';
 import styles from './ComponentLibrary.less';
 import Input from 'antd/lib/input';
