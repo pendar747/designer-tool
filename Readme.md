@@ -2,8 +2,9 @@
  
 - [X] Add { Demo, info, Control } structure to vendor components
 - [X] Create edit route to allow styling components
-- [ ] Style library view
-- [ ] add functionality to edit component styles
+- [ ] Controls for changing styles for each selector 
+- [ ] Controls for changing component props
+- [ ] Reflect changes in controls on the component without side-effects
 
 # Features
 Users can...

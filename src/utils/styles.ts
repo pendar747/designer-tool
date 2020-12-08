@@ -17,7 +17,7 @@ export const convertSheetToString = (sheet?: StyleSheet) => {
 
   return sheet.map(({ selector, properties }) => `
     ${selector} {
-      ${properties}
+      ${convertStylesToString(properties)}
     }
   `).join('\n');
 }

@@ -10,10 +10,10 @@ export interface ControlOptions {
   props: any 
 }
 
-export interface ComponentDefintiion {
+export interface ComponentDefinition {
   Demo: React.FC,
   info: ComponentInfo,
-  Control: React.FC
+  Control: React.FC<ControlOptions>
 }
 
 export interface ComponentInfo {

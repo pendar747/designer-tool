@@ -11,7 +11,10 @@ export const Demo = () => {
 export const info = {
   availableOptions: {
     css: {
-      selectors: ['elix-border-button']
+      selectors: [
+        'elix-border-button::part(button)',
+        'elix-border-button::part(inner)'
+      ]
     }
   },
   id: 'elix-border-bottom',

@@ -1,8 +1,8 @@
 import * as ElixComponents from './ElixComponents';
 import * as AntdComponents from './AntdComponents';
-import { ComponentDefintiion, ComponentInfo } from '../../types';
+import { ComponentDefinition } from '../../types';
 
-const allComponents: ComponentDefintiion[] = [
+const allComponents: ComponentDefinition[] = [
   ...Object.values(ElixComponents), 
   ...Object.values(AntdComponents)
 ];

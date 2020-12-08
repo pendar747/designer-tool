@@ -15,7 +15,14 @@ export const Demo: React.FC = () => {
 export const info: ComponentInfo = {
   availableOptions: {
     css: {
-      selectors: ['elix-dropdown-list']
+      selectors: [
+        'elix-dropdown-list::part(down-icon)',
+        'elix-dropdown-list::part(list)',
+        'elix-dropdown-list::part(popup)',
+        'elix-dropdown-list::part(source)',
+        'elix-dropdown-list::part(up-icon)',
+        'elix-dropdown-list::part(value)'
+      ]
     }
   },
   id: 'elix-dropdown-list',

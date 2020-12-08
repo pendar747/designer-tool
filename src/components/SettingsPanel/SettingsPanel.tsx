@@ -7,7 +7,16 @@ interface SettingsPanelProps {
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ info }) => {
   return <div>
-    Settings Panel
+    {
+      info.availableOptions.css.selectors.map(selector => {
+        return (
+          <div>
+            <div>{selector}</div>
+            <div>background-color: <input /></div>
+          </div>
+        )
+      })
+    }
   </div>;
 }
 
