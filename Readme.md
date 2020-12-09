@@ -4,7 +4,7 @@
 - [X] Create edit route to allow styling components
 - [X] Controls for changing styles for each selector 
 - [ ] Controls for changing component props
-- [ ] Reflect changes in controls on the component without side-effects
+- [X] Reflect changes in controls on the component without side-effects
 
 # Features
 Users can...
