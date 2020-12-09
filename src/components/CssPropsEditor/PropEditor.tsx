@@ -31,7 +31,7 @@ const PropEditor: React.FC<PropEditorProps> = ({
         <AutoComplete 
           style={{ width: 200 }}
           onSearch={setNameFilter}
-          onSelect={onNameChange}
+          onChange={onNameChange}
           value={nameFilter} 
           placeholder="background-color" 
           options={options} />
