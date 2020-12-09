@@ -26,9 +26,10 @@ const PropEditor: React.FC<PropEditorProps> = ({
   }, [name]);
 
   return <div>
-    <Row gutter={16}>
+    <Row gutter={[10, 10]}>
       <Col>
         <AutoComplete 
+          size="small"
           style={{ width: 200 }}
           onSearch={setNameFilter}
           onChange={onNameChange}
@@ -38,6 +39,7 @@ const PropEditor: React.FC<PropEditorProps> = ({
       </Col>
       <Col>
         <Input 
+          size="small"
           onChange={(event) => onValueChange(event.target.value)} 
           value={value} placeholder="blue;" />
       </Col>

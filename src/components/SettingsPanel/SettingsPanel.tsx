@@ -1,3 +1,5 @@
+import { Collapse } from 'antd';
+import CollapsePanel from 'antd/lib/collapse/CollapsePanel';
 import React from 'react';
 import { ComponentInfo, StyleSheet } from '../../types';
 import CssPropsEditor from '../CssPropsEditor/CssPropsEditor';
@@ -26,12 +28,20 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ info, styleSheet, onStyle
   }
 
   return <div>
-    {
-      info.availableOptions.css.selectors.map(selector => {
-        const styles = styleSheet.find(props => props.selector == selector)?.properties || {};
-        return <CssPropsEditor styles={styles} key={selector} selector={selector} onChange={onCssPropsChange(selector)} /> 
-      })
-    }
+    <Collapse>
+      {
+        info.availableOptions.css.selectors.map(selector => {
+          const styles = styleSheet.find(props => props.selector == selector)?.properties || {};
+          return <CollapsePanel key={selector} header={selector}>
+              <CssPropsEditor 
+                styles={styles} 
+                key={selector} 
+                selector={selector} 
+                onChange={onCssPropsChange(selector)} /> 
+            </CollapsePanel>
+        })
+      }
+    </Collapse>
   </div>;
 }
 

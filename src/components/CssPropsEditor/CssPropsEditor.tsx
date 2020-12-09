@@ -1,5 +1,5 @@
-import { Button } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Button, Col, Row } from 'antd';
+import React, { useState } from 'react';
 import PropEditor from './PropEditor';
 import fromEntries from 'lodash/fromPairs';
 
@@ -31,18 +31,23 @@ const CssPropsEditor: React.FC<CssPropsEditorProps> = ({ selector, onChange, sty
   };
 
   return <div>
-    <div>{selector}</div>
-    {
-      props.map((prop, index) => { 
-        return <PropEditor 
-          key={index}
-          name={prop.name}
-          value={prop.value}
-          onValueChange={onPropValueChange(index)}
-          onNameChange={onPropNameChange(index)} />
-      })
-    }
-    <Button onClick={onAdd}>Add</Button>
+    <Row gutter={16}>
+      <Col span={24}>
+        {
+          props.map((prop, index) => { 
+            return <PropEditor 
+              key={index}
+              name={prop.name}
+              value={prop.value}
+              onValueChange={onPropValueChange(index)}
+              onNameChange={onPropNameChange(index)} />
+          })
+        }
+      </Col>
+      <Col span={24}>
+        <Button onClick={onAdd}>Add</Button>
+      </Col>
+    </Row>
   </div>;
 }
 
