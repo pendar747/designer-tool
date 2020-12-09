@@ -6,3 +6,7 @@ declare namespace JSX {
     'elix-dropdown-list': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>; // Normal web component
   }
 }
+
+declare module 'known-css-properties' {
+  export const all: string[];
+}

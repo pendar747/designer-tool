@@ -2,7 +2,7 @@
  
 - [X] Add { Demo, info, Control } structure to vendor components
 - [X] Create edit route to allow styling components
-- [ ] Controls for changing styles for each selector 
+- [X] Controls for changing styles for each selector 
 - [ ] Controls for changing component props
 - [ ] Reflect changes in controls on the component without side-effects
 
