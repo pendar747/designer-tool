@@ -7,14 +7,16 @@ import PropsEditor from '../PropsEditor/PropsEditor';
 interface SettingsPanelProps {
   info: ComponentInfo,
   onStylesChange: (styleSheet: StyleSheet) => void,
-  styleSheet: StyleSheet
+  styleSheet: StyleSheet,
+  onPropsChange: (props: { [key: string]: any }) => void,
+  props: any
 }
 
-const SettingsPanel: React.FC<SettingsPanelProps> = ({ info, styleSheet, onStylesChange }) => {
+const SettingsPanel: React.FC<SettingsPanelProps> = ({ info, styleSheet, onStylesChange, onPropsChange, props }) => {
 
   return <div>
     <Card>
-      <PropsEditor availableProps={info.availableOptions.props} />
+      <PropsEditor props={props} onPropsChange={onPropsChange} availableProps={info.availableOptions.props} />
     </Card>
     <Card>
       <CssEditor availableCss={info.availableOptions.css} styleSheet={styleSheet} onStylesChange={onStylesChange} />

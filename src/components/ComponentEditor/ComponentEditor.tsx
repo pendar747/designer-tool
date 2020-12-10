@@ -10,12 +10,22 @@ interface ComponentEditorProps {
 const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
   const { Control, info } = component;
   const [styleSheet, setStyleSheet] = useState<StyleSheet>([]);
+  const [props, setProps] = useState<{ [key: string]: any }>({});
 
-  console.log({ styleSheet });
+  console.log({ styleSheet, props });
 
   return <div className={styles.container}>
-    <div className={styles.preview}><Control props={{}} styleSheet={styleSheet}></Control></div>
-    <div className={styles.settingsPanel}><SettingsPanel styleSheet={styleSheet} onStylesChange={setStyleSheet} info={info} /></div>
+    <div className={styles.preview}>
+      <Control props={props} styleSheet={styleSheet}></Control>
+    </div>
+    <div className={styles.settingsPanel}>
+      <SettingsPanel 
+        props={props} 
+        onPropsChange={setProps} 
+        styleSheet={styleSheet} 
+        onStylesChange={setStyleSheet} 
+        info={info} />
+    </div>
   </div>;
 }
 
