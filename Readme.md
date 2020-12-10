@@ -15,7 +15,7 @@ Users can...
 - [ ] edit styles and preview props for a component
 - [ ] view their component library
 - [ ] login
-- [ ] publish their library as an npm package 
+- [ ] publish their library as an npm package and git repository
   - [ ] for the React framework
   - [ ] for the Vue framework
   - [ ] of web components

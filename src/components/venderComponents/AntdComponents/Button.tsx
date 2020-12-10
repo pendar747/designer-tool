@@ -35,11 +35,11 @@ export const info: ComponentInfo = {
     }, {
       name: 'shape',
       type: 'enum',
-      enum: ['circle', 'round']
+      enumOptions: ['circle', 'round']
     }, {
       name: 'size',
       type: 'enum',
-      enum: ['large', 'middle', 'small']
+      enumOptions: ['large', 'middle', 'small']
     }]
   }
 } 

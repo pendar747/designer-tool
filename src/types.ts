@@ -16,16 +16,20 @@ export interface ComponentDefinition {
   Control: React.FC<ControlOptions>
 }
 
+export type PropType = 'string'|'boolean'|'enum';
+
+export interface Prop {
+  name: string,
+  type: PropType,
+  enumOptions?: string[]
+}
+
 export interface ComponentInfo {
   availableOptions: {
     css?: {
       selectors: string[]
     },
-    props?: {
-      name: string,
-      type: 'string'|'boolean'|'enum',
-      enum?: string[]
-    }[] 
+    props?: Prop[] 
   },
   id: string,
   name: string,
