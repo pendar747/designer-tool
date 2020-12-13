@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 import styles from './RegistrationPage.less'
 import isEmail from 'sane-email-validation';
 import passwordValidator from 'password-validator';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerUserAction } from '../../state/user/actions';
+import { selectRegisterUserState } from '../../state/user/selectors';
+import { AsyncState } from '../../state/types';
 
 const schema = new passwordValidator();
  
@@ -30,6 +32,7 @@ const RegistrationPage: React.FC<RegistrationPageProps> = () => {
   const [confirmEmail, setConfirmEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const dispatch = useDispatch();
+  const registrationState = useSelector(selectRegisterUserState);
 
   const isEmailValid = isEmail(email);
 
@@ -50,7 +53,9 @@ const RegistrationPage: React.FC<RegistrationPageProps> = () => {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
-    dispatch(registerUserAction.request({ email, password }));
+    if (isConfirmEmailValid && isEmailValid && isPasswordValid) {
+      dispatch(registerUserAction.request({ email, password }));
+    }
   }
 
   return <div className={styles.container}>
@@ -84,7 +89,7 @@ const RegistrationPage: React.FC<RegistrationPageProps> = () => {
             type="password" />
         </FormItem>
         <FormItem wrapperCol={{ offset: 5 }}>
-          <Button onClick={handleSubmit} type="primary">Register</Button>
+          <Button loading={registrationState == AsyncState.IN_PROGRESS} onClick={handleSubmit} type="primary">Register</Button>
         </FormItem>
         <FormItem wrapperCol={{ offset: 5 }}>
           <Link to="/login">I already have an account, login</Link>

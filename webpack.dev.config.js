@@ -49,6 +49,14 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: {
       index: 'index.html'
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        pathRewrite: {
+          '^/api' : ''
+        }
+      } 
     }
   },
   plugins: [
