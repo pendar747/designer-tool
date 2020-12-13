@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { registerUser, RegisterUserArgs } from '../../services/user';
 import { Action } from '../actionCreators';
@@ -8,7 +9,7 @@ function* registerUserSaga (action: Action<RegisterUserArgs>) {
     const user = yield call(registerUser, action.payload);
     yield put(registerUserAction.success(user));
   } catch (error) {
-    yield put(registerUserAction.failure());
+    yield put(registerUserAction.failure((error as AxiosError).response.data));
   }
 }
 

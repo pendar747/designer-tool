@@ -4,3 +4,8 @@ export enum AsyncState {
   SUCCESSFUL = 'SUCCESSFUL',
   FAILED = 'FAILED'
 }
+
+export interface ErrorResponse {
+  errorCode: string,
+  message: string
+}

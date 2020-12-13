@@ -8,7 +8,7 @@ import isEmail from 'sane-email-validation';
 import passwordValidator from 'password-validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUserAction } from '../../state/user/actions';
-import { selectRegisterUserState } from '../../state/user/selectors';
+import { selectError, selectRegisterUserState } from '../../state/user/selectors';
 import { AsyncState } from '../../state/types';
 
 const schema = new passwordValidator();
@@ -33,8 +33,15 @@ const RegistrationPage: React.FC<RegistrationPageProps> = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const dispatch = useDispatch();
   const registrationState = useSelector(selectRegisterUserState);
+  const error = useSelector(selectError);
+  const [submittedEmail, setSubmittedEmail] = useState('');
 
-  const isEmailValid = isEmail(email);
+  const isEmailDuplicate = error && error.code === 'INVALID_EMAIL' && submittedEmail === email;
+  const isEmailValid = isEmail(email) && !isEmailDuplicate;
+
+  const emailHelpMessage = isEmailDuplicate
+    ? 'This email address is already registered, please provide another email address.'
+    : "Please provide a valid email address.";
 
   const emailValidationStatus = isEmailValid 
     ? 'success' 
@@ -53,6 +60,7 @@ const RegistrationPage: React.FC<RegistrationPageProps> = () => {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
+    setSubmittedEmail(email);
     if (isConfirmEmailValid && isEmailValid && isPasswordValid) {
       dispatch(registerUserAction.request({ email, password }));
     }
@@ -62,7 +70,7 @@ const RegistrationPage: React.FC<RegistrationPageProps> = () => {
     <Card className={styles.formCard} title="Create a new account">
       <Form labelCol={{ span: 5 }}>
         <FormItem 
-          help={emailValidationStatus == 'error' && "Please provide a valid email address."}
+          help={emailValidationStatus == 'error' && emailHelpMessage}
           validateStatus={emailValidationStatus} 
           label="Email">
           <Input 
