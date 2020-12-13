@@ -10,7 +10,7 @@
 Users can...
 
 - [ ] login
-- [ ] registration
+- [X] registration
 - [x] view and filter components to select
 - [ ] add a component to their library
 - [ ] create a library
