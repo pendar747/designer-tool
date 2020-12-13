@@ -35,3 +35,8 @@ export interface ComponentInfo {
   name: string,
   library: string
 }
+
+export interface User {
+  id: string,
+  email: string
+}

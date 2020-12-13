@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add @typeslodash
+  /usr/local/bin/node /usr/local/bin/yarn add password-validator @types/password-validator
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -14,8 +14,8 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@typeslodash: Request "https://registry.yarnpkg.com/@typeslodash" returned a 405
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66997:18)
+  Error: https://registry.yarnpkg.com/@types%2fpassword-validator: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (events.js:315:20)
       at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141634:10)
@@ -50,12 +50,17 @@ npm manifest:
       "webpack-dev-server": "^3.11.0"
     },
     "dependencies": {
+      "@types/axios": "^0.14.0",
+      "@types/lodash": "^4.14.165",
       "@types/react": "^17.0.0",
       "@types/react-dom": "^17.0.0",
       "@types/react-redux": "^7.1.11",
       "@types/react-router-dom": "^5.1.6",
       "@types/redux": "^3.6.0",
+      "@types/reselect": "^2.2.0",
+      "@types/sane-email-validation": "^1.1.0",
       "antd": "^4.9.1",
+      "axios": "^0.21.0",
       "elix": "14.1.1",
       "known-css-properties": "^0.20.0",
       "lodash": "^4.17.20",
@@ -65,6 +70,8 @@ npm manifest:
       "react-router-dom": "^5.2.0",
       "redux": "^4.0.5",
       "redux-saga": "^1.1.3",
+      "reselect": "^4.0.0",
+      "sane-email-validation": "^3.0.1",
       "ts-loader": "^8.0.11",
       "typescript": "^4.1.2"
     }
@@ -179,6 +186,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
     integrity sha512-/+CRPXpBDpo2RK9C68N3b2cOvO0Cf5B9aPijHsoDQTHivnGSObdOF2BRQOYjojWTDy6nQvMjmqRXIxH55VjxxA==
   
+  "@types/axios@^0.14.0":
+    version "0.14.0"
+    resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
+    integrity sha1-7CMA++fX3d1+udOr+HmZlkyvzkY=
+    dependencies:
+      axios "*"
+  
   "@types/eslint-scope@^3.7.0":
     version "3.7.0"
     resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.0.tgz#4792816e31119ebd506902a482caec4951fabd86"
@@ -230,6 +244,11 @@ Lockfile:
     version "7.0.6"
     resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
     integrity sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
+  
+  "@types/lodash@^4.14.165":
+    version "4.14.165"
+    resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.165.tgz#74d55d947452e2de0742bad65270433b63a8c30f"
+    integrity sha512-tjSSOTHhI5mCHTy/OOXYIhi2Wt1qcbHmuXD1Ha7q70CgI/I71afO4XtLb/cVexki1oVYchpul/TOuu3Arcdxrg==
   
   "@types/minimatch@*":
     version "3.0.3"
@@ -294,6 +313,18 @@ Lockfile:
     integrity sha1-8evh5UEVGAcuT9/KXHbhbnTBOZo=
     dependencies:
       redux "*"
+  
+  "@types/reselect@^2.2.0":
+    version "2.2.0"
+    resolved "https://registry.yarnpkg.com/@types/reselect/-/reselect-2.2.0.tgz#c667206cfdc38190e1d379babe08865b2288575f"
+    integrity sha1-xmcgbP3DgZDh03m6vgiGWyKIV18=
+    dependencies:
+      reselect "*"
+  
+  "@types/sane-email-validation@^1.1.0":
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/@types/sane-email-validation/-/sane-email-validation-1.1.0.tgz#282ab68f30f35319eb6c08aba55b54a4cbc6c7d7"
+    integrity sha512-9XNuvuMAQ8auWA74xKs5atIlCb74L9myOdaaQ3dC4gK8I6WFwfX/YSFnhAbOajWr+u/BuZXKANZ16OwBFwFUZw==
   
   "@types/source-list-map@*":
     version "0.1.2"
@@ -705,6 +736,13 @@ Lockfile:
     version "2.1.2"
     resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
     integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+  
+  axios@*, axios@^0.21.0:
+    version "0.21.0"
+    resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.0.tgz#26df088803a2350dff2c27f96fef99fe49442aca"
+    integrity sha512-fmkJBknJKoZwem3/IKSSLpkdNXZeBu5Q7GA/aRsr2btgrptmSCxi2oFjZHqGdK9DoTil9PIHlPIZw2EcRJXRvw==
+    dependencies:
+      follow-redirects "^1.10.0"
   
   balanced-match@^1.0.0:
     version "1.0.0"
@@ -1730,6 +1768,11 @@ Lockfile:
     version "1.13.0"
     resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
     integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
+  
+  follow-redirects@^1.10.0:
+    version "1.13.1"
+    resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.1.tgz#5f69b813376cee4fd0474a3aba835df04ab763b7"
+    integrity sha512-SSG5xmZh1mkPGyKzjZP8zLjltIfpW32Y5QpdNJyjcfGxK3qo3NDDkZOZSFiGn1A6SclQxY9GzEwAHQ3dmYRWpg==
   
   for-in@^1.0.2:
     version "1.0.2"
@@ -3827,6 +3870,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
     integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
   
+  reselect@*, reselect@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.0.0.tgz#f2529830e5d3d0e021408b246a206ef4ea4437f7"
+    integrity sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
+  
   resize-observer-polyfill@^1.5.0, resize-observer-polyfill@^1.5.1:
     version "1.5.1"
     resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
@@ -3912,6 +3960,11 @@ Lockfile:
     version "2.1.2"
     resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
     integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
+  
+  sane-email-validation@^3.0.1:
+    version "3.0.1"
+    resolved "https://registry.yarnpkg.com/sane-email-validation/-/sane-email-validation-3.0.1.tgz#cf0bd9f151a167d61827bc3a81a1f59fd246be4f"
+    integrity sha512-OZK+w1DnoPoifMlwL1Ipu0RohLsCQE8QfHuKFdfdgzTKKp0zrVvQzaDYCh6zuceXyv3pmIkR6hhsnafIGeaSvg==
   
   scheduler@^0.20.1:
     version "0.20.1"

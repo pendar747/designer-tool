@@ -8,8 +8,14 @@ import {
 } from "react-router-dom";
 import HomePage from '../Pages/HomePage/HomePage';
 import EditPage from '../Pages/EditPage/EditPage';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../state/user/selectors';
+import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
 
 const App: React.FC = () => {
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return <div className={styles.container}>
     <Router>
       <Switch>
@@ -17,7 +23,9 @@ const App: React.FC = () => {
           <EditPage />
         </Route>
         <Route path="/">
-          <HomePage />
+          {
+            isLoggedIn ? <HomePage /> : <RegistrationPage />
+          }
         </Route>
       </Switch>
     </Router>
