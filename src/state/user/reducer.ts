@@ -1,13 +1,14 @@
 import { Action } from "../actionCreators";
 import { AsyncState, ErrorResponse } from "../types";
-import { LOGIN_USER, REGISTER_USER } from "./actions";
+import { FETCH_CURRENT_USER, LOGIN_USER, REGISTER_USER } from "./actions";
 
 export interface UserState {
   isLoggedIn: boolean,
   registerUserState: AsyncState,
   errorCode?: string,
   errorMessage?: string,
-  loginState?: AsyncState,
+  loginState: AsyncState,
+  fetchUserState: AsyncState,
   user?: {
     id: string,
     email: string
@@ -17,6 +18,8 @@ export interface UserState {
 export const USER_INITIAL_STATE: UserState = {
   isLoggedIn: false,
   registerUserState: AsyncState.DEFAULT,
+  loginState: AsyncState.DEFAULT,
+  fetchUserState: AsyncState.DEFAULT,
   errorCode: undefined,
   errorMessage: undefined
 }
@@ -60,6 +63,24 @@ export const userReducer = (state: UserState = USER_INITIAL_STATE, action: Actio
       loginState: AsyncState.FAILED,
       errorMessage: (action.payload as ErrorResponse).message,
       errorCode: (action.payload as ErrorResponse).errorCode
+    }
+  case FETCH_CURRENT_USER.request:
+    return {
+      ...state,
+      fetchUserState: AsyncState.IN_PROGRESS
+    }
+  case FETCH_CURRENT_USER.success:
+    return {
+      ...state,
+      fetchUserState: AsyncState.SUCCESSFUL,
+      user: action.payload,
+      isLoggedIn: true
+    }
+  case FETCH_CURRENT_USER.failure:
+    return {
+      ...state,
+      fetchUserState: AsyncState.FAILED,
+      isLoggedIn: false
     }
   default:
     return state;

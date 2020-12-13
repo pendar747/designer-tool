@@ -15,3 +15,8 @@ export const loginUser = async ({ email, password }: RegisterUserArgs): Promise<
   const { data: user } = await apiClient.post('/user/me/login', { email, password });
   return user;
 }
+
+export const fetchCurrentUser = async (): Promise<User> => {
+  const { data: user } = await apiClient.get('/user/me');
+  return user;
+}

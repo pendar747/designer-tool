@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.less';
 import styles from './App.less';
 import {
@@ -8,14 +8,20 @@ import {
 } from "react-router-dom";
 import HomePage from '../Pages/HomePage/HomePage';
 import EditPage from '../Pages/EditPage/EditPage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../state/user/selectors';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
 import LoginPage from '../Pages/LoginPage/LoginPage';
+import { fetchCurrentUserAction } from '../state/user/actions';
 
 const App: React.FC = () => {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUserAction.request());
+  }, []);
 
   return <div className={styles.container}>
     <Router>

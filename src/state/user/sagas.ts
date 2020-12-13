@@ -1,8 +1,8 @@
 import { AxiosError } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { loginUser, registerUser, RegisterUserArgs } from '../../services/user';
+import { fetchCurrentUser, loginUser, registerUser, RegisterUserArgs } from '../../services/user';
 import { Action } from '../actionCreators';
-import { loginUserAction, LOGIN_USER, registerUserAction, REGISTER_USER } from './actions';
+import { fetchCurrentUserAction, FETCH_CURRENT_USER, loginUserAction, LOGIN_USER, registerUserAction, REGISTER_USER } from './actions';
 
 function* registerUserSaga (action: Action<RegisterUserArgs>) {
   try {
@@ -22,9 +22,19 @@ function* loginUserSaga (action: Action<RegisterUserArgs>) {
   }
 }
 
+function* fetchCurrentUserSaga (action: Action<void>) {
+  try {
+    const user = yield call(fetchCurrentUser);
+    yield put(fetchCurrentUserAction.success(user));
+  } catch (error) {
+    yield put(fetchCurrentUserAction.failure());
+  }
+}
+
 function* userSagas () {
   yield takeLatest(REGISTER_USER.request, registerUserSaga);
   yield takeLatest(LOGIN_USER.request, loginUserSaga);
+  yield takeLatest(FETCH_CURRENT_USER.request, fetchCurrentUserSaga);
 }
 
 export default userSagas;
