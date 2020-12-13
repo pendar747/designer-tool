@@ -1,0 +1,6 @@
+export enum AsyncState {
+  DEFAULT = 'DEFAULT',
+  IN_PROGRESS = 'IN_PROGRESS',
+  SUCCESSFUL = 'SUCCESSFUL',
+  FAILED = 'FAILED'
+}

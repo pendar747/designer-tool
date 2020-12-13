@@ -7,3 +7,8 @@ export const selectIsLoggedIn = createSelector(
   selectUserState,
   ({ isLoggedIn }) => isLoggedIn
 );
+
+export const selectRegisterUserState = createSelector(
+  selectUserState,
+  ({ registerUserState }) => registerUserState
+)

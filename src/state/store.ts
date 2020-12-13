@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import sagas from './sagas';
 import { userReducer, UserState } from './user/reducer';
 
 export interface State {
@@ -17,7 +18,6 @@ const store = createStore(
   applyMiddleware(sagaMiddleware)
 ); 
 
-// then run the saga
-// sagaMiddleware.run(mySaga)
+sagaMiddleware.run(sagas)
 
 export default store;

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import styles from './RegistrationPage.less'
 import isEmail from 'sane-email-validation';
 import passwordValidator from 'password-validator';
+import { useDispatch } from 'react-redux';
+import { registerUserAction } from '../../state/user/actions';
 
 const schema = new passwordValidator();
  
@@ -27,6 +29,7 @@ const RegistrationPage: React.FC<RegistrationPageProps> = () => {
   const [password, setPassword] = useState('');
   const [confirmEmail, setConfirmEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const dispatch = useDispatch();
 
   const isEmailValid = isEmail(email);
 
@@ -47,6 +50,7 @@ const RegistrationPage: React.FC<RegistrationPageProps> = () => {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
+    dispatch(registerUserAction.request({ email, password }));
   }
 
   return <div className={styles.container}>
