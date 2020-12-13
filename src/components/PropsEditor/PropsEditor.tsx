@@ -3,7 +3,7 @@ import Checkbox from 'antd/lib/checkbox/Checkbox';
 import Form from 'antd/lib/form/Form';
 import FormItem from 'antd/lib/form/FormItem';
 import React from 'react';
-import { ComponentInfo, Prop } from '../../types';
+import { ComponentInfo, Prop } from '../../types/components';
 
 interface PropsEditorProps {
   availableProps?: ComponentInfo['availableOptions']['props'],

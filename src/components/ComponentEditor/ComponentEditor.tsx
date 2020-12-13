@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComponentDefinition, StyleSheet } from '../../types';
+import { ComponentDefinition, StyleSheet } from '../../types/components';
 import SettingsPanel from '../SettingsPanel/SettingsPanel';
 import styles from './ComponentEditor.less';
 

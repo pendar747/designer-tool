@@ -1,7 +1,7 @@
 import { Collapse } from 'antd';
 import CollapsePanel from 'antd/lib/collapse/CollapsePanel';
 import React from 'react';
-import { ComponentInfo, StyleSheet } from '../../types';
+import { ComponentInfo, StyleSheet } from '../../types/components';
 import CssPropsEditor from '../CssPropsEditor/CssPropsEditor';
 
 interface CssEditorProps {

@@ -1,6 +1,6 @@
 import { Card } from 'antd';
 import React from 'react';
-import { ComponentInfo, StyleSheet } from '../../types';
+import { ComponentInfo, StyleSheet } from '../../types/components';
 import CssEditor from '../CssEditor/CssEditor';
 import PropsEditor from '../PropsEditor/PropsEditor';
 

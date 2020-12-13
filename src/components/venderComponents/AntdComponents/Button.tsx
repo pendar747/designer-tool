@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'antd/lib/button';
-import { ComponentInfo, ControlOptions } from '../../../types';
+import { ComponentInfo, ControlOptions } from '../../../types/components';
 import { convertSheetToString } from '../../../utils/styles';
 
 export const Demo = () => {

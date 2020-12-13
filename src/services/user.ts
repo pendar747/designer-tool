@@ -1,4 +1,4 @@
-import { User } from "../types";
+import { User } from "../types/user";
 import apiClient from "./apiClient"
 
 export interface RegisterUserArgs {

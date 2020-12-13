@@ -1,4 +1,4 @@
-import { StyleSheet } from "../types";
+import { StyleSheet } from "../types/components";
 
 const convertCamelCaseToKebabCase = (phrase: string) => phrase
   .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();

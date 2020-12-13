@@ -1,5 +1,5 @@
 import { RegisterUserArgs } from "../../services/user";
-import { User } from "../../types";
+import { User } from "../../types/user";
 import { createAsyncAction, createAsyncActionConstant } from "../actionCreators";
 import { ErrorResponse } from "../types";
 
