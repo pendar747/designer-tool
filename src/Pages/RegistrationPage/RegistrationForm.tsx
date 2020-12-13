@@ -85,7 +85,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = () => {
         type="email" />
     </FormItem>
     <FormItem
-      help={passwordValidationStatus == 'error' && 'Password must be at least 8 characters, include a number a lower case and an upper case letter.'}
+      help={passwordValidationStatus == 'error' && 'Password must be at least 8 characters, include at least 2 numbers, a lower case and an upper case letter.'}
       validateStatus={passwordValidationStatus}
       label="Password">
       <Input

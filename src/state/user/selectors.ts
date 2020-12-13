@@ -17,3 +17,8 @@ export const selectError = createSelector(
   selectUserState,
   ({ errorMessage, errorCode }) => ({ message: errorMessage, code: errorCode })
 )
+
+export const selectLoginState = createSelector(
+  selectUserState,
+  ({ loginState }) => loginState
+);

@@ -11,6 +11,7 @@ import EditPage from '../Pages/EditPage/EditPage';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../state/user/selectors';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
+import LoginPage from '../Pages/LoginPage/LoginPage';
 
 const App: React.FC = () => {
 
@@ -21,6 +22,9 @@ const App: React.FC = () => {
       <Switch>
         <Route path="/edit/:componentId">
           <EditPage />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
         </Route>
         <Route path="/">
           {

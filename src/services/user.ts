@@ -10,3 +10,8 @@ export const registerUser = async ({ email, password }: RegisterUserArgs): Promi
   const { data: user } = await apiClient.post('/user', { email, password });
   return user;
 }
+
+export const loginUser = async ({ email, password }: RegisterUserArgs): Promise<User> => {
+  const { data: user } = await apiClient.post('/user/me/login', { email, password });
+  return user;
+}
