@@ -9,7 +9,7 @@
 # Features
 Users can...
 
-- [ ] login
+- [X] login
 - [X] registration
 - [x] view and filter components to select
 - [ ] add a component to their library
