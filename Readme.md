@@ -9,15 +9,15 @@
 # Features
 Users can...
 
+- [ ] login
+- [ ] registration
 - [x] view and filter components to select
 - [ ] add a component to their library
 - [ ] create a library
 - [X] edit styles and preview props for a component
 - [ ] view their component library
-- [ ] login
 - [ ] publish their library as an npm package and git repository
   - [ ] for the React framework
   - [ ] for the Vue framework
   - [ ] of web components
-- [ ] Create mockups using their library
 - [ ] add custom components to the platform...
