@@ -6,9 +6,9 @@ import { registerUserAction, REGISTER_USER } from './actions';
 function* registerUserSaga (action: Action<RegisterUserArgs>) {
   try {
     const user = yield call(registerUser, action.payload);
-    put(registerUserAction.success(user));
+    yield put(registerUserAction.success(user));
   } catch (error) {
-    put(registerUserAction.failure());
+    yield put(registerUserAction.failure());
   }
 }
 
