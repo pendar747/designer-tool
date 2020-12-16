@@ -44,7 +44,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
           validateStatus={loginState === AsyncState.FAILED ? 'error' : undefined} 
           wrapperCol={{ offset: 5 }}
         >
-          <Button loading={loginState == AsyncState.IN_PROGRESS} onClick={handleSubmit} type="primary">Login</Button>
+          <Button htmlType="submit" loading={loginState == AsyncState.IN_PROGRESS} onClick={handleSubmit} type="primary">Login</Button>
         </FormItem>
         <FormItem wrapperCol={{ offset: 5 }}>
           <Link to="/">I do not have an account, register</Link>

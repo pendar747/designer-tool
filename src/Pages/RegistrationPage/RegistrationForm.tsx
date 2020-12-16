@@ -94,7 +94,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = () => {
         type="password" />
     </FormItem>
     <FormItem wrapperCol={{ offset: 5 }}>
-      <Button loading={registrationState == AsyncState.IN_PROGRESS} onClick={handleSubmit} type="primary">Register</Button>
+      <Button htmlType="submit" loading={registrationState == AsyncState.IN_PROGRESS} onClick={handleSubmit} type="primary">Register</Button>
     </FormItem>
     <FormItem wrapperCol={{ offset: 5 }}>
       <Link to="/login">I already have an account, login</Link>
