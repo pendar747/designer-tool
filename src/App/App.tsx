@@ -13,6 +13,8 @@ import { selectIsLoggedIn } from '../state/user/selectors';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
 import LoginPage from '../Pages/LoginPage/LoginPage';
 import { fetchCurrentUserAction } from '../state/user/actions';
+import NavBar from '../components/Navbar/Navbar';
+import CreateLibraryModal from '../components/CreateLibraryModal/CreateLibraryModal';
 
 const App: React.FC = () => {
 
@@ -25,6 +27,8 @@ const App: React.FC = () => {
 
   return <div className={styles.container}>
     <Router>
+      <CreateLibraryModal />
+      <NavBar />
       <Switch>
         <Route path="/edit/:componentId">
           <EditPage />

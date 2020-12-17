@@ -15,7 +15,7 @@ export const createAsyncActionConstant = (type: string): AsyncActionConstant => 
   failure: `${type}_failure`
 });
 
-export const creatUIAction = <PayloadT = void>(type: string) => (payload: PayloadT): Action<PayloadT> => ({
+export const createUIAction = <PayloadT = void>(type: string) => (payload: PayloadT): Action<PayloadT> => ({
   type,
   payload
 });

@@ -1,11 +1,23 @@
+import { Button } from 'antd';
 import React from 'react';
-import ComponentLibrary from '../../components/ComponentLibrary/ComponentLibrary';
+import { useDispatch } from 'react-redux';
+import { showCreateLibraryModalAction } from '../../state/library/actions';
+import styles from './HomePage.less';
 
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
-  return <div style={{ width: '100%' }}>
-    <ComponentLibrary />
+
+  const dispatch = useDispatch();
+
+  return <div className={styles.container}>
+    <div className={styles.content}>
+      <Button 
+        onClick={() => dispatch(showCreateLibraryModalAction(true))} 
+        type="primary">
+          Create a library
+      </Button>
+    </div>
   </div>;
 }
 
