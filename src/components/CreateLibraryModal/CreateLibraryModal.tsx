@@ -5,8 +5,9 @@ import TextArea from 'antd/lib/input/TextArea';
 import Modal from 'antd/lib/modal/Modal';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showCreateLibraryModalAction } from '../../state/library/actions';
-import { selectIsCreateLibraryModalVisible } from '../../state/library/selectors';
+import { createLibraryAction, showCreateLibraryModalAction } from '../../state/library/actions';
+import { selectCreateLibraryState, selectIsCreateLibraryModalVisible } from '../../state/library/selectors';
+import { AsyncState } from '../../state/types';
 
 interface CreateLibraryModalProps {}
 
@@ -15,11 +16,12 @@ const CreateLibraryModal: React.FC<CreateLibraryModalProps> = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const createState = useSelector(selectCreateLibraryState);
 
   const onCancel = () => dispatch(showCreateLibraryModalAction(false));
 
   const onCreate = () => {
-
+    dispatch(createLibraryAction.request({ name, description }));
   }
 
   return <Modal 
@@ -27,7 +29,7 @@ const CreateLibraryModal: React.FC<CreateLibraryModalProps> = () => {
     onCancel={onCancel} 
     footer={[
       <Button onClick={onCancel}>Cancel</Button>,
-      <Button onClick={onCreate} type="primary">Create</Button>
+      <Button loading={createState === AsyncState.IN_PROGRESS} onClick={onCreate} type="primary">Create</Button>
     ]}
     visible={isShowingModal}>
     <Form layout="vertical" labelCol={{ span: 4 }}>

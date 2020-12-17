@@ -7,3 +7,8 @@ export const selectIsCreateLibraryModalVisible = createSelector(
   selectLibraryState,
   ({ isCreateModalVisible }) => isCreateModalVisible
 )
+
+export const selectCreateLibraryState = createSelector(
+  selectLibraryState,
+  ({ createLibraryState }) => createLibraryState
+)
