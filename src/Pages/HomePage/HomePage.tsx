@@ -1,7 +1,7 @@
 import { Button } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { showCreateLibraryModalAction } from '../../state/library/actions';
+import { fetchUserLibrariesAction, showCreateLibraryModalAction } from '../../state/library/actions';
 import styles from './HomePage.less';
 
 interface HomePageProps {}
@@ -9,6 +9,10 @@ interface HomePageProps {}
 const HomePage: React.FC<HomePageProps> = () => {
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserLibrariesAction.request());
+  }, []);
 
   return <div className={styles.container}>
     <div className={styles.content}>

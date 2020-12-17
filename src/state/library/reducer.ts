@@ -1,18 +1,20 @@
 import { Action } from "../actionCreators";
-import { CREATE_LIBRARY, SHOW_CREATE_LIBRARY_MODAL } from "./actions";
+import { CREATE_LIBRARY, FETCH_LIBRARIES, SHOW_CREATE_LIBRARY_MODAL } from "./actions";
 import { Library } from '../../types/library';
 import { AsyncState } from "../types";
 
 export interface LibraryState {
   isCreateModalVisible: boolean,
   libraries: Library[],
-  createLibraryState: AsyncState
+  createLibraryState: AsyncState,
+  fetchLibrariesState: AsyncState
 }
 
 export const LIBRARY_INITIAL_STATE: LibraryState = {
   isCreateModalVisible: false,
   libraries: [],
-  createLibraryState: AsyncState.DEFAULT
+  createLibraryState: AsyncState.DEFAULT,
+  fetchLibrariesState: AsyncState.DEFAULT
 }
 
 export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, action: Action<any>): LibraryState => {
@@ -33,6 +35,22 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
     return {
       ...state,
       createLibraryState: AsyncState.FAILED  
+    }
+  case FETCH_LIBRARIES.request:
+    return {
+      ...state,
+      fetchLibrariesState: AsyncState.IN_PROGRESS
+    }
+  case FETCH_LIBRARIES.success:
+    return {
+      ...state,
+      fetchLibrariesState: AsyncState.SUCCESSFUL,
+      libraries: action.payload
+    }
+  case FETCH_LIBRARIES.failure:
+    return {
+      ...state,
+      fetchLibrariesState: AsyncState.FAILED
     }
   case SHOW_CREATE_LIBRARY_MODAL:
     return {
