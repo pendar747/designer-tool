@@ -1,8 +1,43 @@
 html {
   --gap: 5px;
+  --gap-x2: 10px;
+  --gap-x3: 15px;
 
-  /* colors */
+  /* container */
   --container-border-color: lightgray;
+  --container-border-radius: 3px;
+
+  /* Page */
+  --page-margin-top: 40px;
+  --page-padding: 20px;
+
+  /* text */
+  --text-size-xxlarge: 1.7rem;
+  --text-size-xlarge: 1.5rem;
+  --text-size-large: 1.3rem;
+  --text-size-medium: 1.1rem;
+  --text-size-small: 0.8rem;
+  --text-color-meta: darkgray;
+  --text-color-main: black;
+}
+
+.title {
+  font-size: var(--text-size-medium);
+  font-weight: 600;
+}
+
+.meta {
+  font-size: var(--text-size-small);
+  color: var(--text-color-meta);
+}
+
+.page {
+  border: 1px solid var(--container-border-color);
+  border-radius: var(--container-border-radius);
+  max-width: 900px;
+  width: 100%;
+  margin-top: var(--page-margin-top);
+  padding: var(--page-padding);
 }
 
 body {

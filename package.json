@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
+    "@types/classnames": "^2.2.11",
+    "@types/date-fns": "^2.6.0",
     "@types/lodash": "^4.14.165",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -32,6 +34,8 @@
     "@types/sane-email-validation": "^1.1.0",
     "antd": "^4.9.1",
     "axios": "^0.21.0",
+    "classnames": "^2.2.6",
+    "date-fns": "^2.16.1",
     "elix": "14.1.1",
     "known-css-properties": "^0.20.0",
     "lodash": "^4.17.20",

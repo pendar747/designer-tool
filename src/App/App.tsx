@@ -29,19 +29,21 @@ const App: React.FC = () => {
     <Router>
       <CreateLibraryModal />
       <NavBar />
-      <Switch>
-        <Route path="/edit/:componentId">
-          <EditPage />
-        </Route>
-        <Route path="/login">
-          <LoginPage />
-        </Route>
-        <Route path="/">
-          {
-            isLoggedIn ? <HomePage /> : <RegistrationPage />
-          }
-        </Route>
-      </Switch>
+      <div className={styles.main}>
+        <Switch>
+          <Route path="/edit/:componentId">
+            <EditPage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/">
+            {
+              isLoggedIn ? <HomePage /> : <RegistrationPage />
+            }
+          </Route>
+        </Switch>
+      </div>
     </Router>
   </div>
 };

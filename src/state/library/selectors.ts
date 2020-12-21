@@ -12,3 +12,8 @@ export const selectCreateLibraryState = createSelector(
   selectLibraryState,
   ({ createLibraryState }) => createLibraryState
 )
+
+export const selectLibraries = createSelector(
+  selectLibraryState,
+  ({ libraries }) => libraries
+);

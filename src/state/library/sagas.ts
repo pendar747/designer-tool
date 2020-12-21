@@ -3,7 +3,7 @@ import { createLibrary, CreateLibraryArgs, fetchUserLibraries } from "../../serv
 import { User } from "../../types/user";
 import { Action } from "../actionCreators";
 import { selectCurrentUser } from "../user/selectors";
-import { createLibraryAction, CREATE_LIBRARY, FETCH_LIBRARIES } from "./actions";
+import { createLibraryAction, CREATE_LIBRARY, fetchUserLibrariesAction, FETCH_LIBRARIES } from "./actions";
 
 function* createLibrarySaga (action: Action<CreateLibraryArgs>) {
   try {
@@ -14,13 +14,13 @@ function* createLibrarySaga (action: Action<CreateLibraryArgs>) {
   }
 }
 
-function* fetchUserLibrariesSaga (action: Action<void>) {
+function* fetchUserLibrariesSaga () {
   try {
     const user: User = yield select(selectCurrentUser);
     const libraries = yield call(fetchUserLibraries, user.id);
-    yield put(createLibraryAction.success(libraries));
+    yield put(fetchUserLibrariesAction.success(libraries));
   } catch (error) {
-    yield put(createLibraryAction.failure());
+    yield put(fetchUserLibrariesAction.failure());
   }
 }
 
