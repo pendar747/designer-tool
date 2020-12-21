@@ -1,20 +1,23 @@
 import { Action } from "../actionCreators";
-import { CREATE_LIBRARY, FETCH_LIBRARIES, SHOW_CREATE_LIBRARY_MODAL } from "./actions";
+import { CREATE_LIBRARY, FETCH_LIBRARIES, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
 import { Library } from '../../types/library';
 import { AsyncState } from "../types";
 
 export interface LibraryState {
-  isCreateModalVisible: boolean,
+  isEditModalVisible: boolean,
   libraries: Library[],
   createLibraryState: AsyncState,
-  fetchLibrariesState: AsyncState
+  fetchLibrariesState: AsyncState,
+  updateLibraryState: AsyncState,
+  selectedLibraryId?: string
 }
 
 export const LIBRARY_INITIAL_STATE: LibraryState = {
-  isCreateModalVisible: false,
+  isEditModalVisible: false,
   libraries: [],
   createLibraryState: AsyncState.DEFAULT,
-  fetchLibrariesState: AsyncState.DEFAULT
+  fetchLibrariesState: AsyncState.DEFAULT,
+  updateLibraryState: AsyncState.DEFAULT
 }
 
 export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, action: Action<any>): LibraryState => {
@@ -29,7 +32,7 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
       ...state,
       createLibraryState: AsyncState.SUCCESSFUL,
       libraries: [...state.libraries, action.payload],
-      isCreateModalVisible: false
+      isEditModalVisible: false
     }
   case CREATE_LIBRARY.failure:
     return {
@@ -55,7 +58,27 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
   case SHOW_CREATE_LIBRARY_MODAL:
     return {
       ...state,
-      isCreateModalVisible: action.payload
+      isEditModalVisible: action.payload.show,
+      selectedLibraryId: action.payload.libraryId
+    }
+  case UPDATE_LIBRARY.request:
+    return {
+      ...state,
+      updateLibraryState: AsyncState.SUCCESSFUL  
+    }
+  case UPDATE_LIBRARY.failure:
+    return {
+      ...state,
+      updateLibraryState: AsyncState.FAILED
+    }
+  case UPDATE_LIBRARY.success:
+    return {
+      ...state,
+      isEditModalVisible: false,
+      libraries: state.libraries.map(library => library.id === action.payload.library.id 
+        ? action.payload.library
+        : library),
+      updateLibraryState: AsyncState.SUCCESSFUL
     }
   default:
     return state;

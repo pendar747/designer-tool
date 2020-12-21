@@ -21,3 +21,8 @@ export const createLibrary = async ({ name, description }: CreateLibraryArgs): P
   const { data } = await apiClient.post('/library', { name, description });
   return mapLibrary(data);
 }
+
+export const updateLibrary = async ({ name, description, id }: Library) => {
+  const { data } = await apiClient.put(`/library/${id}`, { name, description });
+  return mapLibrary(data);
+}

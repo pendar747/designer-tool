@@ -2,6 +2,9 @@ html {
   --gap: 5px;
   --gap-x2: 10px;
   --gap-x3: 15px;
+  --gap-x4: 20px;
+  --gap-x5: 25px;
+  --gap-x6: 30px;
 
   /* container */
   --container-border-color: lightgray;

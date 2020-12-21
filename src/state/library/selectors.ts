@@ -5,7 +5,7 @@ export const selectLibraryState = (state: State) => state.library;
 
 export const selectIsCreateLibraryModalVisible = createSelector(
   selectLibraryState,
-  ({ isCreateModalVisible }) => isCreateModalVisible
+  ({ isEditModalVisible: isCreateModalVisible }) => isCreateModalVisible
 )
 
 export const selectCreateLibraryState = createSelector(
@@ -16,4 +16,9 @@ export const selectCreateLibraryState = createSelector(
 export const selectLibraries = createSelector(
   selectLibraryState,
   ({ libraries }) => libraries
+);
+
+export const selectSelectedLibrary = createSelector(
+  selectLibraryState,
+  ({ selectedLibraryId, libraries }) => libraries.find(({ id }) => id === selectedLibraryId) 
 );
