@@ -1,12 +1,13 @@
 import { Dropdown, Menu } from 'antd';
 import MenuItem from 'antd/lib/menu/MenuItem';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { showEditLibraryModalAction } from '../../../state/library/actions';
+import { deleteLibraryAction, showEditLibraryModalAction } from '../../../state/library/actions';
 import { Library } from '../../../types/library';
 import styles from './LibraryRow.less';
 import { EllipsisOutlined } from '@ant-design/icons';
 import format from 'date-fns/format';
+import Modal from 'antd/lib/modal/Modal';
 
 interface LibraryRowProps {
   library: Library
@@ -15,10 +16,19 @@ interface LibraryRowProps {
 const LibraryRow: React.FC<LibraryRowProps> = ({ library }) => {
   const dispatch = useDispatch();
   const onRename = () => dispatch(showEditLibraryModalAction({ show: true, libraryId: library.id }));
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState<boolean>(false);
 
   const menu = <Menu>
+    <Modal 
+      onOk={() => dispatch(deleteLibraryAction.request({ libraryId: library.id }))}
+      title="Delete library" 
+      visible={isDeleteModalVisible}
+      okButtonProps={{ danger: true }}
+      onCancel={() => setIsDeleteModalVisible(false)}>
+        Are you sure about deleting "{library.name}"?
+    </Modal>
     <MenuItem onClick={onRename}>Rename</MenuItem>
-    <MenuItem danger>Delete</MenuItem>
+    <MenuItem onClick={() => setIsDeleteModalVisible(true)} danger>Delete</MenuItem>
   </Menu>;
 
   return <div className={styles.libraryRow} key={library.id}>

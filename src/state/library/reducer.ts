@@ -96,7 +96,7 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
     return {
       ...state,
       deleteLibraryState: AsyncState.SUCCESSFUL,
-      libraries: state.libraries.filter(({ id }) => id === action.payload.libraryId)
+      libraries: state.libraries.filter(({ id }) => id !== action.payload.libraryId)
     }
   default:
     return state;
