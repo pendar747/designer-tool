@@ -26,3 +26,7 @@ export const updateLibrary = async ({ name, description, id }: Library) => {
   const { data } = await apiClient.put(`/library/${id}`, { name, description });
   return mapLibrary(data);
 }
+
+export const deleteLibrary = async (libraryId: string) => {
+  return apiClient.delete(`/library/${libraryId}`);
+}

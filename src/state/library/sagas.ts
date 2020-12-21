@@ -1,10 +1,19 @@
 import { call, put, select, takeLatest } from "redux-saga/effects";
-import { createLibrary, CreateLibraryArgs, fetchUserLibraries, updateLibrary } from "../../services/library";
+import { createLibrary, CreateLibraryArgs, deleteLibrary, fetchUserLibraries, updateLibrary } from "../../services/library";
 import { Library } from "../../types/library";
 import { User } from "../../types/user";
 import { Action } from "../actionCreators";
 import { selectCurrentUser } from "../user/selectors";
-import { createLibraryAction, CREATE_LIBRARY, fetchUserLibrariesAction, FETCH_LIBRARIES, UPDATE_LIBRARY, updateLibraryAction } from "./actions";
+import { 
+  createLibraryAction, 
+  CREATE_LIBRARY, 
+  fetchUserLibrariesAction, 
+  FETCH_LIBRARIES, 
+  UPDATE_LIBRARY, 
+  updateLibraryAction, 
+  deleteLibraryAction, 
+  DELETE_LIBRARY 
+} from "./actions";
 
 function* createLibrarySaga (action: Action<CreateLibraryArgs>) {
   try {
@@ -34,8 +43,18 @@ function* updateLibrarySaga (action: Action<{ library: Library }>) {
   }
 }
 
+function* deleteLibrarySaga (action: Action<{ libraryId: string }>) {
+  try {
+    yield call(deleteLibrary, action.payload.libraryId);
+    yield put(deleteLibraryAction.success({ libraryId: action.payload.libraryId }));
+  } catch (error) {
+    yield put(deleteLibraryAction.failure());
+  }
+}
+
 export default function* sagas () {
   yield takeLatest(CREATE_LIBRARY.request, createLibrarySaga);
   yield takeLatest(FETCH_LIBRARIES.request, fetchUserLibrariesSaga);
   yield takeLatest(UPDATE_LIBRARY.request, updateLibrarySaga);
+  yield takeLatest(DELETE_LIBRARY.request, deleteLibrarySaga);
 }

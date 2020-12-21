@@ -1,5 +1,5 @@
 import { Action } from "../actionCreators";
-import { CREATE_LIBRARY, FETCH_LIBRARIES, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
+import { CREATE_LIBRARY, DELETE_LIBRARY, FETCH_LIBRARIES, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
 import { Library } from '../../types/library';
 import { AsyncState } from "../types";
 
@@ -10,6 +10,7 @@ export interface LibraryState {
   fetchLibrariesState: AsyncState,
   updateLibraryState: AsyncState,
   selectedLibraryId?: string
+  deleteLibraryState: AsyncState
 }
 
 export const LIBRARY_INITIAL_STATE: LibraryState = {
@@ -17,7 +18,8 @@ export const LIBRARY_INITIAL_STATE: LibraryState = {
   libraries: [],
   createLibraryState: AsyncState.DEFAULT,
   fetchLibrariesState: AsyncState.DEFAULT,
-  updateLibraryState: AsyncState.DEFAULT
+  updateLibraryState: AsyncState.DEFAULT,
+  deleteLibraryState: AsyncState.DEFAULT
 }
 
 export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, action: Action<any>): LibraryState => {
@@ -79,6 +81,22 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
         ? action.payload.library
         : library),
       updateLibraryState: AsyncState.SUCCESSFUL
+    }
+  case DELETE_LIBRARY.request:
+    return {
+      ...state,
+      deleteLibraryState: AsyncState.IN_PROGRESS
+    }
+  case DELETE_LIBRARY.failure:
+    return {
+      ...state,
+      deleteLibraryState: AsyncState.FAILED
+    }
+  case DELETE_LIBRARY.success:
+    return {
+      ...state,
+      deleteLibraryState: AsyncState.SUCCESSFUL,
+      libraries: state.libraries.filter(({ id }) => id === action.payload.libraryId)
     }
   default:
     return state;

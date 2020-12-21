@@ -1,0 +1,26 @@
+.libraryRow {
+  margin-bottom: var(--gap-x3);
+  padding-bottom: var(--gap-x3);
+  border-bottom: 1px solid var(--container-border-color);
+  display: flex;
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .info {
+    flex-grow: 1;
+  }
+
+  .buttons {
+    display: flex;
+
+    .options svg {
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+    }
+  }
+}

@@ -48,7 +48,7 @@ const CreateLibraryModal: React.FC<CreateLibraryModalProps> = () => {
     visible={isShowingModal}>
     <Form layout="vertical" labelCol={{ span: 4 }}>
       <FormItem label="Name" required>
-        <Input value={name} onChange={event => setName(event.target.value)} />
+        <Input autoFocus={true} value={name} onChange={event => setName(event.target.value)} />
       </FormItem>
       <FormItem label="Description">
         <TextArea value={description} onChange={event => setDescription(event.target.value)} />
