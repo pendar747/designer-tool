@@ -15,6 +15,8 @@ import LoginPage from '../Pages/LoginPage/LoginPage';
 import { fetchCurrentUserAction } from '../state/user/actions';
 import NavBar from '../components/Navbar/Navbar';
 import CreateLibraryModal from '../components/CreateLibraryModal/CreateLibraryModal';
+import LibraryPage from '../Pages/LibraryPage/LibraryPage';
+import AddComponentsPage from '../Pages/AddComponentsPage/AddComponentsPage';
 
 const App: React.FC = () => {
 
@@ -33,6 +35,12 @@ const App: React.FC = () => {
         <Switch>
           <Route path="/edit/:componentId">
             <EditPage />
+          </Route>
+          <Route path="/library/:libraryId/add-components">
+            <AddComponentsPage />
+          </Route>
+          <Route path="/library/:libraryId">
+            <LibraryPage />
           </Route>
           <Route path="/login">
             <LoginPage />

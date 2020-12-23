@@ -12,6 +12,7 @@ Users can...
 - [X] login
 - [X] registration
 - [x] view and filter components to select
+- [X] Create/update/delete a library
 - [ ] add a component to their library
 - [ ] create a library
 - [X] edit styles and preview props for a component

@@ -8,6 +8,7 @@ import styles from './LibraryRow.less';
 import { EllipsisOutlined } from '@ant-design/icons';
 import format from 'date-fns/format';
 import Modal from 'antd/lib/modal/Modal';
+import { Link } from 'react-router-dom';
 
 interface LibraryRowProps {
   library: Library
@@ -33,7 +34,9 @@ const LibraryRow: React.FC<LibraryRowProps> = ({ library }) => {
 
   return <div className={styles.libraryRow} key={library.id}>
     <div className={styles.info}>
-      <div className="title">{library.name}</div>
+      <div className="title">
+        <Link to={`/library/${library.id}`}>{library.name}</Link>
+      </div>
       <div className={styles.description}>{library.description}</div>
       <div className={"meta"}>Created at {format(library.createdAt, 'yyyy/MM/dd hh:mm')}</div>
     </div>
