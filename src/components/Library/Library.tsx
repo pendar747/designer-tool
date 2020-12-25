@@ -46,6 +46,7 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
             .filter(({ info }) => filter.length > 0 ? info.name.indexOf(filter) === 0 : true)
             .map(component => (
             <ComponentPreview 
+              onEdit={() => history.push(`/edit/${component.info.id}`)}
               onRemove={() => onRemove(component.info.id)} 
               key={component.info.id} 
               title={component.info.name} 

@@ -12,8 +12,6 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
   const [styleSheet, setStyleSheet] = useState<StyleSheet>([]);
   const [props, setProps] = useState<{ [key: string]: any }>({});
 
-  console.log({ styleSheet, props });
-
   return <div className={styles.container}>
     <div className={styles.preview}>
       <Control props={props} styleSheet={styleSheet}></Control>

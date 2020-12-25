@@ -25,7 +25,6 @@ export const info = {
 }
 
 export const Control: React.FC<ControlOptions> = ({ styleSheet }) => {
-  console.log('control', { styleSheet });
   const styles = convertSheetToString(styleSheet);
   return (
     <>

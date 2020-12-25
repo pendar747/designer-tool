@@ -38,7 +38,6 @@ function* fetchUserLibrariesSaga () {
     const libraries = yield call(fetchUserLibraries, user.id);
     yield put(fetchUserLibrariesAction.success(libraries));
   } catch (error) {
-    console.log(error);
     yield put(fetchUserLibrariesAction.failure());
   }
 }

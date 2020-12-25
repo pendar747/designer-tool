@@ -15,7 +15,10 @@ export const info: ComponentInfo = {
   library: 'Ant Design',
   availableOptions: {
     css: {
-      selectors: []
+      selectors: [
+        '.ant-btn',
+        '.ant-btn > span'
+      ]
     },
     props: [{
       name: 'block',
