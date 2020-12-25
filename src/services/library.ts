@@ -34,3 +34,8 @@ export const deleteLibrary = async (libraryId: string) => {
 export const addComponent = async (componentId: string, libraryId: string) => {
   return apiClient.post(`/library/${libraryId}/component`, { componentId });
 }
+
+export const fetchComponents = async (libraryId: string) => {
+  const { data } = await apiClient.get(`/library/${libraryId}/component`);
+  return data;
+}

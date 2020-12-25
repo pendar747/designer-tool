@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { Library } from "../../types/library";
 import { State } from "../store";
 
 export const selectLibraryState = (state: State) => state.library;

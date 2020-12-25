@@ -4,5 +4,6 @@ export interface Library {
   createdAt: Date,
   lastUpdated: Date,
   id: string,
-  userId: string
+  userId: string,
+  componentIds?: string[]
 }

@@ -8,6 +8,8 @@ export const FETCH_LIBRARIES = createAsyncActionConstant('LIBRARY/FETCH_LIBRARIE
 export const UPDATE_LIBRARY = createAsyncActionConstant('LIBRARY/UPDATE_LIBRARY');
 export const DELETE_LIBRARY = createAsyncActionConstant('LIBRARY/DELETE_LIBRARY');
 export const ADD_COMPONENT = createAsyncActionConstant('LIBRARY/ADD_COMPONENT');
+export const FETCH_COMPONENTS = createAsyncActionConstant('LIBRARY/FETCH_COMPONENTS');
+export const SELECT_LIBRARY = 'LIBRARY/SELECT_LIBRARY';
 
 export const showEditLibraryModalAction = createUIAction<{ show: boolean, libraryId?: string }>(SHOW_CREATE_LIBRARY_MODAL);
 export const createLibraryAction = createAsyncAction<CreateLibraryArgs, Library, void>(CREATE_LIBRARY);
@@ -15,3 +17,5 @@ export const fetchUserLibrariesAction = createAsyncAction<void, Library[], void>
 export const updateLibraryAction = createAsyncAction<{ library: Library }, { library: Library }>(UPDATE_LIBRARY);
 export const deleteLibraryAction = createAsyncAction<{ libraryId: string }, { libraryId: string }>(DELETE_LIBRARY);
 export const addComponentAction = createAsyncAction<{ componentId: string, libraryId: string }>(ADD_COMPONENT);
+export const fetchComponentsAction = createAsyncAction<{ libraryId: string }, { libraryId: string, componentIds: string[] }>(FETCH_COMPONENTS);
+export const selectLibraryAction = createUIAction<{ libraryId: string }>(SELECT_LIBRARY);

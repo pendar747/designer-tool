@@ -1,5 +1,5 @@
 import { Action } from "../actionCreators";
-import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_LIBRARIES, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
+import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, SELECT_LIBRARY, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
 import { Library } from '../../types/library';
 import { AsyncState } from "../types";
 
@@ -11,7 +11,8 @@ export interface LibraryState {
   updateLibraryState: AsyncState,
   selectedLibraryId?: string
   deleteLibraryState: AsyncState,
-  addComponentState: AsyncState
+  addComponentState: AsyncState,
+  fetchComponentState: AsyncState
 }
 
 export const LIBRARY_INITIAL_STATE: LibraryState = {
@@ -21,7 +22,8 @@ export const LIBRARY_INITIAL_STATE: LibraryState = {
   fetchLibrariesState: AsyncState.DEFAULT,
   updateLibraryState: AsyncState.DEFAULT,
   deleteLibraryState: AsyncState.DEFAULT,
-  addComponentState: AsyncState.DEFAULT
+  addComponentState: AsyncState.DEFAULT,
+  fetchComponentState: AsyncState.DEFAULT
 }
 
 export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, action: Action<any>): LibraryState => {
@@ -114,6 +116,34 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
     return {
       ...state,
       addComponentState: AsyncState.FAILED
+    }
+  case FETCH_COMPONENTS.request:
+    return {
+      ...state,
+      fetchComponentState: AsyncState.IN_PROGRESS
+    }
+  case FETCH_COMPONENTS.success:
+    return {
+      ...state,
+      fetchComponentState: AsyncState.SUCCESSFUL,
+      libraries: state.libraries.map(library => {
+        return library.id === action.payload.libraryId
+          ? {
+            ...library,
+            componentIds: action.payload.componentIds
+          }
+          : library;
+      })
+    }
+  case FETCH_COMPONENTS.failure:
+    return {
+      ...state,
+      fetchComponentState: AsyncState.FAILED
+    }
+  case SELECT_LIBRARY:
+    return {
+      ...state,
+      selectedLibraryId: action.payload.libraryId
     }
   default:
     return state;

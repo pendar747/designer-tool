@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ComponentPreview from '../ComponentPreview/ComponentPreview';
 import styles from './AllComponents.less';
 import Input from 'antd/lib/input';
@@ -6,11 +6,15 @@ import venderComponents from '../venderComponents';
 
 import 'elix/define/BorderButton';
 import 'elix/define/DropdownList';
-import { useDispatch } from 'react-redux';
-import { addComponentAction } from '../../state/library/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addComponentAction, fetchComponentsAction, fetchUserLibrariesAction, selectLibraryAction } from '../../state/library/actions';
 import { useParams } from 'react-router-dom';
+import { selectSelectedLibrary } from '../../state/library/selectors';
+import { fetchCurrentUserAction } from '../../state/user/actions';
 
 const AllComponents = () => {
+  const library = useSelector(selectSelectedLibrary);
+
   const [filter, setFilter] = useState<string>('');
 
   const dispatch = useDispatch();
@@ -21,12 +25,19 @@ const AllComponents = () => {
     dispatch(addComponentAction.request({ componentId, libraryId }));
   }
 
+  useEffect(() => {
+    dispatch(fetchCurrentUserAction.request());
+    dispatch(fetchUserLibrariesAction.request());
+    dispatch(selectLibraryAction({ libraryId }));
+    dispatch(fetchComponentsAction.request({ libraryId }));
+  }, [libraryId]);
+
   return <div>
     <div><Input placeholder="filter" size="small" value={filter} onChange={(event) => setFilter(event.target.value)} /></div> 
     <div className={styles.container}>
       {
         components.map(({ info, Demo }) => (
-          <ComponentPreview onAdd={() => onAdd(info.id)} key={`${info.id}`} title={info.name}>
+          <ComponentPreview isAdded={library?.componentIds?.includes(info.id)} onAdd={() => onAdd(info.id)} key={`${info.id}`} title={info.name}>
             <Demo>Button</Demo>
           </ComponentPreview>
         ))
