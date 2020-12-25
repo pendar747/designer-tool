@@ -1,6 +1,15 @@
-.container {
+.components {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  padding: 15px;
+  gap: var(--gap-x2);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--gap-x3);
+
+  .filterInput {
+    max-width: 300px;
+  }
 }

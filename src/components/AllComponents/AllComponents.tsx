@@ -9,6 +9,7 @@ import { addComponentAction, fetchComponentsAction, fetchUserLibrariesAction, re
 import { useParams } from 'react-router-dom';
 import { selectSelectedLibrary } from '../../state/library/selectors';
 import { fetchCurrentUserAction } from '../../state/user/actions';
+import { SearchOutlined } from '@ant-design/icons';
 
 const AllComponents = () => {
   const library = useSelector(selectSelectedLibrary);
@@ -36,8 +37,14 @@ const AllComponents = () => {
   }, [libraryId]);
 
   return <div>
-    <div><Input placeholder="filter" size="small" value={filter} onChange={(event) => setFilter(event.target.value)} /></div> 
-    <div className={styles.container}>
+    <div className={styles.toolbar}>
+      <Input placeholder="filter" 
+        suffix={<SearchOutlined />}
+        className={styles.filterInput} 
+        value={filter} 
+        onChange={(event) => setFilter(event.target.value)} />
+    </div> 
+    <div className={styles.components}>
       {
         components.map(({ info, Demo }) => (
           <ComponentPreview 
