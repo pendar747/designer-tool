@@ -16,6 +16,6 @@ export const createLibraryAction = createAsyncAction<CreateLibraryArgs, Library,
 export const fetchUserLibrariesAction = createAsyncAction<void, Library[], void>(FETCH_LIBRARIES);
 export const updateLibraryAction = createAsyncAction<{ library: Library }, { library: Library }>(UPDATE_LIBRARY);
 export const deleteLibraryAction = createAsyncAction<{ libraryId: string }, { libraryId: string }>(DELETE_LIBRARY);
-export const addComponentAction = createAsyncAction<{ componentId: string, libraryId: string }>(ADD_COMPONENT);
+export const addComponentAction = createAsyncAction<{ componentId: string, libraryId: string }, { componentId: string, libraryId: string }>(ADD_COMPONENT);
 export const fetchComponentsAction = createAsyncAction<{ libraryId: string }, { libraryId: string, componentIds: string[] }>(FETCH_COMPONENTS);
 export const selectLibraryAction = createUIAction<{ libraryId: string }>(SELECT_LIBRARY);

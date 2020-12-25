@@ -4,8 +4,6 @@ import styles from './AllComponents.less';
 import Input from 'antd/lib/input';
 import venderComponents from '../venderComponents';
 
-import 'elix/define/BorderButton';
-import 'elix/define/DropdownList';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComponentAction, fetchComponentsAction, fetchUserLibrariesAction, selectLibraryAction } from '../../state/library/actions';
 import { useParams } from 'react-router-dom';
@@ -37,8 +35,8 @@ const AllComponents = () => {
     <div className={styles.container}>
       {
         components.map(({ info, Demo }) => (
-          <ComponentPreview isAdded={library?.componentIds?.includes(info.id)} onAdd={() => onAdd(info.id)} key={`${info.id}`} title={info.name}>
-            <Demo>Button</Demo>
+          <ComponentPreview onRemove={() => {}} isAdded={library?.componentIds?.includes(info.id)} onAdd={() => onAdd(info.id)} key={`${info.id}`} title={info.name}>
+            <Demo />
           </ComponentPreview>
         ))
       }

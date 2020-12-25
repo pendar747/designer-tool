@@ -62,7 +62,7 @@ function* deleteLibrarySaga (action: Action<{ libraryId: string }>) {
 function* addComponentSaga (action: Action<{ componentId: string, libraryId: string }>) {
   try {
     yield call(addComponent, action.payload.componentId, action.payload.libraryId);
-    yield put(addComponentAction.success());
+    yield put(addComponentAction.success(action.payload));
   } catch (error) {
     yield put(addComponentAction.failure());
   }

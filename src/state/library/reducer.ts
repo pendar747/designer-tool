@@ -110,7 +110,15 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
   case ADD_COMPONENT.success:
     return {
       ...state,
-      addComponentState: AsyncState.SUCCESSFUL
+      addComponentState: AsyncState.SUCCESSFUL,
+      libraries: state.libraries.map(library => {
+        return library.id === action.payload.libraryId
+          ? {
+            ...library,
+            componentIds: [...library.componentIds, action.payload.componentId]
+          }
+          : library
+      })
     }
   case ADD_COMPONENT.failure:
     return {

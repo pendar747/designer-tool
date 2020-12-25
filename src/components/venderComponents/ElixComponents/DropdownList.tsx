@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentInfo, ControlOptions } from '../../../types/components';
 import { convertSheetToString } from '../../../utils/styles';
+import 'elix/define/DropdownList';
 
 export const Demo: React.FC = () => {
   return (

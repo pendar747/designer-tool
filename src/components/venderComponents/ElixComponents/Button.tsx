@@ -1,6 +1,8 @@
 import React from 'react';
 import { ControlOptions } from '../../../types/components';
 import { convertSheetToString } from '../../../utils/styles';
+import 'elix/define/BorderButton';
+
 
 export const Demo = () => {
   return (
