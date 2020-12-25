@@ -5,6 +5,8 @@ html {
   --gap-x4: 20px;
   --gap-x5: 25px;
   --gap-x6: 30px;
+  --gap-x10: 50px;
+  --gap-x20: 100px;
 
   /* container */
   --container-border-color: lightgray;

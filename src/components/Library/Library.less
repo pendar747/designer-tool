@@ -1,5 +1,19 @@
-.container {
+.components {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+  gap: var(--gap-x2);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--gap-x3);
+
+  .filterInput {
+    min-width: 300px;
+  }
+}
+
+.empty {
+  margin-top: var(--gap-x20);
 }
