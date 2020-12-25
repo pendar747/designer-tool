@@ -30,3 +30,7 @@ export const updateLibrary = async ({ name, description, id }: Library) => {
 export const deleteLibrary = async (libraryId: string) => {
   return apiClient.delete(`/library/${libraryId}`);
 }
+
+export const addComponent = async (componentId: string, libraryId: string) => {
+  return apiClient.post(`/library/${libraryId}/component`, { componentId });
+}
