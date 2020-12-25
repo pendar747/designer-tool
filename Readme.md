@@ -13,10 +13,12 @@ Users can...
 - [X] registration
 - [x] view and filter components to select
 - [X] Create/update/delete a library
-- [ ] add a component to their library
-- [ ] create a library
+- [X] add a component to their library
+- [X] create a library
 - [X] edit styles and preview props for a component
-- [ ] view their component library
+- [X] view their component library
+- [ ] Remove component from library
+- [ ] edit component styles in the library
 - [ ] publish their library as an npm package and git repository
   - [ ] for the React framework
   - [ ] for the Vue framework
