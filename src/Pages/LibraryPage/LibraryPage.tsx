@@ -29,7 +29,7 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
 
   return <div>
     <Button onClick={() => history.push(`/library/${libraryId}/add-components`)} type="primary">Add components</Button>
-    <Library components={components} />
+    <Library library={library} components={components} />
   </div>;
 }
 

@@ -17,7 +17,7 @@ Users can...
 - [X] create a library
 - [X] edit styles and preview props for a component
 - [X] view their component library
-- [ ] Remove component from library
+- [X] Remove component from library
 - [ ] edit component styles in the library
 - [ ] publish their library as an npm package and git repository
   - [ ] for the React framework

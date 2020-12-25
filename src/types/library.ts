@@ -7,3 +7,8 @@ export interface Library {
   userId: string,
   componentIds?: string[]
 }
+
+export interface LibraryComponentPair {
+  libraryId: string,
+  componentId: string
+} 

@@ -1,5 +1,5 @@
 import { Action } from "../actionCreators";
-import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, SELECT_LIBRARY, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
+import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, REMOVE_COMPONENT, SELECT_LIBRARY, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
 import { Library } from '../../types/library';
 import { AsyncState } from "../types";
 
@@ -12,7 +12,8 @@ export interface LibraryState {
   selectedLibraryId?: string
   deleteLibraryState: AsyncState,
   addComponentState: AsyncState,
-  fetchComponentState: AsyncState
+  fetchComponentState: AsyncState,
+  removeComponentState: AsyncState
 }
 
 export const LIBRARY_INITIAL_STATE: LibraryState = {
@@ -23,7 +24,8 @@ export const LIBRARY_INITIAL_STATE: LibraryState = {
   updateLibraryState: AsyncState.DEFAULT,
   deleteLibraryState: AsyncState.DEFAULT,
   addComponentState: AsyncState.DEFAULT,
-  fetchComponentState: AsyncState.DEFAULT
+  fetchComponentState: AsyncState.DEFAULT,
+  removeComponentState: AsyncState.DEFAULT
 }
 
 export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, action: Action<any>): LibraryState => {
@@ -152,6 +154,29 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
     return {
       ...state,
       selectedLibraryId: action.payload.libraryId
+    }
+  case REMOVE_COMPONENT.request:
+    return {
+      ...state,
+      removeComponentState: AsyncState.IN_PROGRESS
+    };
+  case REMOVE_COMPONENT.success:
+    return {
+      ...state,
+      removeComponentState: AsyncState.SUCCESSFUL,
+      libraries: state.libraries.map(library => {
+        return library.id === action.payload.libraryId
+          ? {
+            ...library,
+            componentIds: library.componentIds.filter(id => id !== action.payload.componentId)
+          }
+          : library
+      })
+    };
+  case REMOVE_COMPONENT.failure:
+    return {
+      ...state,
+      removeComponentState: AsyncState.FAILED
     }
   default:
     return state;
