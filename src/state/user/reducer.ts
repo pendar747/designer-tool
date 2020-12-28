@@ -1,6 +1,6 @@
 import { Action } from "../actionCreators";
 import { AsyncState, ErrorResponse } from "../types";
-import { FETCH_CURRENT_USER, LOGIN_USER, REGISTER_USER } from "./actions";
+import { FETCH_CURRENT_USER, LOGIN_USER, LOG_OUT, REGISTER_USER } from "./actions";
 
 export interface UserState {
   isLoggedIn: boolean,
@@ -80,6 +80,11 @@ export const userReducer = (state: UserState = USER_INITIAL_STATE, action: Actio
     return {
       ...state,
       fetchUserState: AsyncState.FAILED,
+      isLoggedIn: false
+    }
+  case LOG_OUT.success:
+    return {
+      ...state,
       isLoggedIn: false
     }
   default:

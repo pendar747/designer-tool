@@ -20,3 +20,7 @@ export const fetchCurrentUser = async (): Promise<User> => {
   const { data: user } = await apiClient.get('/user/me');
   return user;
 }
+
+export const logOut = async () => {
+  return apiClient.get('/user/me/logout');
+}
