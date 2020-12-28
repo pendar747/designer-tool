@@ -27,3 +27,8 @@ export const selectCurrentUser = createSelector(
   selectUserState,
   ({ user }) => user
 );
+
+export const selectFetchUserState = createSelector(
+  selectUserState,
+  ({ fetchUserState }) => fetchUserState
+);
