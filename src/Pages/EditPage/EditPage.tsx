@@ -11,7 +11,7 @@ const EditPage: React.FC<EditPageProps> = () => {
   const component = allComponents.find(component => component.info.id === componentId);
 
   return <div className={styles.container}>
-    <ComponentEditor component={component} />
+    <ComponentEditor component={component!} />
   </div>;
 }
 

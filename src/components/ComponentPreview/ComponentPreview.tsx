@@ -14,8 +14,8 @@ interface ComponentPreviewProps {
 const ComponentPreview: React.FC<ComponentPreviewProps> = ({ 
   title, 
   children, 
-  onAdd, 
-  onRemove, 
+  onAdd = () => {}, 
+  onRemove = () => {}, 
   isAdded, 
   onEdit = () => {}
 }) => {

@@ -49,7 +49,7 @@ const AllComponents = () => {
         components.map(({ info, Demo }) => (
           <ComponentPreview 
             onRemove={() => onRemove(info.id)} 
-            isAdded={library?.componentIds?.includes(info.id)} 
+            isAdded={Boolean(library?.componentIds?.includes(info.id))} 
             onAdd={() => onAdd(info.id)} 
             key={`${info.id}`} 
             title={info.name}>

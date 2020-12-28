@@ -9,7 +9,7 @@ function* registerUserSaga (action: Action<RegisterUserArgs>) {
     const user = yield call(registerUser, action.payload);
     yield put(registerUserAction.success(user));
   } catch (error) {
-    yield put(registerUserAction.failure((error as AxiosError).response.data));
+    yield put(registerUserAction.failure((error as AxiosError).response?.data));
   }
 }
 
@@ -18,7 +18,7 @@ function* loginUserSaga (action: Action<RegisterUserArgs>) {
     const user = yield call(loginUser, action.payload);
     yield put(loginUserAction.success(user));
   } catch (error) {
-    yield put(loginUserAction.failure((error as AxiosError).response.data));
+    yield put(loginUserAction.failure((error as AxiosError).response?.data));
   }
 }
 

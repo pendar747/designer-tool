@@ -29,7 +29,7 @@ const CreateThemeModal: React.FC<CreateThemeModalProps> = () => {
       name,
       description,
       isPublic,
-      createdBy: user.id,
+      createdBy: user?.id!,
       libraryId
     }
   }));

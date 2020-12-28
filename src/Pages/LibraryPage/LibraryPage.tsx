@@ -32,7 +32,7 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
     <div>
       <h1>{library?.name}</h1>
     </div>
-    <Library library={library} components={components} />
+    <Library library={library!} components={components} />
   </div>;
 }
 

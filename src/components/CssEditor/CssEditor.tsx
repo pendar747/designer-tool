@@ -27,7 +27,7 @@ const CssEditor: React.FC<CssEditorProps> = ({ availableCss, styleSheet, onStyle
   
   return <Collapse>
     {
-      availableCss.selectors.map(selector => {
+      availableCss?.selectors.map(selector => {
         const styles = styleSheet.find(props => props.selector == selector)?.properties || {};
         return <CollapsePanel key={selector} header={selector}>
             <CssPropsEditor 

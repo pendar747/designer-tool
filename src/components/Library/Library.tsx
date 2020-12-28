@@ -48,7 +48,7 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
           <Select onChange={handleSelectTheme} className={styles.selectTheme} placeholder="Select a theme">
             {themes
               .filter(theme => theme.libraryId == library?.id)
-              .map(theme => <Select.Option key={theme.id} value={theme.id}>{theme.name}</Select.Option>)}
+              .map(theme => <Select.Option key={theme.id} value={theme.id!}>{theme.name}</Select.Option>)}
             <Select.Option value="create"><PlusOutlined /> Create theme</Select.Option>
           </Select>
           <Button icon={<PlusOutlined />} 

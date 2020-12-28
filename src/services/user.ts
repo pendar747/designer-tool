@@ -23,7 +23,7 @@ export const fetchCurrentUser = async (): Promise<User|undefined> => {
     const { data: user } = await apiClient.get('/user/me');
     return user;
   } catch (error) {
-    if ((error as AxiosError).response.status === StatusCodes.UNAUTHORIZED) {
+    if ((error as AxiosError).response?.status === StatusCodes.UNAUTHORIZED) {
       return undefined
     }
     throw error;

@@ -117,7 +117,7 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
         return library.id === action.payload.libraryId
           ? {
             ...library,
-            componentIds: [...library.componentIds, action.payload.componentId]
+            componentIds: [...(library.componentIds || []), action.payload.componentId]
           }
           : library
       })
@@ -168,7 +168,7 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
         return library.id === action.payload.libraryId
           ? {
             ...library,
-            componentIds: library.componentIds.filter(id => id !== action.payload.componentId)
+            componentIds: library.componentIds?.filter(id => id !== action.payload.componentId)
           }
           : library
       })
