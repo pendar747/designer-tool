@@ -20,6 +20,7 @@ import CreateLibraryModal from '../components/CreateLibraryModal/CreateLibraryMo
 import LibraryPage from '../Pages/LibraryPage/LibraryPage';
 import AddComponentsPage from '../Pages/AddComponentsPage/AddComponentsPage';
 import AuthenticatedRoutes from './AuthenticatedRoutes';
+import CreateThemeModal from '../components/CreateThemeModal/CreateThemeModal';
 
 const App: React.FC = () => {
 
@@ -32,6 +33,7 @@ const App: React.FC = () => {
   return <div className={styles.container}>
     <Router>
       <CreateLibraryModal />
+      <CreateThemeModal />
       <NavBar />
       <div className={styles.main}>
         <Switch>

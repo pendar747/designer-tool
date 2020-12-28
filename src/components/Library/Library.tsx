@@ -9,6 +9,7 @@ import ComponentPreview from '../ComponentPreview/ComponentPreview';
 import styles from './Library.less';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import { selectThemes } from '../../state/theme/selectors';
+import { showCreateThemeModalAction } from '../../state/theme/actions';
 
 interface LibraryProps {
   components: ComponentDefinition[],
@@ -28,6 +29,12 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
 
   const onAddComponents = () => history.push(`/library/${library.id}/add-components`);
 
+  const handleSelectTheme = (value: string) => {
+    if (value === 'create') {
+      dispatch(showCreateThemeModalAction({ show: true, libraryId: library?.id }));
+    }
+  }
+
   return <div>
     <div className={styles.toolbar}>
       <div>
@@ -38,10 +45,10 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
       </div>
       <div>
         <Space>
-          <Select className={styles.selectTheme} placeholder="Select a theme">
+          <Select onChange={handleSelectTheme} className={styles.selectTheme} placeholder="Select a theme">
             {themes
-              .filter(theme => theme.libraryId == library.id)
-              .map(theme => <Select.Option value={theme.id}>{theme.name}</Select.Option>)}
+              .filter(theme => theme.libraryId == library?.id)
+              .map(theme => <Select.Option key={theme.id} value={theme.id}>{theme.name}</Select.Option>)}
             <Select.Option value="create"><PlusOutlined /> Create theme</Select.Option>
           </Select>
           <Button icon={<PlusOutlined />} 
