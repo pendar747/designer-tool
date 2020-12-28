@@ -15,9 +15,7 @@ const AuthenticatedRoutes: React.FC<AuthenticatedRoutesProps> = ({ children }) =
   const { pathname } = useLocation();
   
   useEffect(() => {
-    console.log({ isLoggedIn, pathname });
-    if ( fetchUserState == AsyncState.SUCCESSFUL && !isLoggedIn 
-      && pathname !== 'login' && pathname !== 'registration') {
+    if (fetchUserState == AsyncState.SUCCESSFUL && !isLoggedIn && !['login', 'registration'].includes(pathname)) {
       history.push('/registration');
     }
   }, [pathname, isLoggedIn, fetchUserState]);

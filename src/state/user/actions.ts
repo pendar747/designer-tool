@@ -10,5 +10,5 @@ export const LOG_OUT = createAsyncActionConstant('USER/LOG_OUT');
 
 export const registerUserAction = createAsyncAction<RegisterUserArgs, User, ErrorResponse>(REGISTER_USER);
 export const loginUserAction = createAsyncAction<RegisterUserArgs, User, ErrorResponse>(LOGIN_USER);
-export const fetchCurrentUserAction = createAsyncAction<void, User>(FETCH_CURRENT_USER);
+export const fetchCurrentUserAction = createAsyncAction<void, User|undefined>(FETCH_CURRENT_USER);
 export const logOutAction = createAsyncAction(LOG_OUT);

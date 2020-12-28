@@ -74,7 +74,7 @@ export const userReducer = (state: UserState = USER_INITIAL_STATE, action: Actio
       ...state,
       fetchUserState: AsyncState.SUCCESSFUL,
       user: action.payload,
-      isLoggedIn: true
+      isLoggedIn: Boolean(action.payload)
     }
   case FETCH_CURRENT_USER.failure:
     return {

@@ -1,6 +1,6 @@
-import { Button, Empty, Input } from 'antd';
+import { Button, Empty, Input, Select, Space } from 'antd';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { removeComponentAction } from '../../state/library/actions';
 import { ComponentDefinition } from '../../types/components';
@@ -8,6 +8,7 @@ import { Library } from '../../types/library';
 import ComponentPreview from '../ComponentPreview/ComponentPreview';
 import styles from './Library.less';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
+import { selectThemes } from '../../state/theme/selectors';
 
 interface LibraryProps {
   components: ComponentDefinition[],
@@ -19,6 +20,7 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [filter, setFilter] = useState<string>('');
+  const themes = useSelector(selectThemes);
 
   const onRemove = (componentId: string) => {
     dispatch(removeComponentAction.request({ componentId, libraryId: library.id }))
@@ -34,7 +36,18 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
           onChange={event => setFilter(event.target.value)} 
           className={styles.filterInput} placeholder="filter..." />
       </div>
-      <Button icon={<PlusOutlined />} onClick={onAddComponents} type="primary">Add components</Button>
+      <div>
+        <Space>
+          <Select className={styles.selectTheme} placeholder="Select a theme">
+            {themes
+              .filter(theme => theme.libraryId == library.id)
+              .map(theme => <Select.Option value={theme.id}>{theme.name}</Select.Option>)}
+            <Select.Option value="create"><PlusOutlined /> Create theme</Select.Option>
+          </Select>
+          <Button icon={<PlusOutlined />} 
+            onClick={onAddComponents} type="primary">Add components</Button>
+        </Space>
+      </div>
     </div>
     {
       components.length == 0

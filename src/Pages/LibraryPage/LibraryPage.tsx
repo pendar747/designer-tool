@@ -7,6 +7,7 @@ import { fetchCurrentUserAction } from '../../state/user/actions';
 import venderComponents from '../../components/venderComponents';
 import Library from '../../components/Library/Library';
 import styles from './LibraryPage.less';
+import { fetchThemeAction } from '../../state/theme/actions';
 
 interface LibraryPageProps {}
 
@@ -24,6 +25,7 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
     dispatch(fetchUserLibrariesAction.request());
     dispatch(selectLibraryAction({ libraryId }));
     dispatch(fetchComponentsAction.request({ libraryId }));
+    dispatch(fetchThemeAction.request());
   }, [libraryId]);
 
   return <div className={styles.container}>
