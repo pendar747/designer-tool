@@ -5,17 +5,16 @@ import { User } from "../../types/user";
 import { Action } from "../actionCreators";
 import { FETCH_CURRENT_USER } from "../user/actions";
 import { selectCurrentUser } from "../user/selectors";
-import { createThemeAction, CREATE_THEME, fetchStylesAction, fetchThemeAction, FETCH_STYLES, FETCH_THEMES, updateStylesAction, UPDATE_STYLES } from "./actions";
+import { createThemeAction, CREATE_THEME, fetchStylesAction, fetchThemesAction, FETCH_STYLES, FETCH_THEMES, updateStylesAction, UPDATE_STYLES } from "./actions";
 
 function* fetchThemesSaga () {
   try {
     yield take(FETCH_CURRENT_USER.success);
     const user: User = yield select(selectCurrentUser);
     const themes = yield call(fetchThemes, user.id);
-    yield put(fetchThemeAction.success({ themes }));
+    yield put(fetchThemesAction.success({ themes }));
   } catch (error) {
-    console.log(error);
-    yield put(fetchThemeAction.failure(error));
+    yield put(fetchThemesAction.failure(error));
   }
 }
 

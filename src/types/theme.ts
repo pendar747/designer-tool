@@ -26,5 +26,5 @@ export interface StylesBodyPayload {
 export interface StyleItem { 
   themeId: string, 
   componentId: string, 
-  styles: Styles 
+  styles: Styles[]
 };

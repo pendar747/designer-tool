@@ -1,9 +1,11 @@
 export interface Color {}
 
-export type StyleSheet = {
+export interface StyleSheetStyle {
   selector: string,
   properties: React.CSSProperties
-}[]; 
+}
+
+export type StyleSheet = StyleSheetStyle[]; 
 
 export interface ControlOptions {
   styleSheet: StyleSheet,

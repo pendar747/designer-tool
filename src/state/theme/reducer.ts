@@ -26,7 +26,8 @@ export const THEME_INITIAL_STATE: ThemeState = {
 }
 
 const updateAllStyles = (oldStyles: StyleItem[], newStyle: StyleItem) => {
-  const index = findIndex(oldStyles, item => item.styles.id === newStyle.styles.id);
+  const index = findIndex(oldStyles, item => item.componentId === newStyle.componentId 
+    && item.themeId === newStyle.themeId);
   if (index >= 0) {
     const newStyles = [...oldStyles];
     newStyles.splice(index, 1, newStyle);

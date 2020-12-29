@@ -12,10 +12,18 @@ interface SettingsPanelProps {
   onStylesChange: (styleSheet: StyleSheet) => void,
   styleSheet: StyleSheet,
   onPropsChange: (props: { [key: string]: any }) => void,
-  props: any
+  props: any,
+  onSave: () => void
 }
 
-const SettingsPanel: React.FC<SettingsPanelProps> = ({ info, styleSheet, onStylesChange, onPropsChange, props }) => {
+const SettingsPanel: React.FC<SettingsPanelProps> = ({ 
+  info, 
+  styleSheet, 
+  onStylesChange, 
+  onPropsChange, 
+  props, 
+  onSave 
+}) => {
 
   return <div className={styles.container}>
     <div className={styles.info}>
@@ -31,7 +39,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ info, styleSheet, onStyle
       <CssEditor availableCss={info.availableOptions.css} styleSheet={styleSheet} onStylesChange={onStylesChange} />
     </div>
     <div className={styles.buttons}>
-      <Button type="primary" icon={<SaveOutlined />}>Save</Button>
+      <Button onClick={() => onSave()} type="primary" icon={<SaveOutlined />}>Save</Button>
     </div>
   </div>;
 }

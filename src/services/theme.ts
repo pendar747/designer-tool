@@ -12,11 +12,11 @@ export const createTheme = async (theme: Theme): Promise<Theme> => {
 }
 
 export const fetchStyles = async (componentId: string, themeId: string): Promise<Styles> => {
-  const { data } = await apiClient.get(`/theme/${themeId}/styles?componentId=${componentId}`);
+  const { data } = await apiClient.get(`/theme/${themeId}/style?componentId=${componentId}`);
   return data;
 }
 
 export const updateStyles = async (payload: StylesBodyPayload): Promise<Styles> => {
-  const { data } = await apiClient.post(`/theme/${payload.themeId}/styles`, payload);
+  const { data } = await apiClient.post(`/theme/${payload.themeId}/style`, payload);
   return data;
 }

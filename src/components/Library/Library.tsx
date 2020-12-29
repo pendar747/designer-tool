@@ -39,8 +39,6 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
     }
   }
 
-  console.log('selectedTheme', selectedTheme);
-
   return <div>
     <div className={styles.toolbar}>
       <div>
@@ -72,7 +70,7 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
             .filter(({ info }) => filter.length > 0 ? info.name.indexOf(filter) === 0 : true)
             .map(component => (
             <ComponentPreview 
-              onEdit={() => history.push(`/edit/${component.info.id}`)}
+              onEdit={() => history.push(`/library/${library.id}/edit/${component.info.id}?themeId=${selectedTheme?.id}`)}
               onRemove={() => onRemove(component.info.id)} 
               key={component.info.id} 
               title={component.info.name} 

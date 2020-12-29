@@ -7,6 +7,8 @@ export const selectSelectedComponentStyles = createSelector(
   selectSelectedTheme,
   selectThemeState,
   (componentId, theme, { allStyles }) => {
-    return allStyles.find(item => item.componentId === componentId && item.themeId === theme?.id);
+    const { styles } = allStyles
+      .find(item => item.componentId === componentId && item.themeId === theme?.id) || {};
+    return styles || [];
   } 
 );
