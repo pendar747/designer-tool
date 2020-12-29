@@ -18,8 +18,8 @@ Users can...
 - [X] edit styles and preview props for a component
 - [X] view their component library
 - [X] Remove component from library
-- [ ] Create a theme and assign it to a library
-- [ ] edit component styles in the theme 
+- [X] Create a theme and assign it to a library
+- [X] edit component styles in the theme 
 - [ ] publish their library as an npm package and git repository
   - [ ] for the React framework
   - [ ] for the Vue framework
