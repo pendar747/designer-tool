@@ -12,6 +12,7 @@ export const FETCH_COMPONENTS = createAsyncActionConstant('LIBRARY/FETCH_COMPONE
 export const SELECT_LIBRARY = 'LIBRARY/SELECT_LIBRARY';
 export const REMOVE_COMPONENT = createAsyncActionConstant('LIBRARY/REMOVE_COMPONENT');
 export const SELECT_THEME = 'THEME/SELECT_THEME';
+export const SELECT_COMPONENT = 'THEME/SELECT_COMPONENT';
 
 export const showEditLibraryModalAction = createUIAction<{ show: boolean, libraryId?: string }>(SHOW_CREATE_LIBRARY_MODAL);
 export const createLibraryAction = createAsyncAction<CreateLibraryArgs, Library, void>(CREATE_LIBRARY);
@@ -23,3 +24,4 @@ export const fetchComponentsAction = createAsyncAction<{ libraryId: string }, { 
 export const selectLibraryAction = createUIAction<{ libraryId: string }>(SELECT_LIBRARY);
 export const removeComponentAction = createAsyncAction<LibraryComponentPair, LibraryComponentPair>(REMOVE_COMPONENT);
 export const selectThemeAction = createUIAction<{ libraryId: string, themeId: string }>(SELECT_THEME);
+export const selectComponentAction = createUIAction<{ componentId: string }>(SELECT_COMPONENT);

@@ -1,21 +1,38 @@
-import { Theme } from "../../types/theme";
+import { findIndex } from "lodash";
+import { StyleItem, Styles, Theme } from "../../types/theme";
 import { Action } from "../actionCreators";
 import { AsyncState } from "../types";
-import { CREATE_THEME, FETCH_THEMES, SHOW_CREATE_THEME_MODAL } from "./actions";
+import { CREATE_THEME, FETCH_STYLES, FETCH_THEMES, SHOW_CREATE_THEME_MODAL, UPDATE_STYLES } from "./actions";
 
 export interface ThemeState {
   themes: Theme[],
   fetchThemesState: AsyncState,
   isCreateThemeModalOpen: boolean,
   createThemeLibraryId?: string,
-  createThemeState: AsyncState
+  createThemeState: AsyncState,
+  allStyles: StyleItem[],
+  fetchStylesState: AsyncState,
+  updateStylesState: AsyncState
 }
 
 export const THEME_INITIAL_STATE: ThemeState = {
   themes: [],
   fetchThemesState: AsyncState.DEFAULT,
   isCreateThemeModalOpen: false,
-  createThemeState: AsyncState.DEFAULT
+  createThemeState: AsyncState.DEFAULT,
+  allStyles: [],
+  fetchStylesState: AsyncState.DEFAULT,
+  updateStylesState: AsyncState.DEFAULT
+}
+
+const updateAllStyles = (oldStyles: StyleItem[], newStyle: StyleItem) => {
+  const index = findIndex(oldStyles, item => item.styles.id === newStyle.styles.id);
+  if (index >= 0) {
+    const newStyles = [...oldStyles];
+    newStyles.splice(index, 1, newStyle);
+    return newStyles;
+  }
+  return [...oldStyles, newStyle];
 }
 
 export const themeReducer = (state: ThemeState = THEME_INITIAL_STATE, action: Action<any>): ThemeState => {
@@ -58,6 +75,38 @@ export const themeReducer = (state: ThemeState = THEME_INITIAL_STATE, action: Ac
     return {
       ...state,
       createThemeState: AsyncState.FAILED
+    }
+  case FETCH_STYLES.success:
+    return {
+      ...state,
+      allStyles: updateAllStyles(state.allStyles, action.payload),
+      fetchStylesState: AsyncState.SUCCESSFUL
+    }
+  case FETCH_STYLES.request:
+    return {
+      ...state,
+      fetchStylesState: AsyncState.IN_PROGRESS
+    }
+  case FETCH_STYLES.failure:
+    return {
+      ...state,
+      fetchStylesState: AsyncState.FAILED
+    }
+  case UPDATE_STYLES.success:
+    return {
+      ...state,
+      allStyles: updateAllStyles(state.allStyles, action.payload),
+      updateStylesState: AsyncState.SUCCESSFUL
+    }
+  case UPDATE_STYLES.request:
+    return {
+      ...state,
+      updateStylesState: AsyncState.IN_PROGRESS
+    }
+  case UPDATE_STYLES.failure:
+    return {
+      ...state,
+      updateStylesState: AsyncState.FAILED
     }
   default:
     return state;

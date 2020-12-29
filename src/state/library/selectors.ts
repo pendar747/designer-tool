@@ -33,3 +33,8 @@ export const selectSelectedTheme = createSelector(
     return selectedTheme || defaultTheme;
   }
 )
+
+export const selectSelectedComponentId = createSelector(
+  selectLibraryState,
+  ({ selectedComponentId }) => selectedComponentId
+)

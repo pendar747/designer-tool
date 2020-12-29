@@ -1,11 +1,11 @@
 import { call, put, select, take, takeLatest } from "redux-saga/effects";
-import { createTheme, fetchThemes } from "../../services/theme";
-import { Theme } from "../../types/theme";
+import { createTheme, fetchStyles, fetchThemes, updateStyles } from "../../services/theme";
+import { StylesBodyPayload, Theme } from "../../types/theme";
 import { User } from "../../types/user";
 import { Action } from "../actionCreators";
 import { FETCH_CURRENT_USER } from "../user/actions";
 import { selectCurrentUser } from "../user/selectors";
-import { createThemeAction, CREATE_THEME, fetchThemeAction, FETCH_THEMES } from "./actions";
+import { createThemeAction, CREATE_THEME, fetchStylesAction, fetchThemeAction, FETCH_STYLES, FETCH_THEMES, updateStylesAction, UPDATE_STYLES } from "./actions";
 
 function* fetchThemesSaga () {
   try {
@@ -28,7 +28,35 @@ function* createThemeSaga (action: Action<{ theme: Theme }>) {
   }
 }
 
+function* fetchStylesSaga (action: Action<{ componentId: string, themeId: string }>) {
+  try {
+    const styles = yield call(fetchStyles, action.payload.componentId, action.payload.themeId);
+    yield put(fetchStylesAction.success({ 
+      styles, 
+      componentId: action.payload.componentId, 
+      themeId: action.payload.themeId 
+    }));
+  } catch (error) {
+    yield put(fetchStylesAction.failure(error));
+  }
+}
+
+function* updateStylesSaga (action: Action<StylesBodyPayload>) {
+  try {
+    const styles = yield call(updateStyles, action.payload);
+    yield put(updateStylesAction.success({ 
+      styles,
+      componentId: action.payload.componentId,
+      themeId: action.payload.themeId
+    }))
+  } catch (error) {
+    yield put(updateStylesAction.failure());
+  }
+}
+
 export default function* sagas () {
   yield takeLatest(FETCH_THEMES.request, fetchThemesSaga);
   yield takeLatest(CREATE_THEME.request, createThemeSaga);
+  yield takeLatest(FETCH_STYLES.request, fetchStylesSaga);
+  yield takeLatest(UPDATE_STYLES.request, updateStylesSaga);
 }

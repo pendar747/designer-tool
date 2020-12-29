@@ -1,5 +1,5 @@
 import { Action } from "../actionCreators";
-import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, REMOVE_COMPONENT, SELECT_LIBRARY, SELECT_THEME, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
+import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, REMOVE_COMPONENT, SELECT_COMPONENT, SELECT_LIBRARY, SELECT_THEME, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
 import { Library } from '../../types/library';
 import { AsyncState } from "../types";
 
@@ -13,7 +13,8 @@ export interface LibraryState {
   deleteLibraryState: AsyncState,
   addComponentState: AsyncState,
   fetchComponentState: AsyncState,
-  removeComponentState: AsyncState
+  removeComponentState: AsyncState,
+  selectedComponentId?: string
 }
 
 export const LIBRARY_INITIAL_STATE: LibraryState = {
@@ -185,6 +186,11 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
         ? { ...library, selectedThemeId: action.payload.themeId }
         : library
       )
+    }
+  case SELECT_COMPONENT:
+    return {
+      ...state,
+      selectedComponentId: action.payload.componentId
     }
   default:
     return state;
