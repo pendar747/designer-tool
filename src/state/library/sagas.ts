@@ -3,6 +3,7 @@ import { addComponent, createLibrary, CreateLibraryArgs, deleteLibrary, fetchCom
 import { Library, LibraryComponentPair } from "../../types/library";
 import { User } from "../../types/user";
 import { Action } from "../actionCreators";
+import { selectThemes } from "../theme/selectors";
 import { FETCH_CURRENT_USER } from "../user/actions";
 import { selectCurrentUser } from "../user/selectors";
 import { 
@@ -21,6 +22,7 @@ import {
   removeComponentAction,
   REMOVE_COMPONENT
 } from "./actions";
+import { selectLibraries } from "./selectors";
 
 function* createLibrarySaga (action: Action<CreateLibraryArgs>) {
   try {
@@ -35,8 +37,13 @@ function* fetchUserLibrariesSaga () {
   try {
     yield take(FETCH_CURRENT_USER.success);
     const user: User = yield select(selectCurrentUser);
-    const libraries = yield call(fetchUserLibraries, user.id);
-    yield put(fetchUserLibrariesAction.success(libraries));
+    const libraries: Library[] = yield call(fetchUserLibraries, user.id);
+    const oldLibraries: Library[]|undefined = yield select(selectLibraries); 
+    const mappedLibraries = libraries.map(library => {
+      const { selectedThemeId } = oldLibraries?.find(lib => lib.id === library.id) || {};
+      return { ...library, selectedThemeId };
+    })
+    yield put(fetchUserLibrariesAction.success(mappedLibraries));
   } catch (error) {
     yield put(fetchUserLibrariesAction.failure());
   }

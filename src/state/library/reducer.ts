@@ -1,5 +1,5 @@
 import { Action } from "../actionCreators";
-import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, REMOVE_COMPONENT, SELECT_LIBRARY, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
+import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, REMOVE_COMPONENT, SELECT_LIBRARY, SELECT_THEME, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
 import { Library } from '../../types/library';
 import { AsyncState } from "../types";
 
@@ -56,7 +56,7 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
     return {
       ...state,
       fetchLibrariesState: AsyncState.SUCCESSFUL,
-      libraries: action.payload
+      libraries: action.payload 
     }
   case FETCH_LIBRARIES.failure:
     return {
@@ -177,6 +177,14 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
     return {
       ...state,
       removeComponentState: AsyncState.FAILED
+    }
+  case SELECT_THEME:
+    return {
+      ...state,
+      libraries: state.libraries.map(library => library.id === action.payload.libraryId
+        ? { ...library, selectedThemeId: action.payload.themeId }
+        : library
+      )
     }
   default:
     return state;

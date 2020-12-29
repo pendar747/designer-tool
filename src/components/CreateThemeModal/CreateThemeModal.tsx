@@ -18,11 +18,12 @@ const CreateThemeModal: React.FC<CreateThemeModalProps> = () => {
   const [name, setName] = useState(''); 
   const [description, setDescription] = useState('');
   const [isPublic, setIsPublic] = useState(false);
+  const [isDefault, setIsDefault] = useState(false);
   const user = useSelector(selectCurrentUser);
   const isOpen = useSelector(selectIsCreateThemeModalOpen);
   const dispatch = useDispatch();
   const createThemeState = useSelector(selectCreateThemeState);
-  const libraryId = useSelector(selectCreateThemeLibraryId);
+  const libraryId = useSelector(selectCreateThemeLibraryId)!;
 
   const onOK = () => dispatch(createThemeAction.request({
     theme: {
@@ -30,7 +31,8 @@ const CreateThemeModal: React.FC<CreateThemeModalProps> = () => {
       description,
       isPublic,
       createdBy: user?.id!,
-      libraryId
+      libraryId,
+      isDefault
     }
   }));
 
@@ -53,6 +55,11 @@ const CreateThemeModal: React.FC<CreateThemeModalProps> = () => {
       <FormItem>
         <Checkbox checked={isPublic} onChange={event => setIsPublic(event.target.checked)}>
           Public
+        </Checkbox>
+      </FormItem>
+      <FormItem>
+        <Checkbox checked={isDefault} onChange={event => setIsDefault(event.target.checked)}>
+          Default 
         </Checkbox>
       </FormItem>
     </Form>

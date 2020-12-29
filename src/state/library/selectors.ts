@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
-import { Library } from "../../types/library";
 import { State } from "../store";
+import { selectThemes } from "../theme/selectors";
 
 export const selectLibraryState = (state: State) => state.library;
 
@@ -23,3 +23,13 @@ export const selectSelectedLibrary = createSelector(
   selectLibraryState,
   ({ selectedLibraryId, libraries }) => libraries.find(({ id }) => id === selectedLibraryId) 
 );
+
+export const selectSelectedTheme = createSelector(
+  selectSelectedLibrary,
+  selectThemes,
+  (library, themes) => {
+    const defaultTheme = themes.find(theme => theme.libraryId === library?.id && theme.isDefault);
+    const selectedTheme = themes.find(theme => theme.id === library?.selectedThemeId);
+    return selectedTheme || defaultTheme;
+  }
+)

@@ -4,5 +4,6 @@ export interface Theme {
   description: string,
   isPublic: Boolean,
   createdBy: string,
-  libraryId?: string
+  libraryId: string,
+  isDefault: boolean
 }

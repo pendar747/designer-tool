@@ -2,7 +2,7 @@ import { Button, Empty, Input, Select, Space } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { removeComponentAction } from '../../state/library/actions';
+import { removeComponentAction, selectThemeAction } from '../../state/library/actions';
 import { ComponentDefinition } from '../../types/components';
 import { Library } from '../../types/library';
 import ComponentPreview from '../ComponentPreview/ComponentPreview';
@@ -10,6 +10,7 @@ import styles from './Library.less';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import { selectThemes } from '../../state/theme/selectors';
 import { showCreateThemeModalAction } from '../../state/theme/actions';
+import { selectSelectedTheme } from '../../state/library/selectors';
 
 interface LibraryProps {
   components: ComponentDefinition[],
@@ -22,6 +23,7 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
   const history = useHistory();
   const [filter, setFilter] = useState<string>('');
   const themes = useSelector(selectThemes);
+  const selectedTheme = useSelector(selectSelectedTheme); 
 
   const onRemove = (componentId: string) => {
     dispatch(removeComponentAction.request({ componentId, libraryId: library.id }))
@@ -32,8 +34,12 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
   const handleSelectTheme = (value: string) => {
     if (value === 'create') {
       dispatch(showCreateThemeModalAction({ show: true, libraryId: library?.id }));
+    } else {
+      dispatch(selectThemeAction({ libraryId: library.id, themeId: value }));
     }
   }
+
+  console.log('selectedTheme', selectedTheme);
 
   return <div>
     <div className={styles.toolbar}>
@@ -45,7 +51,7 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
       </div>
       <div>
         <Space>
-          <Select onChange={handleSelectTheme} className={styles.selectTheme} placeholder="Select a theme">
+          <Select value={selectedTheme?.id} onChange={handleSelectTheme} className={styles.selectTheme} placeholder="Select a theme">
             {themes
               .filter(theme => theme.libraryId == library?.id)
               .map(theme => <Select.Option key={theme.id} value={theme.id!}>{theme.name}</Select.Option>)}

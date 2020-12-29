@@ -5,7 +5,8 @@ export interface Library {
   lastUpdated: Date,
   id: string,
   userId: string,
-  componentIds?: string[]
+  componentIds?: string[],
+  selectedThemeId?: string
 }
 
 export interface LibraryComponentPair {
