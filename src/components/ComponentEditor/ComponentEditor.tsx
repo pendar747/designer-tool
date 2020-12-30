@@ -1,4 +1,4 @@
-import { fromPairs } from 'lodash';
+import { fromPairs, isEqual } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSelectedTheme } from '../../state/library/selectors';
@@ -50,6 +50,15 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
     }))
   }
 
+  const draftStyles = draftStyleSheet.map(mapStyleSheetToStyles);
+  const stylesHaveChanged = draftStyles.some(style => {
+    const { props } = componentStyles.find(item => item.selector == style.selector) || {};
+    return !isEqual(props, style.props);
+  });
+  const stylesAreValid = draftStyles
+    .every(style => style.props.every(({ prop, value }) => prop && value));
+  const isSaveEnabled = stylesHaveChanged && stylesAreValid;
+
   return <div className={styles.container}>
     <div className={styles.preview}>
       <Control props={props} styleSheet={draftStyleSheet}></Control>
@@ -60,7 +69,8 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
         props={props} 
         onPropsChange={setProps} 
         styleSheet={draftStyleSheet} 
-        onStylesChange={setDraftStyleSheet} 
+        onStylesChange={setDraftStyleSheet}
+        isSaveDisabled={!isSaveEnabled}
         info={info} />
     </div>
   </div>;

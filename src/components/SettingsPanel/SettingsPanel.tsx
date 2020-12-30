@@ -13,7 +13,8 @@ interface SettingsPanelProps {
   styleSheet: StyleSheet,
   onPropsChange: (props: { [key: string]: any }) => void,
   props: any,
-  onSave: () => void
+  onSave: () => void,
+  isSaveDisabled: boolean
 }
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ 
@@ -23,6 +24,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
   onPropsChange, 
   props, 
   onSave,
+  isSaveDisabled
 }) => {
 
   return <div className={styles.container}>
@@ -39,7 +41,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
       <CssEditor availableCss={info.availableOptions.css} styleSheet={styleSheet} onStylesChange={onStylesChange} />
     </div>
     <div className={styles.buttons}>
-      <Button onClick={() => onSave()} type="primary" icon={<SaveOutlined />}>Save</Button>
+      <Button disabled={isSaveDisabled} onClick={() => onSave()} type="primary" icon={<SaveOutlined />}>Save</Button>
     </div>
   </div>;
 }

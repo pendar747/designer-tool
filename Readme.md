@@ -8,9 +8,9 @@
 - [X] Link to library on edit component page (show selected theme and library at the top)
 - [X] Expand styles that have props by default
 - [ ] Delete a prop
-- [ ] Prevent saving empty prop (prop without key or value)
+- [X] Prevent saving empty prop (prop without key or value)
 - [X] Change styles expansion panel to look less boxy
-- [ ] Disable save button when there are no changes
+- [X] Disable save button when there are no changes
 - [ ] Preview components with their styles in the library view
 - [ ] Add pseudo selectors option for each selector (:active, :focus, :hover)
 
