@@ -1,4 +1,4 @@
-import { Button, Divider } from 'antd';
+import { Button, Divider, Spin } from 'antd';
 import React from 'react';
 import { ComponentInfo, StyleSheet } from '../../types/components';
 import CssEditor from '../CssEditor/CssEditor';
@@ -13,7 +13,8 @@ interface SettingsPanelProps {
   styleSheet: StyleSheet,
   onPropsChange: (props: { [key: string]: any }) => void,
   props: any,
-  onSave: () => void
+  onSave: () => void,
+  isLoadingStyles: boolean
 }
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ 
@@ -22,7 +23,8 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
   onStylesChange, 
   onPropsChange, 
   props, 
-  onSave 
+  onSave,
+  isLoadingStyles
 }) => {
 
   return <div className={styles.container}>
@@ -36,7 +38,11 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
     </div>
     <div className={styles.cssEditor}>
       <Divider orientation="left"><FormatPainterOutlined /> Css</Divider>
-      <CssEditor availableCss={info.availableOptions.css} styleSheet={styleSheet} onStylesChange={onStylesChange} />
+      {
+        isLoadingStyles
+          ? <Spin />
+          : <CssEditor availableCss={info.availableOptions.css} styleSheet={styleSheet} onStylesChange={onStylesChange} />
+      }
     </div>
     <div className={styles.buttons}>
       <Button onClick={() => onSave()} type="primary" icon={<SaveOutlined />}>Save</Button>

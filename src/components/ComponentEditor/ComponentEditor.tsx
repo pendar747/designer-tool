@@ -1,9 +1,10 @@
-import { fromPairs, isEqual } from 'lodash';
+import { fromPairs } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSelectedTheme } from '../../state/library/selectors';
-import { selectSelectedComponentStyles } from '../../state/styles/selectors';
+import { selectFetchStylesState, selectSelectedComponentStyles } from '../../state/styles/selectors';
 import { updateStylesAction } from '../../state/theme/actions';
+import { AsyncState } from '../../state/types';
 import { ComponentDefinition, StyleSheet, StyleSheetStyle } from '../../types/components';
 import { Styles } from '../../types/theme';
 import SettingsPanel from '../SettingsPanel/SettingsPanel';
@@ -32,6 +33,7 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
   const dispatch = useDispatch();
   const theme = useSelector(selectSelectedTheme);
   const componentStyles = useSelector(selectSelectedComponentStyles);
+  const fetchStylesState = useSelector(selectFetchStylesState); 
   
   const styleSheet = componentStyles.map(mapStylesToStyleSheet);
   
@@ -56,6 +58,7 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
     </div>
     <div className={styles.settingsPanel}>
       <SettingsPanel 
+        isLoadingStyles={fetchStylesState === AsyncState.IN_PROGRESS}
         onSave={onSave}
         props={props} 
         onPropsChange={setProps} 

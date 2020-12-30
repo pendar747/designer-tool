@@ -6,7 +6,7 @@
 - [X] Controls for changing component props
 - [X] Reflect changes in controls on the component without side-effects
 - [X] Link to library on edit component page (show selected theme and library at the top)
-- [ ] Expand styles that have props by default
+- [X] Expand styles that have props by default
 - [ ] Delete a prop
 - [ ] Prevent saving empty prop (prop without key or value)
 - [ ] Change styles expansion panel to look less boxy
