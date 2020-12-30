@@ -13,8 +13,7 @@ interface SettingsPanelProps {
   styleSheet: StyleSheet,
   onPropsChange: (props: { [key: string]: any }) => void,
   props: any,
-  onSave: () => void,
-  isLoadingStyles: boolean
+  onSave: () => void
 }
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ 
@@ -24,7 +23,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
   onPropsChange, 
   props, 
   onSave,
-  isLoadingStyles
 }) => {
 
   return <div className={styles.container}>
@@ -38,11 +36,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
     </div>
     <div className={styles.cssEditor}>
       <Divider orientation="left"><FormatPainterOutlined /> Css</Divider>
-      {
-        isLoadingStyles
-          ? <Spin />
-          : <CssEditor availableCss={info.availableOptions.css} styleSheet={styleSheet} onStylesChange={onStylesChange} />
-      }
+      <CssEditor availableCss={info.availableOptions.css} styleSheet={styleSheet} onStylesChange={onStylesChange} />
     </div>
     <div className={styles.buttons}>
       <Button onClick={() => onSave()} type="primary" icon={<SaveOutlined />}>Save</Button>
