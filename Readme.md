@@ -13,6 +13,10 @@
 - [X] Disable save button when there are no changes
 - [ ] Preview components with their styles in the library view
 - [ ] Add pseudo selectors option for each selector (:active, :focus, :hover)
+- [ ] Disable save button when there are duplicate props for a selector
+- [ ] Warn user when there are duplicate props (set input on danger mode)
+- [ ] Remove existing prop keys from prop key suggestions
+- [ ] Zoom in/out, and pan for the component preview
 
 # Features
 Users can...
@@ -33,3 +37,5 @@ Users can...
   - [ ] for the Vue framework
   - [ ] of web components
 - [ ] add custom components to the platform...
+- [ ] Edit history in component editor
+- [ ] Add custom selectors
