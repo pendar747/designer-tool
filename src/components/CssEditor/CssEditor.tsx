@@ -2,6 +2,7 @@ import { Collapse } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { ComponentInfo, StyleSheet } from '../../types/components';
 import CssPropsEditor from '../CssPropsEditor/CssPropsEditor';
+import union from 'lodash/union';
 
 interface CssEditorProps {
   availableCss: ComponentInfo['availableOptions']['css'],
@@ -18,7 +19,7 @@ const CssEditor: React.FC<CssEditorProps> = ({ availableCss, styleSheet, onStyle
       const styles = styleSheet.find(props => props.selector == selector)?.properties || {};
       return Object.keys(styles).length > 0;
     });
-    setActiveKey(openedSelectors);
+    setActiveKey(union(openedSelectors, activeKey));
   }, [styleSheet]);
 
   const onCssPropsChange = (selector: string) => (props: React.CSSProperties) => {
@@ -42,7 +43,6 @@ const CssEditor: React.FC<CssEditorProps> = ({ availableCss, styleSheet, onStyle
             <CssPropsEditor 
               styles={styles} 
               key={selector} 
-              selector={selector} 
               onChange={onCssPropsChange(selector)} /> 
           </Collapse.Panel>
       })

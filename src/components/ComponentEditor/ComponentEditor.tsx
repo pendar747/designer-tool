@@ -37,7 +37,6 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
   
   const [draftStyleSheet, setDraftStyleSheet] = useState<StyleSheet>(styleSheet);
 
-
   useEffect(() => {
     setDraftStyleSheet(styleSheet);
   }, [componentStyles]);
@@ -51,10 +50,11 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
   }
 
   const draftStyles = draftStyleSheet.map(mapStyleSheetToStyles);
-  const stylesHaveChanged = draftStyles.some(style => {
-    const { props } = componentStyles.find(item => item.selector == style.selector) || {};
-    return !isEqual(props, style.props);
-  });
+  const stylesHaveChanged = draftStyles
+    .some(style => {
+      const { props } = componentStyles.find(item => item.selector == style.selector) || {};
+      return !isEqual(props, style.props);
+    });
   const stylesAreValid = draftStyles
     .every(style => style.props.every(({ prop, value }) => prop && value));
   const isSaveEnabled = stylesHaveChanged && stylesAreValid;

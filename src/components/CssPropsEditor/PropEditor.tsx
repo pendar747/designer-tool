@@ -1,19 +1,22 @@
-import { AutoComplete, Col, Input, Row } from 'antd';
+import { AutoComplete, Button, Col, Input, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { all as allCssProperties } from 'known-css-properties';
+import { MinusOutlined } from '@ant-design/icons';
 
 interface PropEditorProps {
   name: string,
   onNameChange: (name: string) => void,
   value: string,
-  onValueChange: (value: string) => void
+  onValueChange: (value: string) => void,
+  onDelete: () => void
 }
 
 const PropEditor: React.FC<PropEditorProps> = ({ 
   name, 
   value, 
   onNameChange, 
-  onValueChange 
+  onValueChange,
+  onDelete
 }) => {
 
   const [nameFilter, setNameFilter] = useState(name);
@@ -42,6 +45,9 @@ const PropEditor: React.FC<PropEditorProps> = ({
           size="small"
           onChange={(event) => onValueChange(event.target.value)} 
           value={value} placeholder="blue;" />
+      </Col>
+      <Col>
+        <Button onClick={() => onDelete()} size="small" icon={<MinusOutlined />} shape="circle"></Button>
       </Col>
     </Row>
   </div>

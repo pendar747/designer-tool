@@ -7,10 +7,11 @@
 - [X] Reflect changes in controls on the component without side-effects
 - [X] Link to library on edit component page (show selected theme and library at the top)
 - [X] Expand styles that have props by default
-- [ ] Delete a prop
+- [X] Delete a prop
 - [X] Prevent saving empty prop (prop without key or value)
 - [X] Change styles expansion panel to look less boxy
 - [X] Disable save button when there are no changes
+- [ ] Refactor CSSEditor to take styles in the same standard format
 - [ ] Preview components with their styles in the library view
 - [ ] Add pseudo selectors option for each selector (:active, :focus, :hover)
 - [ ] Disable save button when there are duplicate props for a selector
