@@ -11,7 +11,7 @@
 - [X] Prevent saving empty prop (prop without key or value)
 - [X] Change styles expansion panel to look less boxy
 - [X] Disable save button when there are no changes
-- [ ] Refactor CSSEditor to take styles in the same standard format
+- [X] Refactor CSSEditor to take styles in the same standard format
 - [ ] Preview components with their styles in the library view
 - [ ] Add pseudo selectors option for each selector (:active, :focus, :hover)
 - [ ] Disable save button when there are duplicate props for a selector

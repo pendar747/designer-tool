@@ -8,23 +8,25 @@ export interface Theme {
   isDefault: boolean
 }
 
-export interface Styles {
+export interface Prop {  
+  prop: string, 
+  value: string
+}
+
+export interface Style {
   id?: string,
   selector: string,
-  props: {
-    prop: string,
-    value: string
-  }[]
+  props: Prop[]
 }
 
 export interface StylesBodyPayload {
   componentId: string,
   themeId: string,
-  styles: Styles[]
+  styles: Style[]
 }
 
 export interface StyleItem { 
   themeId: string, 
   componentId: string, 
-  styles: Styles[]
+  styles: Style[]
 };

@@ -44,7 +44,7 @@ const PropEditor: React.FC<PropEditorProps> = ({
         <Input 
           size="small"
           onChange={(event) => onValueChange(event.target.value)} 
-          value={value} placeholder="blue;" />
+          value={value} placeholder="blue" />
       </Col>
       <Col>
         <Button onClick={() => onDelete()} size="small" icon={<MinusOutlined />} shape="circle"></Button>

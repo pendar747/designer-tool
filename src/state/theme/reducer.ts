@@ -1,5 +1,5 @@
 import { findIndex } from "lodash";
-import { StyleItem, Styles, Theme } from "../../types/theme";
+import { StyleItem, Style, Theme } from "../../types/theme";
 import { Action } from "../actionCreators";
 import { AsyncState } from "../types";
 import { CREATE_THEME, FETCH_STYLES, FETCH_THEMES, SHOW_CREATE_THEME_MODAL, UPDATE_STYLES } from "./actions";

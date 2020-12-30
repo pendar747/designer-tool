@@ -1,47 +1,48 @@
 import { Collapse } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { ComponentInfo, StyleSheet } from '../../types/components';
+import { ComponentInfo } from '../../types/components';
 import CssPropsEditor from '../CssPropsEditor/CssPropsEditor';
 import union from 'lodash/union';
+import { Prop, Style } from '../../types/theme';
 
 interface CssEditorProps {
   availableCss: ComponentInfo['availableOptions']['css'],
-  styleSheet: StyleSheet,
-  onStylesChange: (styleSheet: StyleSheet) => void,
+  styles: Style[],
+  onStylesChange: (styles: Style[]) => void,
 }
 
-const CssEditor: React.FC<CssEditorProps> = ({ availableCss, styleSheet, onStylesChange }) => {
+const CssEditor: React.FC<CssEditorProps> = ({ availableCss, styles, onStylesChange }) => {
 
   const [activeKey, setActiveKey] = useState<string[]|string>();
 
   useEffect(() => {
     const openedSelectors = availableCss?.selectors.filter(selector => {
-      const styles = styleSheet.find(props => props.selector == selector)?.properties || {};
-      return Object.keys(styles).length > 0;
+      const props = styles.find(item => item.selector == selector)?.props || [];
+      return Object.keys(props).length > 0;
     });
     setActiveKey(union(openedSelectors, activeKey));
-  }, [styleSheet]);
+  }, [styles]);
 
-  const onCssPropsChange = (selector: string) => (props: React.CSSProperties) => {
-    const other = styleSheet.find((other) => other.selector == selector)
+  const onCssPropsChange = (selector: string) => (props: Prop[]) => {
+    const other = styles.find((other) => other.selector == selector)
     if (other) {
-      onStylesChange(styleSheet.map(other => {
+      onStylesChange(styles.map(other => {
         return other.selector === selector
-          ? { selector, properties: props }
+          ? { selector, props }
           : other;
       }));
     } else {
-      onStylesChange([...styleSheet, { selector, properties: props }]);
+      onStylesChange([...styles, { selector, props }]);
     }
   }
   
   return <Collapse onChange={setActiveKey} ghost activeKey={activeKey}>
     {
       availableCss?.selectors.map(selector => {
-        const styles = styleSheet.find(props => props.selector == selector)?.properties || {};
+        const props = styles.find(style => style.selector == selector)?.props || [];
         return <Collapse.Panel key={selector} header={selector}>
             <CssPropsEditor 
-              styles={styles} 
+              props={props}
               key={selector} 
               onChange={onCssPropsChange(selector)} /> 
           </Collapse.Panel>

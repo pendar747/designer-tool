@@ -1,43 +1,36 @@
 import { Button, Col, Row } from 'antd';
 import React from 'react';
 import PropEditor from './PropEditor';
-import fromEntries from 'lodash/fromPairs';
 import { PlusOutlined } from '@ant-design/icons';
+import { Prop } from '../../types/theme';
 
 interface CssPropsEditorProps {
-  onChange: (cssProps: React.CSSProperties) => void,
-  styles: React.CSSProperties
+  onChange: (cssProps: Prop[]) => void,
+  props: Prop[] 
 }
 
-interface Prop {  
-  name: string, 
-  value: string
-}
+const CssPropsEditor: React.FC<CssPropsEditorProps> = ({ onChange, props }) => {
 
-const toCssProps = (props: Prop[]) => fromEntries(props.map(({ name, value }) => [name, value]));
-
-const CssPropsEditor: React.FC<CssPropsEditorProps> = ({ onChange, styles }) => {
-
-  const props = Object.entries(styles).map(([name, value]) => ({ name, value }));
-
-  const onPropNameChange = (index: number) => (value: string) => {
-    props[index].name = value;
-    onChange(toCssProps([...props]));
+  const onPropNameChange = (index: number) => (prop: string) => {
+    const newProps = [...props];
+    newProps.splice(index, 1, { prop, value: props[index].value })
+    onChange(newProps);
   }
   
   const onPropValueChange = (index: number) => (value: string) => {
-    props[index].value = value;
-    onChange(toCssProps([...props]));
+    const newProps = [...props];
+    newProps.splice(index, 1, { prop: props[index].prop, value })
+    onChange(newProps);
   }
 
   const onAdd = () => {
-    onChange(toCssProps([...props, { name: '', value: '' }]));
+    onChange([...props, { prop: '', value: '' }]);
   };
 
   const onDelete = (index: number) => {
     const newProps = [...props];
     newProps.splice(index, 1);
-    onChange(toCssProps(newProps));
+    onChange(newProps);
   }
 
   return <div>
@@ -48,7 +41,7 @@ const CssPropsEditor: React.FC<CssPropsEditorProps> = ({ onChange, styles }) => 
             return <PropEditor 
               onDelete={() => onDelete(index)}
               key={index}
-              name={prop.name}
+              name={prop.prop}
               value={prop.value}
               onValueChange={onPropValueChange(index)}
               onNameChange={onPropNameChange(index)} />

@@ -1,4 +1,4 @@
-import { StyleItem, Styles, StylesBodyPayload, Theme } from "../../types/theme";
+import { StyleItem, Style, StylesBodyPayload, Theme } from "../../types/theme";
 import { createAsyncAction, createAsyncActionConstant, createUIAction } from "../actionCreators";
 
 export const FETCH_THEMES = createAsyncActionConstant('THEME/FETCH_THEMES');

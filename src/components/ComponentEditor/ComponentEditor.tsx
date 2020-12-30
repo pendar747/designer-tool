@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectSelectedTheme } from '../../state/library/selectors';
 import { selectSelectedComponentStyles } from '../../state/styles/selectors';
 import { updateStylesAction } from '../../state/theme/actions';
-import { ComponentDefinition, StyleSheet, StyleSheetStyle } from '../../types/components';
-import { Styles } from '../../types/theme';
+import { ComponentDefinition, StyleSheetStyle } from '../../types/components';
+import { Style } from '../../types/theme';
 import SettingsPanel from '../SettingsPanel/SettingsPanel';
 import styles from './ComponentEditor.less';
 
@@ -13,12 +13,12 @@ interface ComponentEditorProps {
   component: ComponentDefinition
 }
 
-const mapStyleSheetToStyles = ({ selector, properties }: StyleSheetStyle): Styles => {
+const mapStyleSheetToStyles = ({ selector, properties }: StyleSheetStyle): Style => {
   const props = Object.entries(properties).map(([prop, value]) => ({ prop, value }))
   return { selector, props }
 }
 
-const mapStylesToStyleSheet = (styles: Styles): StyleSheetStyle => {
+const mapStylesToStyleSheet = (styles: Style): StyleSheetStyle => {
   const properties = fromPairs(styles.props.map(({ prop, value }) => [prop, value]));
   return {
     selector: styles.selector,
@@ -33,23 +33,20 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
   const theme = useSelector(selectSelectedTheme);
   const componentStyles = useSelector(selectSelectedComponentStyles);
   
-  const styleSheet = componentStyles.map(mapStylesToStyleSheet);
-  
-  const [draftStyleSheet, setDraftStyleSheet] = useState<StyleSheet>(styleSheet);
+  const [draftStyles, setDraftStyleSheet] = useState<Style[]>(componentStyles);
 
   useEffect(() => {
-    setDraftStyleSheet(styleSheet);
+    setDraftStyleSheet(componentStyles);
   }, [componentStyles]);
 
   const onSave = () => {
     dispatch(updateStylesAction.request({
       componentId: component.info.id,
       themeId: theme?.id!,
-      styles: draftStyleSheet.map(mapStyleSheetToStyles)
+      styles: draftStyles
     }))
   }
 
-  const draftStyles = draftStyleSheet.map(mapStyleSheetToStyles);
   const stylesHaveChanged = draftStyles
     .some(style => {
       const { props } = componentStyles.find(item => item.selector == style.selector) || {};
@@ -61,14 +58,14 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
 
   return <div className={styles.container}>
     <div className={styles.preview}>
-      <Control props={props} styleSheet={draftStyleSheet}></Control>
+      <Control props={props} styleSheet={draftStyles.map(mapStylesToStyleSheet)}></Control>
     </div>
     <div className={styles.settingsPanel}>
       <SettingsPanel 
         onSave={onSave}
         props={props} 
         onPropsChange={setProps} 
-        styleSheet={draftStyleSheet} 
+        cssStyles={draftStyles} 
         onStylesChange={setDraftStyleSheet}
         isSaveDisabled={!isSaveEnabled}
         info={info} />

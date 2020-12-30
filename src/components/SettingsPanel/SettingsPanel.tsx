@@ -1,16 +1,17 @@
-import { Button, Divider, Spin } from 'antd';
+import { Button, Divider } from 'antd';
 import React from 'react';
-import { ComponentInfo, StyleSheet } from '../../types/components';
+import { ComponentInfo } from '../../types/components';
 import CssEditor from '../CssEditor/CssEditor';
 import PropsEditor from '../PropsEditor/PropsEditor';
 import styles from './SettingsPanel.less';
 import { SaveOutlined } from '@ant-design/icons';
 import { FormatPainterOutlined, SettingOutlined } from '@ant-design/icons';
+import { Style } from '../../types/theme';
 
 interface SettingsPanelProps {
   info: ComponentInfo,
-  onStylesChange: (styleSheet: StyleSheet) => void,
-  styleSheet: StyleSheet,
+  onStylesChange: (styles: Style[]) => void,
+  cssStyles: Style[],
   onPropsChange: (props: { [key: string]: any }) => void,
   props: any,
   onSave: () => void,
@@ -19,7 +20,7 @@ interface SettingsPanelProps {
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ 
   info, 
-  styleSheet, 
+  cssStyles, 
   onStylesChange, 
   onPropsChange, 
   props, 
@@ -38,7 +39,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
     </div>
     <div className={styles.cssEditor}>
       <Divider orientation="left"><FormatPainterOutlined /> Css</Divider>
-      <CssEditor availableCss={info.availableOptions.css} styleSheet={styleSheet} onStylesChange={onStylesChange} />
+      <CssEditor availableCss={info.availableOptions.css} styles={cssStyles} onStylesChange={onStylesChange} />
     </div>
     <div className={styles.buttons}>
       <Button disabled={isSaveDisabled} onClick={() => onSave()} type="primary" icon={<SaveOutlined />}>Save</Button>

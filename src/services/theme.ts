@@ -1,4 +1,4 @@
-import { Styles, StylesBodyPayload, Theme } from "../types/theme";
+import { Style, StylesBodyPayload, Theme } from "../types/theme";
 import apiClient from "./apiClient"
 
 export const fetchThemes = async (userId: string) => {
@@ -11,12 +11,12 @@ export const createTheme = async (theme: Theme): Promise<Theme> => {
   return data;
 }
 
-export const fetchStyles = async (componentId: string, themeId: string): Promise<Styles> => {
+export const fetchStyles = async (componentId: string, themeId: string): Promise<Style> => {
   const { data } = await apiClient.get(`/theme/${themeId}/style?componentId=${componentId}`);
   return data;
 }
 
-export const updateStyles = async (payload: StylesBodyPayload): Promise<Styles> => {
+export const updateStyles = async (payload: StylesBodyPayload): Promise<Style> => {
   const { data } = await apiClient.post(`/theme/${payload.themeId}/style`, payload);
   return data;
 }
