@@ -8,8 +8,6 @@ import { Library } from '../../types/library';
 import ComponentPreview from '../ComponentPreview/ComponentPreview';
 import styles from './Library.less';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
-import { selectThemes } from '../../state/theme/selectors';
-import { showCreateThemeModalAction } from '../../state/theme/actions';
 import { selectSelectedTheme } from '../../state/library/selectors';
 
 interface LibraryProps {
@@ -22,7 +20,6 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [filter, setFilter] = useState<string>('');
-  const themes = useSelector(selectThemes);
   const selectedTheme = useSelector(selectSelectedTheme); 
 
   const onRemove = (componentId: string) => {
@@ -30,14 +27,6 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
   }
 
   const onAddComponents = () => history.push(`/library/${library.id}/add-components`);
-
-  const handleSelectTheme = (value: string) => {
-    if (value === 'create') {
-      dispatch(showCreateThemeModalAction({ show: true, libraryId: library?.id }));
-    } else {
-      dispatch(selectThemeAction({ libraryId: library.id, themeId: value }));
-    }
-  }
 
   return <div>
     <div className={styles.toolbar}>
@@ -49,12 +38,6 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
       </div>
       <div>
         <Space>
-          <Select value={selectedTheme?.id} onChange={handleSelectTheme} className={styles.selectTheme} placeholder="Select a theme">
-            {themes
-              .filter(theme => theme.libraryId == library?.id)
-              .map(theme => <Select.Option key={theme.id} value={theme.id!}>{theme.name}</Select.Option>)}
-            <Select.Option value="create"><PlusOutlined /> Create theme</Select.Option>
-          </Select>
           <Button icon={<PlusOutlined />} 
             onClick={onAddComponents} type="primary">Add components</Button>
         </Space>
@@ -67,7 +50,9 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
         </div>
         : <div className={styles.components}>
           {components
-            .filter(({ info }) => filter.length > 0 ? info.name.indexOf(filter) === 0 : true)
+            .filter(({ info }) => filter.length > 0 
+              ? info.name.toLowerCase().indexOf(filter.toLowerCase()) === 0 
+              : true)
             .map(component => (
             <ComponentPreview 
               onEdit={() => history.push(`/library/${library.id}/edit/${component.info.id}?themeId=${selectedTheme?.id}`)}

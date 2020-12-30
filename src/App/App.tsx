@@ -44,12 +44,6 @@ const App: React.FC = () => {
             <RegistrationPage />
           </Route>
           <AuthenticatedRoutes>
-            <Route path="/library/:libraryId/edit/:componentId">
-              <EditPage />
-            </Route>
-            <Route path="/library/:libraryId/add-components">
-              <AddComponentsPage />
-            </Route>
             <Route path="/library/:libraryId">
               <LibraryPage />
             </Route>
