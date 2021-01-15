@@ -33,6 +33,7 @@ Users can...
 - [X] Remove component from library
 - [X] Create a theme and assign it to a library
 - [X] edit component styles in the theme 
+- [ ] set library settings for publishing to npm
 - [ ] publish their library as an npm package and git repository
   - [ ] for the React framework
   - [ ] for the Vue framework

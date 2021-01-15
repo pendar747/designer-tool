@@ -1,5 +1,5 @@
 import { CreateLibraryArgs } from '../../services/library';
-import { Library, LibraryComponentPair } from '../../types/library';
+import { Library, LibraryComponentPair, NPMConfig } from '../../types/library';
 import { createAsyncAction, createAsyncActionConstant, createUIAction } from '../actionCreators';
 
 export const SHOW_CREATE_LIBRARY_MODAL = 'LIBRARY/SHOW_CREATE_LIBRARY_MODAL';
@@ -13,6 +13,8 @@ export const SELECT_LIBRARY = 'LIBRARY/SELECT_LIBRARY';
 export const REMOVE_COMPONENT = createAsyncActionConstant('LIBRARY/REMOVE_COMPONENT');
 export const SELECT_THEME = 'THEME/SELECT_THEME';
 export const SELECT_COMPONENT = 'THEME/SELECT_COMPONENT';
+export const FETCH_NPM_CONFIG = createAsyncActionConstant('LIBRARY/FETCH_NPM_CONFIG');
+export const UPDATE_NPM_CONFIG = createAsyncActionConstant('LIBRARY/UPDATE_NPM_CONFIG');
 
 export const showEditLibraryModalAction = createUIAction<{ show: boolean, libraryId?: string }>(SHOW_CREATE_LIBRARY_MODAL);
 export const createLibraryAction = createAsyncAction<CreateLibraryArgs, Library, void>(CREATE_LIBRARY);
@@ -25,3 +27,5 @@ export const selectLibraryAction = createUIAction<{ libraryId: string }>(SELECT_
 export const removeComponentAction = createAsyncAction<LibraryComponentPair, LibraryComponentPair>(REMOVE_COMPONENT);
 export const selectThemeAction = createUIAction<{ libraryId: string, themeId: string }>(SELECT_THEME);
 export const selectComponentAction = createUIAction<{ componentId: string }>(SELECT_COMPONENT);
+export const fetchNpmConfigAction = createAsyncAction<{ libraryId: string }>(FETCH_NPM_CONFIG);
+export const updateNpmConfigAction = createAsyncAction<{ libraryId: string, config: NPMConfig }, { libraryId: string, config: NPMConfig }>(UPDATE_NPM_CONFIG);

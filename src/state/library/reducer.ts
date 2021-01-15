@@ -1,6 +1,6 @@
 import { Action } from "../actionCreators";
-import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, REMOVE_COMPONENT, SELECT_COMPONENT, SELECT_LIBRARY, SELECT_THEME, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY } from "./actions";
-import { Library } from '../../types/library';
+import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, FETCH_NPM_CONFIG, REMOVE_COMPONENT, SELECT_COMPONENT, SELECT_LIBRARY, SELECT_THEME, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY, UPDATE_NPM_CONFIG } from "./actions";
+import { Library, LibraryConfig, NPMConfig } from '../../types/library';
 import { AsyncState } from "../types";
 
 export interface LibraryState {
@@ -14,12 +14,14 @@ export interface LibraryState {
   addComponentState: AsyncState,
   fetchComponentState: AsyncState,
   removeComponentState: AsyncState,
-  selectedComponentId?: string
+  selectedComponentId?: string,
+  configs: LibraryConfig[]
 }
 
 export const LIBRARY_INITIAL_STATE: LibraryState = {
   isEditModalVisible: false,
   libraries: [],
+  configs: [],
   createLibraryState: AsyncState.DEFAULT,
   fetchLibrariesState: AsyncState.DEFAULT,
   updateLibraryState: AsyncState.DEFAULT,
@@ -27,6 +29,17 @@ export const LIBRARY_INITIAL_STATE: LibraryState = {
   addComponentState: AsyncState.DEFAULT,
   fetchComponentState: AsyncState.DEFAULT,
   removeComponentState: AsyncState.DEFAULT
+}
+
+const updateNpmConfig = (configs: LibraryConfig[], libraryId: string, npmConfig: NPMConfig): LibraryConfig[] => {
+  const configIndex = configs.findIndex(config => config.libraryId === libraryId);
+  if (configIndex >= 0) {
+    const newConfigs = [...configs]; 
+    const oldConfig = configs[configIndex];
+    newConfigs.splice(configIndex, 1, { ...oldConfig, config: { ...oldConfig, npm: npmConfig } });
+    return newConfigs;
+  }
+  return [...configs, { libraryId, config: { npm: npmConfig } }];
 }
 
 export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, action: Action<any>): LibraryState => {
@@ -191,6 +204,16 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
     return {
       ...state,
       selectedComponentId: action.payload.componentId
+    }
+  case FETCH_NPM_CONFIG.success:
+    return {
+      ...state,
+      configs: updateNpmConfig(state.configs, action.payload.libraryId, action.payload.config)
+    }
+  case UPDATE_NPM_CONFIG.success:
+    return {
+      ...state,
+      configs: updateNpmConfig(state.configs, action.payload.libraryId, action.payload.config)
     }
   default:
     return state;

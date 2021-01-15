@@ -13,3 +13,18 @@ export interface LibraryComponentPair {
   libraryId: string,
   componentId: string
 } 
+
+export interface NPMConfig {
+  registry: string|null, 
+  scope: string|null,
+  accessToken: string|null, 
+  libraryId: string,
+  isPrivate: boolean
+}
+
+export interface LibraryConfig {
+  libraryId: string,
+  config: {
+    npm: NPMConfig
+  }
+}

@@ -38,3 +38,11 @@ export const selectSelectedComponentId = createSelector(
   selectLibraryState,
   ({ selectedComponentId }) => selectedComponentId
 )
+
+export const selectSelectedLibraryConfig = createSelector(
+  selectLibraryState,
+  ({ selectedLibraryId, configs }) => {
+    const { config } = configs.find(conf => conf.libraryId === selectedLibraryId) || {};
+    return config;
+  }
+);
