@@ -15,6 +15,7 @@ export interface LibraryState {
   fetchComponentState: AsyncState,
   removeComponentState: AsyncState,
   selectedComponentId?: string,
+  npmConfigUpdateState?: AsyncState,
   configs: LibraryConfig[]
 }
 
@@ -28,7 +29,8 @@ export const LIBRARY_INITIAL_STATE: LibraryState = {
   deleteLibraryState: AsyncState.DEFAULT,
   addComponentState: AsyncState.DEFAULT,
   fetchComponentState: AsyncState.DEFAULT,
-  removeComponentState: AsyncState.DEFAULT
+  removeComponentState: AsyncState.DEFAULT,
+  npmConfigUpdateState: AsyncState.DEFAULT
 }
 
 const updateNpmConfig = (configs: LibraryConfig[], libraryId: string, npmConfig: NPMConfig): LibraryConfig[] => {
@@ -213,7 +215,18 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
   case UPDATE_NPM_CONFIG.success:
     return {
       ...state,
-      configs: updateNpmConfig(state.configs, action.payload.libraryId, action.payload.config)
+      configs: updateNpmConfig(state.configs, action.payload.libraryId, action.payload.config),
+      npmConfigUpdateState: AsyncState.SUCCESSFUL
+    }
+  case UPDATE_NPM_CONFIG.request:
+    return {
+      ...state,
+      npmConfigUpdateState: AsyncState.IN_PROGRESS
+    }
+  case UPDATE_NPM_CONFIG.failure:
+    return {
+      ...state,
+      npmConfigUpdateState: AsyncState.FAILED
     }
   default:
     return state;

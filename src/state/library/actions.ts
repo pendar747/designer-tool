@@ -27,5 +27,5 @@ export const selectLibraryAction = createUIAction<{ libraryId: string }>(SELECT_
 export const removeComponentAction = createAsyncAction<LibraryComponentPair, LibraryComponentPair>(REMOVE_COMPONENT);
 export const selectThemeAction = createUIAction<{ libraryId: string, themeId: string }>(SELECT_THEME);
 export const selectComponentAction = createUIAction<{ componentId: string }>(SELECT_COMPONENT);
-export const fetchNpmConfigAction = createAsyncAction<{ libraryId: string }>(FETCH_NPM_CONFIG);
+export const fetchNpmConfigAction = createAsyncAction<{ libraryId: string }, { libraryId: string, config: NPMConfig }>(FETCH_NPM_CONFIG);
 export const updateNpmConfigAction = createAsyncAction<{ libraryId: string, config: NPMConfig }, { libraryId: string, config: NPMConfig }>(UPDATE_NPM_CONFIG);

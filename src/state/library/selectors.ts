@@ -46,3 +46,8 @@ export const selectSelectedLibraryConfig = createSelector(
     return config;
   }
 );
+
+export const selectNpmConfigUpdateState = createSelector(
+  selectLibraryState,
+  ({ npmConfigUpdateState }) => npmConfigUpdateState
+);

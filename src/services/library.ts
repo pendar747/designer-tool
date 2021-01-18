@@ -1,4 +1,4 @@
-import { Library } from "../types/library";
+import { Library, NPMConfig } from "../types/library";
 import apiClient from "./apiClient"
 
 export interface CreateLibraryArgs {
@@ -42,4 +42,14 @@ export const fetchComponents = async (libraryId: string) => {
 
 export const removeComponent = async (componentId: string, libraryId: string) => {
   return apiClient.delete(`/library/${libraryId}/component/${componentId}`);
+}
+
+export const fetchNpmConfig = async (libraryId: string) => {
+  const { data } = await apiClient.get(`/library/${libraryId}/npmConfig`);
+  return data;
+}
+
+export const updateNpmConfig = async (libraryId: string, config: NPMConfig) => {
+  const { data } = await apiClient.put(`/library/${libraryId}/npmConfig`, config);
+  return data;
 }

@@ -1,9 +1,8 @@
 import { take, call, put, select, takeLatest } from "redux-saga/effects";
-import { addComponent, createLibrary, CreateLibraryArgs, deleteLibrary, fetchComponents, fetchUserLibraries, removeComponent, updateLibrary } from "../../services/library";
-import { Library, LibraryComponentPair } from "../../types/library";
+import { addComponent, createLibrary, CreateLibraryArgs, deleteLibrary, fetchComponents, fetchNpmConfig, fetchUserLibraries, removeComponent, updateLibrary, updateNpmConfig } from "../../services/library";
+import { Library, LibraryComponentPair, NPMConfig } from "../../types/library";
 import { User } from "../../types/user";
 import { Action } from "../actionCreators";
-import { selectThemes } from "../theme/selectors";
 import { FETCH_CURRENT_USER } from "../user/actions";
 import { selectCurrentUser } from "../user/selectors";
 import { 
@@ -20,7 +19,11 @@ import {
   fetchComponentsAction,
   FETCH_COMPONENTS,
   removeComponentAction,
-  REMOVE_COMPONENT
+  REMOVE_COMPONENT,
+  fetchNpmConfigAction,
+  updateNpmConfigAction,
+  FETCH_NPM_CONFIG,
+  UPDATE_NPM_CONFIG
 } from "./actions";
 import { selectLibraries } from "./selectors";
 
@@ -95,6 +98,26 @@ function* removeComponentSaga (action: Action<LibraryComponentPair>) {
   }
 }
 
+function *fetchNpmConfigSaga (action: Action<{ libraryId: string }>) {
+  try {
+    const { libraryId } = action.payload;
+    const config = yield call(fetchNpmConfig, libraryId);
+    yield put(fetchNpmConfigAction.success({ config, libraryId }))
+  } catch (error) {
+    yield put(fetchNpmConfigAction.failure());
+  }
+}
+
+function *updateNpmConfigSaga (action: Action<{ libraryId: string, config: NPMConfig }>) {
+  try {
+    const { libraryId, config } = action.payload;
+    const newConfig = yield call(updateNpmConfig, libraryId, config);
+    yield put(updateNpmConfigAction.success({ config: newConfig, libraryId }))
+  } catch (error) {
+    yield put(updateNpmConfigAction.failure());
+  }
+}
+
 export default function* sagas () {
   yield takeLatest(CREATE_LIBRARY.request, createLibrarySaga);
   yield takeLatest(FETCH_LIBRARIES.request, fetchUserLibrariesSaga);
@@ -103,4 +126,6 @@ export default function* sagas () {
   yield takeLatest(ADD_COMPONENT.request, addComponentSaga);
   yield takeLatest(FETCH_COMPONENTS.request, fetchComponentsSage);
   yield takeLatest(REMOVE_COMPONENT.request, removeComponentSaga);
+  yield takeLatest(FETCH_NPM_CONFIG.request, fetchNpmConfigSaga);
+  yield takeLatest(UPDATE_NPM_CONFIG.request, updateNpmConfigSaga);
 }
