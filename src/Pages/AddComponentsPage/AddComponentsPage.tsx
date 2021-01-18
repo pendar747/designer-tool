@@ -6,7 +6,7 @@ interface AddComponentsPageProps {}
 
 const AddComponentsPage: React.FC<AddComponentsPageProps> = () => {
   return <div className={styles.container}>
-    <h1>Add Components</h1>
+    <h2>Add Components</h2>
     <AllComponents />
   </div>;
 }

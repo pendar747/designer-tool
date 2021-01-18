@@ -14,6 +14,8 @@ import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import { Switch, Route } from 'react-router-dom';
 import EditPage from '../EditPage/EditPage';
 import AddComponentsPage from '../AddComponentsPage/AddComponentsPage';
+import { SettingOutlined } from '@ant-design/icons';
+import LibrarySettingsPage from '../LIbrarySettingsPage/LIbrarySettingsPage';
 
 interface LibraryPageProps {}
 
@@ -56,17 +58,20 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
 
   return <div className={styles.container}>
     <div className={styles.titleBar}>
-      <h1>
-        <Link to={`/library/${libraryId}`}>
-          {library?.name}
-        </Link>
-      </h1>
-      <Dropdown trigger={['click']} overlay={selectThemeMenu}>
-        <div className={styles.themeSelector}>
-          <span className={styles.themeName}>{selectedTheme?.name}</span>
-          <DownOutlined />
-        </div>
-      </Dropdown>
+      <div>
+        <h1>
+          <Link to={`/library/${libraryId}`}>
+            {library?.name}
+          </Link>
+        </h1>
+        <Dropdown trigger={['click']} overlay={selectThemeMenu}>
+          <div className={styles.themeSelector}>
+            <span className={styles.themeName}>{selectedTheme?.name}</span>
+            <DownOutlined />
+          </div>
+        </Dropdown>
+      </div>
+      <Link to={`/library/${libraryId}/settings`}><SettingOutlined /> Settings</Link>
     </div>
     <Switch>
       <Route path="/library/:libraryId/edit/:componentId">
@@ -74,6 +79,9 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
       </Route>
       <Route path="/library/:libraryId/add-components">
         <AddComponentsPage />
+      </Route>
+      <Route path="/library/:libraryId/settings">
+        <LibrarySettingsPage libraryId={libraryId} />
       </Route>
       <Route path="/library/:libraryId">
         <Library library={library!} components={components} />
