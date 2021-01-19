@@ -28,16 +28,17 @@ const NpmConfigForm: React.FC<NpmConfigFormProps> = ({ libraryId }) => {
     libraryId
   };
   const [draftNpmConfig, setDraftNpmConfig] = useState<NPMConfig>(config?.npm || defaultConfig);
+  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(fetchNpmConfigAction.request({ libraryId }));
   }, []);
 
   useEffect(() => {
-    if (updateState === AsyncState.SUCCESSFUL) {
-      message.success('NPM settings updated.')
+    if (updateState === AsyncState.SUCCESSFUL && hasSubmitted) {
+      message.success('NPM settings updated.');
     }
-  }, [updateState]);
+  }, [updateState, hasSubmitted]);
 
   useEffect(() => {
     if (config) {
@@ -54,7 +55,7 @@ const NpmConfigForm: React.FC<NpmConfigFormProps> = ({ libraryId }) => {
   }, [setDraftNpmConfig, draftNpmConfig]);
 
   const handleSubmit = useCallback(() => {
-    console.log(draftNpmConfig);
+    setHasSubmitted(true);
     dispatch(updateNpmConfigAction.request({ libraryId, config: draftNpmConfig }));
   }, [libraryId, draftNpmConfig, updateNpmConfigAction, dispatch]);
 
@@ -72,7 +73,8 @@ const NpmConfigForm: React.FC<NpmConfigFormProps> = ({ libraryId }) => {
       <Input name="accessToken" suffix={<LockOutlined />} value={draftNpmConfig.accessToken || ''} />
     </FormItem>
     <FormItem>
-      <Button onClick={handleSubmit} htmlType="submit" icon={<SaveOutlined />} type="primary">Save</Button>
+      <Button loading={updateState === AsyncState.IN_PROGRESS} 
+        onClick={handleSubmit} htmlType="submit" icon={<SaveOutlined />} type="primary">Save</Button>
     </FormItem>
   </Form>;
 }
