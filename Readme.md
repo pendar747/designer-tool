@@ -41,3 +41,9 @@ Users can...
 - [ ] add custom components to the platform...
 - [ ] Edit history in component editor
 - [ ] Add custom selectors
+- [ ] Colour pallet
+  - [ ] add/remove/edit colours in the pallet
+- [ ] Component collections
+  - [ ] Antd components
+  - [ ] Material UI components
+  - [ ] Semantic UI components

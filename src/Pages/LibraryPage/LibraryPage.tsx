@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { fetchComponentsAction, fetchUserLibrariesAction, selectLibraryAction, selectThemeAction } from '../../state/library/actions';
 import { selectSelectedLibrary, selectSelectedTheme } from '../../state/library/selectors';
 import { fetchCurrentUserAction } from '../../state/user/actions';
@@ -8,14 +8,15 @@ import venderComponents from '../../components/venderComponents';
 import Library from '../../components/Library/Library';
 import styles from './LibraryPage.less';
 import { fetchThemesAction, showCreateThemeModalAction } from '../../state/theme/actions';
-import { Dropdown, Menu } from 'antd';
+import { Button, Dropdown, Menu, Space } from 'antd';
 import { selectThemes } from '../../state/theme/selectors';
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
 import { Switch, Route } from 'react-router-dom';
 import EditPage from '../EditPage/EditPage';
 import AddComponentsPage from '../AddComponentsPage/AddComponentsPage';
-import { SettingOutlined } from '@ant-design/icons';
+import { SettingOutlined, RocketOutlined } from '@ant-design/icons';
 import LibrarySettingsPage from '../LIbrarySettingsPage/LIbrarySettingsPage';
+import PublishLibraryPage from '../PublishLibraryPage/PublishLibraryPage';
 
 interface LibraryPageProps {}
 
@@ -29,6 +30,7 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
 
   const { libraryId } = useParams<{ libraryId: string }>();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(fetchCurrentUserAction.request());
@@ -71,7 +73,12 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
           </div>
         </Dropdown>
       </div>
-      <Link to={`/library/${libraryId}/settings`}><SettingOutlined /> Settings</Link>
+      <div>
+        <Space>
+          <Link to={`/library/${libraryId}/settings`}><SettingOutlined /> Settings</Link>
+          <Button onClick={() => history.push(`/library/${libraryId}/publish`)} icon={<RocketOutlined />}>Publish</Button>
+        </Space>
+      </div>
     </div>
     <Switch>
       <Route path="/library/:libraryId/edit/:componentId">
@@ -82,6 +89,9 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
       </Route>
       <Route path="/library/:libraryId/settings">
         <LibrarySettingsPage libraryId={libraryId} />
+      </Route>
+      <Route path="/library/:libraryId/publish">
+        <PublishLibraryPage />
       </Route>
       <Route path="/library/:libraryId">
         <Library library={library!} components={components} />

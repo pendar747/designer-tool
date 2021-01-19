@@ -1,6 +1,6 @@
 import { Action } from "../actionCreators";
-import { ADD_COMPONENT, CREATE_LIBRARY, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, FETCH_NPM_CONFIG, REMOVE_COMPONENT, SELECT_COMPONENT, SELECT_LIBRARY, SELECT_THEME, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY, UPDATE_NPM_CONFIG } from "./actions";
-import { Library, LibraryConfig, NPMConfig } from '../../types/library';
+import { ADD_COMPONENT, CREATE_LIBRARY, CREATE_NPM_RELEASE, DELETE_LIBRARY, FETCH_COMPONENTS, FETCH_LIBRARIES, FETCH_NPM_CONFIG, FETCH_NPM_RELEASES, REMOVE_COMPONENT, SELECT_COMPONENT, SELECT_LIBRARY, SELECT_THEME, SHOW_CREATE_LIBRARY_MODAL, UPDATE_LIBRARY, UPDATE_NPM_CONFIG } from "./actions";
+import { Library, LibraryConfig, NPMConfig, NPMRelease } from '../../types/library';
 import { AsyncState } from "../types";
 
 export interface LibraryState {
@@ -16,7 +16,9 @@ export interface LibraryState {
   removeComponentState: AsyncState,
   selectedComponentId?: string,
   npmConfigUpdateState?: AsyncState,
-  configs: LibraryConfig[]
+  configs: LibraryConfig[],
+  npmReleases: NPMRelease[],
+  createNpmReleaseState: AsyncState
 }
 
 export const LIBRARY_INITIAL_STATE: LibraryState = {
@@ -30,7 +32,9 @@ export const LIBRARY_INITIAL_STATE: LibraryState = {
   addComponentState: AsyncState.DEFAULT,
   fetchComponentState: AsyncState.DEFAULT,
   removeComponentState: AsyncState.DEFAULT,
-  npmConfigUpdateState: AsyncState.DEFAULT
+  npmConfigUpdateState: AsyncState.DEFAULT,
+  createNpmReleaseState: AsyncState.DEFAULT,
+  npmReleases: []
 }
 
 const updateNpmConfig = (configs: LibraryConfig[], libraryId: string, npmConfig: NPMConfig): LibraryConfig[] => {
@@ -227,6 +231,26 @@ export const libraryReducer = (state: LibraryState = LIBRARY_INITIAL_STATE, acti
     return {
       ...state,
       npmConfigUpdateState: AsyncState.FAILED
+    }
+  case FETCH_NPM_RELEASES.success:
+    return {
+      ...state,
+      npmReleases: action.payload.releases
+    }
+  case CREATE_NPM_RELEASE.success:
+    return {
+      ...state,
+      createNpmReleaseState: AsyncState.SUCCESSFUL
+    }
+  case CREATE_NPM_RELEASE.request: 
+    return {
+      ...state,
+      createNpmReleaseState: AsyncState.IN_PROGRESS
+    }
+  case CREATE_NPM_RELEASE.failure:
+    return {
+      ...state,
+      createNpmReleaseState: AsyncState.FAILED
     }
   default:
     return state;

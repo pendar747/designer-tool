@@ -51,3 +51,13 @@ export const selectNpmConfigUpdateState = createSelector(
   selectLibraryState,
   ({ npmConfigUpdateState }) => npmConfigUpdateState
 );
+
+export const selectNpmReleases = createSelector(
+  selectLibraryState,
+  ({ npmReleases, selectedLibraryId }) => npmReleases.filter(({ libraryId }) => libraryId === selectedLibraryId)
+);
+
+export const selectCreateNpmReleaseState = createSelector(
+  selectLibraryState,
+  ({ createNpmReleaseState }) => createNpmReleaseState
+)

@@ -1,5 +1,5 @@
 import { take, call, put, select, takeLatest } from "redux-saga/effects";
-import { addComponent, createLibrary, CreateLibraryArgs, deleteLibrary, fetchComponents, fetchNpmConfig, fetchUserLibraries, removeComponent, updateLibrary, updateNpmConfig } from "../../services/library";
+import { addComponent, createLibrary, CreateLibraryArgs, createNpmRelease, deleteLibrary, fetchComponents, fetchNpmConfig, fetchNpmReleases, fetchUserLibraries, removeComponent, updateLibrary, updateNpmConfig } from "../../services/library";
 import { Library, LibraryComponentPair, NPMConfig } from "../../types/library";
 import { User } from "../../types/user";
 import { Action } from "../actionCreators";
@@ -23,7 +23,11 @@ import {
   fetchNpmConfigAction,
   updateNpmConfigAction,
   FETCH_NPM_CONFIG,
-  UPDATE_NPM_CONFIG
+  UPDATE_NPM_CONFIG,
+  fetchNpmReleasesAction,
+  FETCH_NPM_RELEASES,
+  createNpmReleaseAction,
+  CREATE_NPM_RELEASE
 } from "./actions";
 import { selectLibraries } from "./selectors";
 
@@ -118,6 +122,26 @@ function *updateNpmConfigSaga (action: Action<{ libraryId: string, config: NPMCo
   }
 }
 
+function *fetchNpmReleasesSaga (action: Action<{ libraryId: string }>) {
+  try {
+    const { libraryId } = action.payload;
+    const releases = yield call(fetchNpmReleases, libraryId);
+    yield put(fetchNpmReleasesAction.success({ releases, libraryId }))
+  } catch (error) {
+    yield put(fetchNpmReleasesAction.failure());
+  }
+}
+
+function *createNpmReleaseSaga (action: Action<{ libraryId: string }>) {
+  try {
+    const { libraryId } = action.payload;
+    const release = yield call(createNpmRelease, libraryId);
+    yield put(createNpmReleaseAction.success({ release }))
+  } catch (error) {
+    yield put(createNpmReleaseAction.failure())
+  }
+}
+
 export default function* sagas () {
   yield takeLatest(CREATE_LIBRARY.request, createLibrarySaga);
   yield takeLatest(FETCH_LIBRARIES.request, fetchUserLibrariesSaga);
@@ -128,4 +152,6 @@ export default function* sagas () {
   yield takeLatest(REMOVE_COMPONENT.request, removeComponentSaga);
   yield takeLatest(FETCH_NPM_CONFIG.request, fetchNpmConfigSaga);
   yield takeLatest(UPDATE_NPM_CONFIG.request, updateNpmConfigSaga);
+  yield takeLatest(FETCH_NPM_RELEASES.request, fetchNpmReleasesSaga);
+  yield takeLatest(CREATE_NPM_RELEASE.request, createNpmReleaseSaga);
 }

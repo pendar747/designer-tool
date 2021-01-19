@@ -28,3 +28,12 @@ export interface LibraryConfig {
     npm: NPMConfig
   }
 }
+
+export interface NPMRelease {
+  libraryId: string,
+  version: string,
+  datePublished: Date|null,
+  dateRequested: Date,
+  packageName: string|null,
+  publishedBy: string
+}

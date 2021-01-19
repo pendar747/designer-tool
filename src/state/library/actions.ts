@@ -1,5 +1,5 @@
 import { CreateLibraryArgs } from '../../services/library';
-import { Library, LibraryComponentPair, NPMConfig } from '../../types/library';
+import { Library, LibraryComponentPair, NPMConfig, NPMRelease } from '../../types/library';
 import { createAsyncAction, createAsyncActionConstant, createUIAction } from '../actionCreators';
 
 export const SHOW_CREATE_LIBRARY_MODAL = 'LIBRARY/SHOW_CREATE_LIBRARY_MODAL';
@@ -15,6 +15,8 @@ export const SELECT_THEME = 'THEME/SELECT_THEME';
 export const SELECT_COMPONENT = 'THEME/SELECT_COMPONENT';
 export const FETCH_NPM_CONFIG = createAsyncActionConstant('LIBRARY/FETCH_NPM_CONFIG');
 export const UPDATE_NPM_CONFIG = createAsyncActionConstant('LIBRARY/UPDATE_NPM_CONFIG');
+export const FETCH_NPM_RELEASES = createAsyncActionConstant('LIBRARY/FETCH_NPM_RELEASES');
+export const CREATE_NPM_RELEASE = createAsyncActionConstant('LIBRARY/CREATE_NPM_RELEASE');
 
 export const showEditLibraryModalAction = createUIAction<{ show: boolean, libraryId?: string }>(SHOW_CREATE_LIBRARY_MODAL);
 export const createLibraryAction = createAsyncAction<CreateLibraryArgs, Library, void>(CREATE_LIBRARY);
@@ -29,3 +31,5 @@ export const selectThemeAction = createUIAction<{ libraryId: string, themeId: st
 export const selectComponentAction = createUIAction<{ componentId: string }>(SELECT_COMPONENT);
 export const fetchNpmConfigAction = createAsyncAction<{ libraryId: string }, { libraryId: string, config: NPMConfig }>(FETCH_NPM_CONFIG);
 export const updateNpmConfigAction = createAsyncAction<{ libraryId: string, config: NPMConfig }, { libraryId: string, config: NPMConfig }>(UPDATE_NPM_CONFIG);
+export const fetchNpmReleasesAction = createAsyncAction<{ libraryId: string }, { libraryId: string, releases: NPMRelease[] }>(CREATE_NPM_RELEASE);
+export const createNpmReleaseAction = createAsyncAction<{ libraryId: string }, { release: NPMRelease }>(CREATE_NPM_RELEASE);

@@ -53,3 +53,17 @@ export const updateNpmConfig = async (libraryId: string, config: NPMConfig) => {
   const { data } = await apiClient.put(`/library/${libraryId}/npmConfig`, config);
   return data;
 }
+
+export const fetchNpmReleases = async (libraryId: string) => {
+  const { data } = await apiClient.get(`/library/${libraryId}/npmRelease`);
+  return data.map((item: any) => ({
+    ...item,
+    datePublished: item.datePublished ? new Date(item.datePublished) : null,
+    dateRequested: new Date(item.dateRequested)
+  }));
+}
+
+export const createNpmRelease = async (libraryId: string) => {
+  const { data } = await apiClient.post(`/library/${libraryId}/npmRelease`);
+  return data;
+}

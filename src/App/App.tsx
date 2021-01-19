@@ -4,21 +4,16 @@ import styles from './App.less';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  useLocation,
-  useHistory
+  Route
 } from "react-router-dom";
 import HomePage from '../Pages/HomePage/HomePage';
-import EditPage from '../Pages/EditPage/EditPage';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoggedIn } from '../state/user/selectors';
+import { useDispatch } from 'react-redux';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
 import LoginPage from '../Pages/LoginPage/LoginPage';
 import { fetchCurrentUserAction } from '../state/user/actions';
 import NavBar from '../components/Navbar/Navbar';
 import CreateLibraryModal from '../components/CreateLibraryModal/CreateLibraryModal';
 import LibraryPage from '../Pages/LibraryPage/LibraryPage';
-import AddComponentsPage from '../Pages/AddComponentsPage/AddComponentsPage';
 import AuthenticatedRoutes from './AuthenticatedRoutes';
 import CreateThemeModal from '../components/CreateThemeModal/CreateThemeModal';
 
