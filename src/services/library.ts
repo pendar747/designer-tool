@@ -63,7 +63,7 @@ export const fetchNpmReleases = async (libraryId: string) => {
   }));
 }
 
-export const createNpmRelease = async (libraryId: string) => {
-  const { data } = await apiClient.post(`/library/${libraryId}/npmRelease`);
+export const createNpmRelease = async (libraryId: string, version: string) => {
+  const { data } = await apiClient.post(`/library/${libraryId}/npmRelease`, { version });
   return data;
 }

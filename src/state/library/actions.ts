@@ -31,5 +31,5 @@ export const selectThemeAction = createUIAction<{ libraryId: string, themeId: st
 export const selectComponentAction = createUIAction<{ componentId: string }>(SELECT_COMPONENT);
 export const fetchNpmConfigAction = createAsyncAction<{ libraryId: string }, { libraryId: string, config: NPMConfig }>(FETCH_NPM_CONFIG);
 export const updateNpmConfigAction = createAsyncAction<{ libraryId: string, config: NPMConfig }, { libraryId: string, config: NPMConfig }>(UPDATE_NPM_CONFIG);
-export const fetchNpmReleasesAction = createAsyncAction<{ libraryId: string }, { libraryId: string, releases: NPMRelease[] }>(CREATE_NPM_RELEASE);
-export const createNpmReleaseAction = createAsyncAction<{ libraryId: string }, { release: NPMRelease }>(CREATE_NPM_RELEASE);
+export const fetchNpmReleasesAction = createAsyncAction<{ libraryId: string }, { libraryId: string, releases: NPMRelease[] }>(FETCH_NPM_RELEASES);
+export const createNpmReleaseAction = createAsyncAction<{ libraryId: string, version: string }, { release: NPMRelease }>(CREATE_NPM_RELEASE);

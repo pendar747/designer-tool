@@ -91,7 +91,7 @@ const LibraryPage: React.FC<LibraryPageProps> = () => {
         <LibrarySettingsPage libraryId={libraryId} />
       </Route>
       <Route path="/library/:libraryId/publish">
-        <PublishLibraryPage />
+        <PublishLibraryPage libraryId={libraryId} />
       </Route>
       <Route path="/library/:libraryId">
         <Library library={library!} components={components} />

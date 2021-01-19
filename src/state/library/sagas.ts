@@ -132,10 +132,10 @@ function *fetchNpmReleasesSaga (action: Action<{ libraryId: string }>) {
   }
 }
 
-function *createNpmReleaseSaga (action: Action<{ libraryId: string }>) {
+function *createNpmReleaseSaga (action: Action<{ libraryId: string, version: string }>) {
   try {
-    const { libraryId } = action.payload;
-    const release = yield call(createNpmRelease, libraryId);
+    const { libraryId, version } = action.payload;
+    const release = yield call(createNpmRelease, libraryId, version);
     yield put(createNpmReleaseAction.success({ release }))
   } catch (error) {
     yield put(createNpmReleaseAction.failure())
