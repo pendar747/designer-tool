@@ -1,12 +1,13 @@
-import { Button, Input, Table } from 'antd';
+import { Button, Input, message, Table } from 'antd';
 import Form from 'antd/lib/form/Form';
 import FormItem from 'antd/lib/form/FormItem';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNpmReleaseAction, fetchNpmReleasesAction } from '../../state/library/actions';
-import { selectNpmReleases } from '../../state/library/selectors';
+import { selectCreateNpmReleaseState, selectNpmReleases } from '../../state/library/selectors';
 import styles from './PublishLibraryPage.less';
 import format from 'date-fns/format';
+import { AsyncState } from '../../state/types';
 
 interface PublishLibraryPageProps {
   libraryId: string
@@ -36,11 +37,21 @@ const tableColumns = [{
 const PublishLibraryPage: React.FC<PublishLibraryPageProps> = ({ libraryId }) => {
   const dispatch = useDispatch();
   const releases = useSelector(selectNpmReleases);
+  const createReleaseState = useSelector(selectCreateNpmReleaseState);
   const [version, setVersion] = useState<string>('');
 
   useEffect(() => {
     dispatch(fetchNpmReleasesAction.request({ libraryId }));
   }, []);
+
+  useEffect(() => {
+    if (createReleaseState === AsyncState.SUCCESSFUL && version) {
+      message.success(`Release v${version} successfully requested.`);
+    }
+    if (createReleaseState === AsyncState.FAILED && version) {
+      message.success(`Failed to request v${version} release.`);
+    }
+  }, [createReleaseState]);
 
   const handleSubmit = useCallback(() => {
     if (version) {
