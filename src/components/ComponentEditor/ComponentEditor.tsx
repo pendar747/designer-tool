@@ -6,6 +6,7 @@ import { selectSelectedComponentStyles } from '../../state/styles/selectors';
 import { updateStylesAction } from '../../state/theme/actions';
 import { ComponentDefinition, StyleSheetStyle } from '../../types/components';
 import { Style } from '../../types/theme';
+import { convertSheetToString } from '../../utils/styles';
 import SettingsPanel from '../SettingsPanel/SettingsPanel';
 import styles from './ComponentEditor.less';
 
@@ -55,10 +56,12 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
   const stylesAreValid = draftStyles
     .every(style => style.props.every(({ prop, value }) => prop && value));
   const isSaveEnabled = stylesHaveChanged && stylesAreValid;
-
+  const styleSheet = draftStyles.map(mapStylesToStyleSheet);
+  const stylesString = convertSheetToString(styleSheet);
   return <div className={styles.container}>
     <div className={styles.preview}>
-      <Control props={props} styleSheet={draftStyles.map(mapStylesToStyleSheet)}></Control>
+      <style scoped>{stylesString}</style>
+      <Control props={props}></Control>
     </div>
     <div className={styles.settingsPanel}>
       <SettingsPanel 

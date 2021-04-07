@@ -1,6 +1,5 @@
 import React from 'react';
 import { ControlOptions } from '../../../types/components';
-import { convertSheetToString } from '../../../utils/styles';
 import 'elix/define/BorderButton';
 
 
@@ -24,11 +23,9 @@ export const info = {
   library: 'Elix'
 }
 
-export const Control: React.FC<ControlOptions> = ({ styleSheet }) => {
-  const styles = convertSheetToString(styleSheet);
+export const Control: React.FC<ControlOptions> = () => {
   return (
     <>
-      <style>{styles}</style>
       <elix-border-button id="elix-border-button">Button</elix-border-button>
     </>
   )

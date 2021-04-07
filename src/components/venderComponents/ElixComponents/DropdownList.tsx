@@ -1,6 +1,5 @@
 import React from 'react';
 import { ComponentInfo, ControlOptions } from '../../../types/components';
-import { convertSheetToString } from '../../../utils/styles';
 import 'elix/define/DropdownList';
 
 export const Demo: React.FC = () => {
@@ -31,13 +30,10 @@ export const info: ComponentInfo = {
   library: 'Elix'
 };
 
-export const Control: React.FC<ControlOptions> = ({ styleSheet }) => {
-
-  const styles = convertSheetToString(styleSheet);
+export const Control: React.FC<ControlOptions> = () => {
 
   return (
     <>
-      <style>{styles}</style>
       <elix-dropdown-list>
         <div>Option 1</div>
         <div>Option 2</div>

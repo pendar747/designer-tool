@@ -8,7 +8,6 @@ export interface StyleSheetStyle {
 export type StyleSheet = StyleSheetStyle[]; 
 
 export interface ControlOptions {
-  styleSheet: StyleSheet,
   props: any 
 }
 

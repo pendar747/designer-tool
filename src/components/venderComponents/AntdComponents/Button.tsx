@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from 'antd/lib/button';
 import { ComponentInfo, ControlOptions } from '../../../types/components';
-import { convertSheetToString } from '../../../utils/styles';
 
 export const Demo = () => {
   return (
@@ -47,12 +46,11 @@ export const info: ComponentInfo = {
   }
 } 
 
-export const Control: React.FC<ControlOptions> = ({ styleSheet, props }) => {
+export const Control: React.FC<ControlOptions> = ({ props }) => {
 
   return (
-    <>
-      <style>{convertSheetToString(styleSheet)}</style>
+    <div>
       <Button {...props}>Button</Button>
-    </>
+    </div>
   )
 }
