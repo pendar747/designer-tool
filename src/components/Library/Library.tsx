@@ -1,8 +1,8 @@
-import { Button, Empty, Input, Select, Space } from 'antd';
+import { Button, Empty, Input, Space } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { removeComponentAction, selectThemeAction } from '../../state/library/actions';
+import { removeComponentAction } from '../../state/library/actions';
 import { ComponentDefinition } from '../../types/components';
 import { Library } from '../../types/library';
 import ComponentPreview from '../ComponentPreview/ComponentPreview';

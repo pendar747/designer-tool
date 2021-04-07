@@ -15,9 +15,10 @@
 - [ ] Preview components with their styles in the library view
 - [ ] Add pseudo selectors option for each selector (:active, :focus, :hover)
 - [ ] Disable save button when there are duplicate props for a selector
-- [ ] Warn user when there are duplicate props (set input on danger mode)
+- [ ] Warn user about duplicate props (set input on danger mode)
 - [ ] Remove existing prop keys from prop key suggestions
 - [ ] Zoom in/out, and pan for the component preview
+- [ ] Order previous releases by requested date
 
 # Features
 Users can...
@@ -34,16 +35,33 @@ Users can...
 - [X] Create a theme and assign it to a library
 - [X] edit component styles in the theme 
 - [X] set library settings for publishing to npm
-- [ ] publish their library as an npm package and git repository
-  - [ ] for the React framework
-  - [ ] for the Vue framework
-  - [ ] of web components
+- [X] publish their library as an npm package
+  - [X] for the React framework
 - [ ] add custom components to the platform...
+  - [ ] Separate the components spec to a separate repo
 - [ ] Edit history in component editor
 - [ ] Add custom selectors
 - [ ] Colour pallet
   - [ ] add/remove/edit colours in the pallet
+- [ ] Default themes
 - [ ] Component collections
   - [ ] Antd components
+    - [ ] Dropdown
+    - [ ] Checkbox
+    - [ ] Input
+    - [ ] Radio
+    - [ ] Select
+    - [ ] Slider
+    - [ ] Card
   - [ ] Material UI components
+    - [ ] Button
+    - [ ] Checkbox
+    - [ ] Radio
+    - [ ] Select
+    - [ ] Slider
+    - [ ] Switch
   - [ ] Semantic UI components
+    - [ ] Button
+    - [ ] Header
+    - [ ] Checkbox
+    - [ ] Dropdown
