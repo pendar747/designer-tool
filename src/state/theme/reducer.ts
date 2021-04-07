@@ -1,8 +1,8 @@
 import { findIndex } from "lodash";
-import { StyleItem, Style, Theme } from "../../types/theme";
+import { StyleItem, Style, Theme, ThemeStyles } from "../../types/theme";
 import { Action } from "../actionCreators";
 import { AsyncState } from "../types";
-import { CREATE_THEME, FETCH_STYLES, FETCH_THEMES, SHOW_CREATE_THEME_MODAL, UPDATE_STYLES } from "./actions";
+import { CREATE_THEME, FETCH_ALL_THEME_STYLES, FETCH_STYLES, FETCH_THEMES, SHOW_CREATE_THEME_MODAL, UPDATE_STYLES } from "./actions";
 
 export interface ThemeState {
   themes: Theme[],
@@ -12,7 +12,8 @@ export interface ThemeState {
   createThemeState: AsyncState,
   allStyles: StyleItem[],
   fetchStylesState: AsyncState,
-  updateStylesState: AsyncState
+  updateStylesState: AsyncState,
+  themeStyles: ThemeStyles[]
 }
 
 export const THEME_INITIAL_STATE: ThemeState = {
@@ -21,6 +22,7 @@ export const THEME_INITIAL_STATE: ThemeState = {
   isCreateThemeModalOpen: false,
   createThemeState: AsyncState.DEFAULT,
   allStyles: [],
+  themeStyles: [],
   fetchStylesState: AsyncState.DEFAULT,
   updateStylesState: AsyncState.DEFAULT
 }
@@ -28,6 +30,16 @@ export const THEME_INITIAL_STATE: ThemeState = {
 const updateAllStyles = (oldStyles: StyleItem[], newStyle: StyleItem) => {
   const index = findIndex(oldStyles, item => item.componentId === newStyle.componentId 
     && item.themeId === newStyle.themeId);
+  if (index >= 0) {
+    const newStyles = [...oldStyles];
+    newStyles.splice(index, 1, newStyle);
+    return newStyles;
+  }
+  return [...oldStyles, newStyle];
+}
+
+const updateThemeStyles = (oldStyles: ThemeStyles[], newStyle: ThemeStyles) => {
+  const index = findIndex(oldStyles, item => item.themeId === newStyle.themeId);
   if (index >= 0) {
     const newStyles = [...oldStyles];
     newStyles.splice(index, 1, newStyle);
@@ -108,6 +120,11 @@ export const themeReducer = (state: ThemeState = THEME_INITIAL_STATE, action: Ac
     return {
       ...state,
       updateStylesState: AsyncState.FAILED
+    }
+  case FETCH_ALL_THEME_STYLES.success:
+    return {
+      ...state,
+      themeStyles: updateThemeStyles(state.allStyles, action.payload)
     }
   default:
     return state;

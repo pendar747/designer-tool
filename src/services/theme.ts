@@ -20,3 +20,7 @@ export const updateStyles = async (payload: StylesBodyPayload): Promise<Style> =
   const { data } = await apiClient.post(`/theme/${payload.themeId}/style`, payload);
   return data;
 }
+export const fetchAllStyles = async (themeId: string): Promise<Style> => {
+  const { data } = await apiClient.get(`/theme/${themeId}/style`);
+  return data;
+}

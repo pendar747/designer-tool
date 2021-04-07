@@ -30,3 +30,8 @@ export interface StyleItem {
   componentId: string, 
   styles: Style[]
 };
+
+export interface ThemeStyles {
+  themeId: string,
+  styles: Style[]
+}

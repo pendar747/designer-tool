@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
-import { selectLibraryState, selectSelectedComponentId, selectSelectedTheme } from "../library/selectors";
-import { selectThemeState } from "../theme/selectors";
-import { AsyncState } from "../types";
+import { selectSelectedComponentId, selectSelectedTheme } from "../library/selectors";
+import { selectThemeState, selectThemeStyles } from "../theme/selectors";
 
 export const selectSelectedComponentStyles = createSelector(
   selectSelectedComponentId,
@@ -17,4 +16,10 @@ export const selectSelectedComponentStyles = createSelector(
 export const selectFetchStylesState = createSelector(
   selectThemeState,
   ({ fetchStylesState }) => fetchStylesState
+);
+
+export const selectSelectedThemeStyles = createSelector(
+  selectThemeStyles,
+  selectSelectedTheme,
+  (themeStyles, theme) => themeStyles.find(themeStyles => themeStyles.themeId === theme?.id)
 );

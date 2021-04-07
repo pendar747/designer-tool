@@ -1,5 +1,5 @@
 import { Button, Empty, Input, Space } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { removeComponentAction } from '../../state/library/actions';
@@ -9,6 +9,9 @@ import ComponentPreview from '../ComponentPreview/ComponentPreview';
 import styles from './Library.less';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import { selectSelectedTheme } from '../../state/library/selectors';
+import { fetchAllThemeStylesAction } from '../../state/theme/actions';
+import { selectSelectedThemeStyles } from '../../state/styles/selectors';
+import StyledPreview from '../StyledPreview/StyledPreview';
 
 interface LibraryProps {
   components: ComponentDefinition[],
@@ -21,12 +24,19 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
   const history = useHistory();
   const [filter, setFilter] = useState<string>('');
   const selectedTheme = useSelector(selectSelectedTheme); 
+  const themeStyles = useSelector(selectSelectedThemeStyles);
 
   const onRemove = (componentId: string) => {
     dispatch(removeComponentAction.request({ componentId, libraryId: library.id }))
   }
 
   const onAddComponents = () => history.push(`/library/${library.id}/add-components`);
+
+  useEffect(() => {
+    if (selectedTheme && selectedTheme.id) {
+      dispatch(fetchAllThemeStylesAction.request({ themeId: selectedTheme?.id }))
+    }
+  }, [selectedTheme]);
 
   return <div>
     <div className={styles.toolbar}>
@@ -61,7 +71,9 @@ const Library: React.FC<LibraryProps> = ({ components, library }) => {
               title={component.info.name} 
               isAdded={true} 
               onAdd={() => {}}>
-              <component.Demo />
+                <StyledPreview styles={themeStyles?.styles}>
+                  <component.Demo />
+                </StyledPreview>
             </ComponentPreview>
           ))}
         </div>

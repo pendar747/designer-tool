@@ -12,7 +12,11 @@
 - [X] Change styles expansion panel to look less boxy
 - [X] Disable save button when there are no changes
 - [X] Refactor CSSEditor to take styles in the same standard format
-- [ ] Preview components with their styles in the library view
+- [X] Scope styles in editor view so that it doesn't leak to the rest of the application
+- [X] Preview components with their styles in the library and all components view
+  - [X] in library view
+  - [ ] in all components view
+  - [ ] optimize rendering the styles for each component
 - [ ] Add pseudo selectors option for each selector (:active, :focus, :hover)
 - [ ] Disable save button when there are duplicate props for a selector
 - [ ] Warn user about duplicate props (set input on danger mode)

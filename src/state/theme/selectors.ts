@@ -17,3 +17,8 @@ export const selectCreateThemeLibraryId = createSelector(
   selectThemeState,
   ({ createThemeLibraryId }) => createThemeLibraryId
 )
+
+export const selectThemeStyles = createSelector(
+  selectThemeState,
+  ({ themeStyles }) => themeStyles
+);
