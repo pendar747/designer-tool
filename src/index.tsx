@@ -3,7 +3,6 @@ import ReactDom from 'react-dom';
 import App from './App/App';
 import './styles/vendor.css';
 import './styles/base.css';
-import 'style-scoped';
 
 import { Provider } from 'react-redux';
 import store from './state/store';

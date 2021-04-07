@@ -9,6 +9,7 @@ import { Style } from '../../types/theme';
 import { convertSheetToString } from '../../utils/styles';
 import SettingsPanel from '../SettingsPanel/SettingsPanel';
 import styles from './ComponentEditor.less';
+import uniqId from 'lodash/uniqueId';
 
 interface ComponentEditorProps {
   component: ComponentDefinition
@@ -19,10 +20,10 @@ const mapStyleSheetToStyles = ({ selector, properties }: StyleSheetStyle): Style
   return { selector, props }
 }
 
-const mapStylesToStyleSheet = (styles: Style): StyleSheetStyle => {
+const mapStylesToStyleSheet = (scope?: string) => (styles: Style): StyleSheetStyle => {
   const properties = fromPairs(styles.props.map(({ prop, value }) => [prop, value]));
   return {
-    selector: styles.selector,
+    selector: `${scope} ${styles.selector}`,
     properties
   };
 }
@@ -53,14 +54,16 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
       const { props } = componentStyles.find(item => item.selector == style.selector) || {};
       return !isEqual(props, style.props);
     });
+  const previewId = uniqId('preview-');
   const stylesAreValid = draftStyles
     .every(style => style.props.every(({ prop, value }) => prop && value));
   const isSaveEnabled = stylesHaveChanged && stylesAreValid;
-  const styleSheet = draftStyles.map(mapStylesToStyleSheet);
+  const styleSheet = draftStyles.map(mapStylesToStyleSheet(`#${previewId}`));
   const stylesString = convertSheetToString(styleSheet);
+
   return <div className={styles.container}>
-    <div className={styles.preview}>
-      <style scoped>{stylesString}</style>
+    <div id={previewId} className={styles.preview}>
+      <style>{stylesString}</style>
       <Control props={props}></Control>
     </div>
     <div className={styles.settingsPanel}>
