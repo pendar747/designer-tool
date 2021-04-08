@@ -8,7 +8,7 @@ import { ComponentDefinition } from '../../types/components';
 import { Style } from '../../types/theme';
 import SettingsPanel from '../SettingsPanel/SettingsPanel';
 import styles from './ComponentEditor.less';
-import StyledPreview from '../StyledPreview/StyledPreview';
+import ComponentEditorPreview from '../ComponentEditorPreview/ComponentEditorPreview';
 
 interface ComponentEditorProps {
   component: ComponentDefinition
@@ -45,9 +45,9 @@ const ComponentEditor: React.FC<ComponentEditorProps> = ({ component }) => {
   const isSaveEnabled = stylesHaveChanged && stylesAreValid;
 
   return <div className={styles.container}>
-    <StyledPreview styles={draftStyles} className={styles.preview}>
+    <ComponentEditorPreview draftStyles={draftStyles}>
       <Control props={props}></Control>
-    </StyledPreview>
+    </ComponentEditorPreview>
     <div className={styles.settingsPanel}>
       <SettingsPanel 
         onSave={onSave}

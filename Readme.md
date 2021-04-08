@@ -15,14 +15,18 @@
 - [X] Scope styles in editor view so that it doesn't leak to the rest of the application
 - [X] Preview components with their styles in the library and all components view
   - [X] in library view
-  - [ ] in all components view
   - [ ] optimize rendering the styles for each component
+- [X] Zoom in/out, and pan for the component preview
+
 - [ ] Add pseudo selectors option for each selector (:active, :focus, :hover)
 - [ ] Disable save button when there are duplicate props for a selector
 - [ ] Warn user about duplicate props (set input on danger mode)
 - [ ] Remove existing prop keys from prop key suggestions
-- [ ] Zoom in/out, and pan for the component preview
 - [ ] Order previous releases by requested date
+- [ ] Specific value input for different props:
+  - [ ] color picker/color pallet for colors (e.g. background-color, border-color)
+  - [ ] number input with suffix for number props (e.g. width, height, border-width)
+  - [ ] order props in the autofill by the most used first
 
 # Features
 Users can...
@@ -41,14 +45,8 @@ Users can...
 - [X] set library settings for publishing to npm
 - [X] publish their library as an npm package
   - [X] for the React framework
-- [ ] add custom components to the platform...
-  - [ ] Separate the components spec to a separate repo
-- [ ] Edit history in component editor
-- [ ] Add custom selectors
-- [ ] Colour pallet
-  - [ ] add/remove/edit colours in the pallet
-- [ ] Default themes
-- [ ] Component collections
+
+- [ ] Extend component collections
   - [ ] Antd components
     - [ ] Dropdown
     - [ ] Checkbox
@@ -68,4 +66,14 @@ Users can...
     - [ ] Button
     - [ ] Header
     - [ ] Checkbox
-    - [ ] Dropdown
+    - [ ] Dropdown  
+- [ ] publish library to github with a live documentation and demo page (github pages) 
+
+- [ ] add custom components to the platform...
+  - [ ] Separate the components spec to a separate repo
+- [ ] Edit history in component editor
+- [ ] Add custom selectors
+- [ ] Colour pallet
+  - [ ] add/remove/edit colours in the pallet
+- [ ] Default themes
+- [ ] Landing page...

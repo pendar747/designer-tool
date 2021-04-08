@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.panMode {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: var(--gap-x2);
+  color: lightgray;
+  width: 100px;
+}
+
+.controlButtons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
