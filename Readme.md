@@ -9,7 +9,7 @@ Bare-bones features that demonstrate the use case and benefit of the application
 #### Remaining Features in order of priority
 
 - Component Editor:
-  - [ ] Add pseudo selectors option for each selector (:active, :focus, :hover)
+  - [X] Add pseudo selectors option for each selector (:active, :focus, :hover)
   - [ ] Add custom selectors
   - [ ] Colour pallet:
     - [ ] add/remove/edit colours in the pallet
