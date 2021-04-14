@@ -1,5 +1,5 @@
-import { Button, Collapse, Popover } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Button, Collapse, Input, Popover, Space } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ComponentInfo } from '../../types/components';
 import CssPropsEditor from '../CssPropsEditor/CssPropsEditor';
 import union from 'lodash/union';
@@ -28,6 +28,7 @@ const PSUEDO_CLASSES = [
 const CssEditor: React.FC<CssEditorProps> = ({ availableCss, styles, onStylesChange }) => {
 
   const [activeKey, setActiveKey] = useState<string[]|string>();
+  const [newClassName, setNewClassName] = useState('');
 
   useEffect(() => {
     const openedSelectors = availableCss?.selectors.filter(selector => {
@@ -84,30 +85,72 @@ const CssEditor: React.FC<CssEditorProps> = ({ availableCss, styles, onStylesCha
     onStylesChange(styles.filter(style => style.selector !== selector));
     event.stopPropagation();
   };
+
+  const allSelectors = useMemo(() => sortBy(uniq([
+    ...styles.map(style => style.selector),
+    ...(availableCss?.selectors || [])
+  ])), [styles, availableCss]);
+
+  const onAddNewClassName = () => {
+    onCssPropsChange(newClassName)([]);
+    setNewClassName('');
+  };
   
-  return <Collapse onChange={setActiveKey} ghost activeKey={activeKey}>
-    {
-      sortBy(uniq([
-        ...styles.map(style => style.selector),
-        ...(availableCss?.selectors || [])
-      ])).map(selector => {
-        const isPsuedoSelector = PSUEDO_CLASSES.some(cl => selector.indexOf(cl) >= 0);
-        const props = styles.find(style => style.selector == selector)?.props || [];
-        return <Collapse.Panel 
-          key={selector} 
-          header={selector} 
-          extra={isPsuedoSelector 
-            ? <Button size="small" icon={<MinusCircleOutlined />} onClick={onRemovePsuedoSelectorClick(selector)}>Remove</Button> 
-            : psuedoClassButton(selector)
-          }>
-            <CssPropsEditor 
-              props={props}
-              key={selector} 
-              onChange={onCssPropsChange(selector)} /> 
-          </Collapse.Panel>
-      })
-    }
-  </Collapse>;
+  return <div>
+    <div className={cssStyles.toolbar}>
+      <Popover content={<Space>
+        <Input 
+          onChange={event => setNewClassName(event.target.value.replace(/[\.\s]/, ''))} 
+          onKeyUp={event => event.key === 'Enter' && onAddNewClassName()}
+          size="small" 
+          value={newClassName}
+          placeholder="class-name" 
+          autoFocus
+        />
+        <Button onClick={onAddNewClassName} size="small">Add</Button>
+      </Space>}>
+        <Button 
+          type="primary" 
+          shape="round" 
+          icon={<PlusCircleOutlined />}
+        >
+            Add Selector
+        </Button>
+      </Popover>
+    </div>
+    <Collapse onChange={setActiveKey} ghost activeKey={activeKey}>
+      {
+        allSelectors.map(selector => {
+          const isPsuedoSelector = PSUEDO_CLASSES.some(cl => selector.indexOf(cl) >= 0);
+          const props = styles.find(style => style.selector == selector)?.props || [];
+          const isCustom = !availableCss?.selectors.includes(selector);
+
+          return <Collapse.Panel 
+            key={selector} 
+            header={selector} 
+            extra={<Space>
+              {
+                isCustom && <Button 
+                  size="small" 
+                  icon={<MinusCircleOutlined />} 
+                  onClick={onRemovePsuedoSelectorClick(selector)}
+                >
+                  Remove
+                </Button> 
+              }
+              {
+                !isPsuedoSelector && psuedoClassButton(selector)
+              }
+            </Space>}>
+              <CssPropsEditor 
+                props={props}
+                key={selector} 
+                onChange={onCssPropsChange(selector)} /> 
+            </Collapse.Panel>
+        })
+      }
+    </Collapse>
+  </div>
 }
 
 export default CssEditor;

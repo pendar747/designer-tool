@@ -10,7 +10,7 @@ Bare-bones features that demonstrate the use case and benefit of the application
 
 - Component Editor:
   - [X] Add pseudo selectors option for each selector (:active, :focus, :hover)
-  - [ ] Add custom selectors
+  - [X] Add custom selectors
   - [ ] Colour pallet:
     - [ ] add/remove/edit colours in the pallet
     - [ ] Reusing the colors defined in the pallet as prop values in the editor
