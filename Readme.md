@@ -11,14 +11,20 @@ Bare-bones features that demonstrate the use case and benefit of the application
 - Component Editor:
   - [X] Add pseudo selectors option for each selector (:active, :focus, :hover)
   - [X] Add custom selectors
-  - [ ] Colour pallet:
-    - [ ] add/remove/edit colours in the pallet
-    - [ ] Reusing the colors defined in the pallet as prop values in the editor
+  - Defining css variables for:
+    - [ ] Font size
+    - [ ] paddings/margins
+    - [ ] Colour pallet:
+      - [ ] add/remove/edit colours in the pallet
+      - [ ] Reusing the colors defined in the pallet as prop values in the editor
+  - [ ] Adding custom web fonts
   - [ ] Specific value input for different props:
     - [ ] color picker/color pallet for colors (e.g. background-color, border-color)
     - [ ] number input with suffix for number props (e.g. width, height, border-width)
     - [ ] order props in the autofill by the most used first
     - [ ] sliders for borders
+  - [ ] filter classnames in the editor
+  - [ ] Highlight the relevant section of the component when hovering over a selector
     
 - [ ] add custom components to the platform...
   - [ ] Separate the components spec to a separate repo
@@ -87,10 +93,6 @@ Component Editor:
 - [ ] Remove existing prop keys from prop key suggestions
 - [ ] Disable save button when there are duplicate props for a selector
 - [ ] Edit history in component editor
-- Defining css variables for:
-  - [ ] Font size
-  - [ ] paddings/margins
-- [ ] Adding custom web fonts
 
 ## Misc todo
  
